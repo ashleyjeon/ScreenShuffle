@@ -146,14 +146,14 @@ input[type=button] {
 
 
 h1 {
-        color: white;
+        color: black;
         font-size: 55px;
         text-align: center;
         font-family:Georgia, 'Times New Roman', Times, serif; 
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        /* position: absolute; */
+        /* top: 45%; */
+        /* left: 50%; */
+        /* transform: translate(-50%, -50%); */
 }
 
 h2 { 
@@ -385,4 +385,11 @@ div.fixed {
         padding: 0%;
         top: 0;
         z-index: 999;
+}
+
+.title_heading {
+        border-style: solid;
+        border-color: #fdd06a;
+        border-width: 3px;
+        border-radius: 8px;
 }

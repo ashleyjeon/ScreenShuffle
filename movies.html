@@ -1,43 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Movies</title>
-        <link rel="stylesheet" href="final.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="final.css">
+    <title>Movies</title>
+
 </head>
 <body>
         <nav>
-                 <a href="default.html" class="logo">
-                         <img src="images/logo.png" alt="Logo" height="100px">
-                 </a>
-                 <a href="default.html">Home</a>
-                 <a class="active" href="movies.html">Movies</a>
-                 <a href="tv_shows.html">TV Shows</a>
-                 <a href="actors.php">Actors</a>
-                 <a href="about.html">About Us</a>
-                 <a href="contribute.html">Contribute</a>      
+            <a href="default.html" class="logo"><img src="images/logo.png" alt="Logo" height="100px"></a>
+            <a href="default.html">Home</a>
+            <a class="active" href="movies.html">Movies</a>
+            <a href="tv_shows.html">TV Shows</a>
+            <a href="actors.html">Actors</a>
+            <a href="about.html">About Us</a>
+            <a href="contribute.html">Contribute</a>      
          </nav>
 
+         
+
+
+
+        <div id="title_heading">
+
+            <h1>Random Movie Generator</h1>
+        </div>
+        
+        <br><br>
+        <h2>Search Filters</h2>
+        <br>
+        <br>
+
+        <form>
+                <label for="genre">Genre:</label>
+                <select id="genre" name="genre">
+                        <option value="28">Action</option>
+                        <option value="12">Adventure</option>
+                        <option value="16">Animation</option>
+                        <option value="35">Comedy</option>
+                        <option value="80">Crime</option>
+                        <option value="99">Documentary</option>
+                        <option value="18">Drama</option>
+                        <option value="10751">Family</option>
+                        <option value="14">Fantasy</option>
+                        <option value="36">History</option>
+                        <option value="27">Horror</option>
+                        <option value="10402">Music</option>
+                        <option value="9648">Mystery</option>
+                        <option value="10749">Romance</option>
+                        <option value="878">Science Fiction</option>
+                        <option value="10770">TV Movie</option>
+                        <option value="53">Thriller</option>
+                        <option value="10752">War</option>
+                        <option value="37">Western</option>
+                </select>
+
+               <!--  <label for="from">From:</label>
+                <input type="date" id="movie_start_date" name="movie_start_date">
+
+                <label for="to">To:</label>
+                <input type="date" id="movie_end_date" name="movie_end_date"> -->
+
+
+                <label for="rating">Rating of at least:</label>
+                <select id="rating" name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                </select>
+                
+               <!--  <label for="keyword">Keyword</label>
+                <input type="text" id="keyword" name="keyword">
+                <br><br> -->
+
+                <button type="button" onclick="getFilterInfo()">Shuffle</button>
+        </form>
+        
+        <div id="data"></div>
+
+        
+         <script language="javascript">
+            var genreId, rating;
+            
+           /*  start_date, end_date,  keyword; */
+
+            function getFilterInfo() {
+                    genreId = document.getElementById("genre").value;
+                    console.log(genreId);
+
+                //     start_date = document.getElementById("movie_start_date").value;
+                //     end_date = document.getElementById("movie_end_date").value;
+                //     console.log(end_date);
+            
+                    rating = document.getElementById("rating").value;
+                    console.log(rating);
+
+                //     keyword = document.getElementById("keyword").value;
+                //     console.log(keyword);
+
+                    requestData();
+                
+            }
+
+            function requestData() {
+                var request = new XMLHttpRequest();
+              
+                if (!request) {
+                        alert("Unable to create HTTPRequest object");
+                        return;
+                }
+                
+                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&page=1&with_genres=" 
+                                + genreId + "&vote_average.gte=" + rating;
+                
+                console.log(api_link);
+                     
+                // request.open("GET", api_link, true);
+             
+                  
+/*             // Step 3: set up event handler/callback
+            request.onreadystatechange = function() {
+                console.log("3 - readystatechange event fired.");
+    
+                if (request.readyState == 4 && request.status == 200) {
+                        // Step 5: wait for done + success
+                        console.log("5 - response received");
+                        result = request.responseText;
+        
+                        
+                        characters = JSON.parse(result);
+                        characters = characters["data"];
+
+                        strHTML = "<ul>";
+                        for (var i = 0; i < characters.length; i++) {
+                                strHTML += "<li>" + "Character name: " + characters[i].name + "</br>"
+                                        + "Link to their image: " + characters[i].imageUrl + "</br>" +
+                                        "</li>";
+                        }
+                        strHTML += "</ul>";
+                                
+                        document.getElementById("data").innerHTML = strHTML;
+                    
+                } else if (request.readyState == 4 && request.status != 200) {
+                    document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+                } else if (request.readyState == 3) {
+                    document.getElementById("data").innerHTML = "Too soon!  Try again";
+                }
+            }
+
+    
+                // Step 4: fire off the HTTP request
+            request.send();
+            console.log("4 - Request sent"); */
+
+                if (!request) {
+                        {alert("Unable to get HTTPRequest object"); return;}
+                }
+                request.open("GET", api_link, true);
+                request.onreadystatechange = function() {
+                        console.log("ready: " + this.readyState);
+                        console.log("status: " + this.status);
+                        if (this.readyState === 4 && this.status === 200) {
+                                var data = this.responseText;
+                                var info = JSON.parse(data);
+                                var retrieved = info["results"];
+
+                                /* generates a random number */
+                                var random = Math.ceil((Math.random() * 19));
+                                console.log("What is the random number: " + random);
+                        
+                                console.log(retrieved);
+                                document.getElementById("data").innerHTML = retrieved[random].title;
+
+                        } else if (this.readyState == 4 && this.status != 200) {
+                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                        }
+                }
+                request.send();
+        }
+        
+         </script>
+    
 
 
 
 
 
+          <footer>
+                 <br />
+                 &copy;Screen Shuffle
+                 <footer class="navigation-align-right">
+                        <!--  <a href="https://www.instagram.com/tuftsanimalaid/" target="_blank">
+//                                 <img src="images/instagram.png" alt="Instagram Icon" height="17px"></a>
+//                                 &nbsp; &nbsp;
+//                                 <a href="mailto:lcsanimalaid@gmail.com" target="_blank">
+//                                 <img src="images/email.png" alt="Email Icon" height="17px">
+//                         </a> -->
+                 </footer>
 
-         <footer>
-                <br />
-                &copy;Screen Shuffle
-                <footer class="navigation-align-right">
-                       <!--  <a href="https://www.instagram.com/tuftsanimalaid/" target="_blank">
-                                <img src="images/instagram.png" alt="Instagram Icon" height="17px"></a>
-                                &nbsp; &nbsp;
-                                <a href="mailto:lcsanimalaid@gmail.com" target="_blank">
-                                <img src="images/email.png" alt="Email Icon" height="17px">
-                        </a> -->
-                </footer>
-
-        </footer>
-</body>
-</html>
+         </footer>
+ </body>
+ </html>
