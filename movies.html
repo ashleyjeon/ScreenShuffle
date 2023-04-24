@@ -57,7 +57,7 @@
 
         <header>
                 <img class="banner-image" src="images/banner-image.jpeg" 
-                alt="Unsplash.com" height="250">
+                alt="Unsplash.com" height="450">
                 <h1>Random Movie Generator</h1>
         </header>
         
@@ -158,6 +158,7 @@
                 if (!request) {
                         {alert("Unable to get HTTPRequest object"); return;}
                 }
+                
                 request.open("GET", api_link, true);
                 request.onreadystatechange = function() {
                         console.log("ready: " + this.readyState);
@@ -199,9 +200,11 @@
                 request.send();
         }
         
-         </script>
+        </script>
     
 
+        <div class="spacer"></div>
+        
         <footer>
                 <br/>&copy;Screen Shuffle
                 <footer class="navigation-align-right"></footer>

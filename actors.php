@@ -101,7 +101,7 @@
 
         <header>
                 <img class="banner-image" src="images/banner-image.jpeg" 
-                alt="Unsplash.com" height="250">
+                alt="Unsplash.com" height="450">
                 <h1>Popular Actors</h1>
                 
         </header>
@@ -166,7 +166,7 @@
                                 }
                                 
                                 gallery += "<td class='gallery__item'>" 
-                                + "<img style='margin: auto auto 1% auto;' src='" + actorImages[i] + "' width='180px' height='220px';" 
+                                + "<img style='margin: auto auto 3% auto;' src='" + actorImages[i] + "' width='180px' height='220px';" 
                                 + "<br/><br/><p><strong>" + actorNames[i] + "</strong></p><p><i>"+ actorFilms[i] + "</i></p>"
                                 + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p>" + "</td>";
 
