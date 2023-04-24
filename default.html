@@ -3,6 +3,9 @@
 <head>
         <meta charset="utf-8">
         <title>Home</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    
         <link rel="stylesheet" href="final.css">
 </head>
 
@@ -37,6 +40,42 @@
         <br>
 
         <h3>Top 10 Movies</h3>
+
+        <script>
+                function requestData() {
+                        var request = new XMLHttpRequest();
+                        var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
+        
+                        if (!request) {
+                                alert("Unable to create HTTPRequest object");
+                                return;
+                        }
+                    
+                        request.onreadystatechange = function() {
+                                if (this.readyState === 4 && this.status === 200) {
+                                var data = JSON.parse(this.responseText);
+                                var retrieved = data.results;
+                                var strHTML = "<ol>";
+                                
+                                for (var i = 0; i < 10; i++) {
+                                        strHTML += "<li>" + retrieved[i].title + "</li>";
+                                }
+                
+                                strHTML += "</ol>";
+                                document.getElementById("data").innerHTML = strHTML;
+                                } else if (this.readyState === 4 && this.status !== 200) {
+                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                }
+                        }
+        
+                        request.open("GET", api_link, true);
+                        request.send();
+                }
+        
+                        window.onload = function() {
+                        requestData();
+                };
+        </script>
         <br><br>
 
         <div style="text-align: center; margin: auto; width: auto">
