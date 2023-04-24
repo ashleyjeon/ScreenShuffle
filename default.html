@@ -40,7 +40,7 @@
         <br>
 
         <h3>Top 10 Movies</h3>
-
+        <div id="data"></div>
         <script>
         function requestData() {
                 var request = new XMLHttpRequest();
@@ -55,7 +55,7 @@
                 console.log(api_link);
 
                 request.open("GET", api_link, true);
-                
+
                 request.onreadystatechange = function() {
                         console.log("ready: " + this.readyState);
                         console.log("status: " + this.status);
