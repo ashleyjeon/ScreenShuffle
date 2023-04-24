@@ -1,0 +1,388 @@
+body {
+        background-color: white;
+        margin: auto;
+}
+
+nav {
+        background-color: #009dbd; overflow:hidden;
+        text-align: right;
+        padding: 2% 5% 2%;
+        /* position: sticky; */
+        display: flex;
+        justify-content: space-between;
+}
+
+.navLogo {
+        display: flex;
+}
+
+.navLinks {
+        display: flex;
+        flex-direction: row;
+}
+nav.logo {
+        justify-content: left;
+}
+
+.logo {
+        float: left;
+        margin-left: -5%;
+        margin-top: -3%;
+        margin-bottom: -3%;
+        overflow: hidden;
+}
+
+.logo img {
+        display: block;
+        border-radius: 10px;
+        margin: 0;
+        padding: 0;
+        border: none;
+}
+
+nav a:first-child {
+        margin-right: auto;
+}
+
+nav a {
+        color: white;
+        display: inline-block;
+        font-size: 17px;
+        vertical-align: center; 
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        text-decoration: none;
+        text-transform: uppercase;
+        margin: 0px 10px 0px 10px;
+        padding: 8px 15px 8px 15px;
+}
+
+nav a:hover {
+        border: 1px solid white;
+        border-radius: 5px;
+}
+
+nav a.logo:hover {
+        border: none;
+}
+
+nav a.active {
+        border: 1px solid white;
+        border-radius: 8px;
+        font-weight: bold
+}
+
+header {
+        position: relative;
+        text-align: center;
+        color: white;
+}
+
+.banner-image {
+        width: 100%;
+        height: 650;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        filter: brightness(35%);
+}
+
+.flexbox {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+}
+
+
+.column {
+        background-color: #009dbd;
+        border: 3px solid #009dbd;
+        width: 450px;
+        margin: 0 0.5% 0 0.5%;
+        padding: 2% 30px 2% 30px;
+        border-radius: 8px;
+        justify-content: center;
+        text-align: center;
+}
+
+.spacer {
+        display: flex;
+        padding: 0px 0 25px 0px;
+}
+
+form {
+        width: 100%;
+}
+
+input[type=text] {
+        font-size: 14px;
+        width: 100%;
+        padding: 10px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+}
+
+input[type=checkbox] {
+        color: black;
+        font-size: 20px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif; 
+        display: inline-flexbox;
+        padding: 10px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+}
+
+input[type=button] {
+        background-color: #fdd06a;
+        border-radius: 8px;
+        padding: 8px 15px 8px 15px;
+        margin: 5% 0% 0% 0%;
+        color: black;
+        text-decoration: none;
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+h1 {
+        color: white;
+        font-size: 55px;
+        text-align: center;
+        font-family:Georgia, 'Times New Roman', Times, serif; 
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
+
+h2 { 
+        color: black;
+        width: auto;
+        margin: 0 5% 0 5%;
+        padding: 1% 25px 1% 25px;
+        font-size: 35px;
+        text-align: center;
+        font-family:Georgia, 'Times New Roman', Times, serif; 
+}
+
+
+h3 {
+        color: black;
+        font-size: 22px; 
+        text-align: center;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+h4 {
+        color: black;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 22px; 
+        text-align: auto;
+        
+}
+
+p {
+        color: black;
+        font-size: 20px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif; 
+}
+
+button {
+        background-color: #fdd06a;
+        border-radius: 8px;
+        padding: 8px 15px 8px 15px;
+}
+
+button a {
+        color: black;
+        text-decoration: none;
+        font-size: 15px;
+        border: none;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 8px 15px 8px 15px;
+}
+
+button a:hover {
+        text-decoration: none;
+        font-weight: bold;
+        background-color: #fdd06a;
+        border: 1px white;
+        border-radius: 8px;
+        font-size: 15px;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 8px 15px 8px 15px;
+}
+
+footer {
+        background-color: #009dbd;
+        overflow:hidden;
+        color: white;
+        font-size: small;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: left;
+        padding: 20px 30px 20px;
+        bottom: 0; display: flex;
+        justify-content: space-between;
+}
+
+footer.navigation-align-right {text-align: right;
+                               padding-right: 1%;}
+
+.tipContainer {
+        display: flex;
+        flex-direction: row;
+}
+
+.tipTitle {
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        font-size: 55px;
+        align-items: center;
+        font-weight: bold;
+}
+
+.tip {
+        display: flex;
+        flex-direction: column;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border-radius: 8px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #fdd06a;
+        padding: 10px;
+        width: 300px;
+        height: 250px;
+        text-align: center;
+}
+
+
+.tipImg {
+        width: 320px;
+        height: 270px;
+        border-radius: 8px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #fdd06a;
+
+}
+
+.mainTip {
+        font-size: 21px;
+        font-weight: 550;
+}
+
+.subTip {
+        font-size: 13px;
+        margin-top: 2px;
+}
+
+td {
+        width: 200px;
+        padding: 10px;
+        
+}
+
+.tipContainer {
+        justify-content: center;
+}
+
+tr {
+        padding-bottom: 0px;
+}
+
+.reviewTitle {
+        margin-top: 20px;
+}
+
+.reviewTitleContainer {
+        border-style: solid;
+        border-color: #fdd06a;
+        border-width: 3px;
+        border-radius: 8px;
+        width: 835px;
+        height: 125px;
+        margin: auto;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+}
+
+.reviewSubtitle {
+        background-color: #fdd06a;
+        font-size: 40px;
+        font-weight: bold;
+        margin-top: 60px;
+        color: black;
+        text-align: center;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 12px;
+        border-radius: 8px;
+        width: 800px;
+        height: 100px;
+        margin: auto;
+        text-align: center;
+        font-family: Georgia, 'Times New Roman', Times, serif; 
+}
+
+
+.imageContainer {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-basis: 50%;
+}
+        
+.reviewContainer {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        opacity: 0.8;
+        padding: 10px;
+        text-align: center;
+        margin-left: 55%;
+        margin-top: 0%;
+        width: 104%;
+}
+        
+.sigi {
+        display: flex;
+        margin-left: -55%;
+        margin-top: 1%;
+        border-radius: 8px;
+        border-width: 4px;
+        border-style: solid;
+        border-color: #009dbd; 
+}
+
+
+.birdie {
+        margin-left: 70%;
+        margin-top: 0%;
+        border-radius: 8px;
+        border-style: solid;
+        border-width: 4px;
+        border-color: #009dbd;
+}
+        
+.reviewContainer1 {
+        position: absolute;
+        top: 0;
+        opacity: 0.8;
+        padding: 10px;
+        text-align: center;
+        margin-left: -70%;
+        margin-top: 8%;
+        width: 120%;
+}
+
+div.fixed {
+        position: fixed;
+        width: 100%;
+        padding: 0%;
+        top: 0;
+        z-index: 999;
+}

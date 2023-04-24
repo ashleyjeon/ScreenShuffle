@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <title>Dogs</title>
+        <link rel="stylesheet" href="final.css">
+        <style type="text/css">
+                .gallery {
+                                display: grid;
+                                width: auto;
+                        }
+
+                .gallery__item {
+                        cursor: pointer;
+                        overflow: hidden;
+                        border-radius: 30px;
+                }
+
+                .gallery__item img {
+                        object-fit: cover;
+                        transition: 0.3s ease-in-out;
+                }
+
+                .gallery__item img:hover {
+                        transform: scale(1.1);
+                        }
+
+                @media (max-width: 950px) {
+                        .gallery {
+                                grid-template-columns: repeat(2, 1fr);
+                        }
+                }
+
+                @media (max-width: 550px) {
+                        .gallery {
+                                grid-template-columns: repeat(1, 1fr);
+                        }
+                }
+                
+                @keyframes zoom {
+                        from {
+                                transform: scale(0);
+                        }
+                        to {
+                                transform: scale(1);
+                        }
+                }
+
+                .modal {
+                        width: 100%;
+                        height: 100%;
+                        position: fixed;
+                        top: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: rgba(0, 0, 0, 0.733);
+                        animation: zoom 0.3s ease-in-out;
+                }
+                
+                .modal img {
+                        height: 75%;
+                        object-fit: cover;
+                }
+
+                button {
+                        background-color: none;
+                        border: none;
+                        color: rgba(255, 255, 255, 0.87);
+                }
+                
+                .closeBtn {
+                        background-color: transparent;
+                        font-size: 40px;
+                        position: fixed;
+                        top: 0;
+                        right: 0;
+                        cursor: pointer;
+                        transition: 0.2s ease-in-out;
+                }
+
+                .closeBtn:hover {
+                        color: rgb(255, 255, 255);
+                }
+                </style>
+                
+        </style>
+</head>
+
+<body>
+        <nav>
+                <!--  Todo: Add logo here!!! -->
+                 <a href="default.html" class="logo"><img src="images/logo.png" alt="Logo" height="100px"></a>
+                 <a  href="default.html">Home</a>
+                 <a href="movies.html">Movies</a>
+                 <a href="tv_shows.html">TV Shows</a>
+                 <a class="active" href="actors.html">Actors</a>
+                 <a href="about.html">About Us</a>
+                 <a href="contribute.html">Contribute</a>                
+         </nav>
+
+       <!--  <header>
+                <img class="banner-image" src="banner-image.jpg" 
+                alt="Unsplash.com" height="625" style="border-radius: 0%;">
+                <h1>Our Dogs</h1>
+        </header> -->
+
+        <div class="spacer"></div>
+
+       <!--  <h2>The Animal Aid Hall of Fame!</h2> -->
+        <p style="text-align: center; font-size: small;"><em>Click images to expand</em></p>
+        <br/>
+
+        <div class="gallery" style="margin: auto">
+                <table style="margin: auto">
+                        <div class="flexbox">
+                                <tr>
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Tango.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Tango</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Willoughby.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Willoughby</p> -->
+                                        </td>
+                                        
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Nala.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Nala</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Norman.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Norman</p> -->
+                                        </td>
+                                </tr> 
+                        </div>  
+                        <div class="flexbox">
+                                <tr>
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Kingsley.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">
+                                                        Kingsley</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Cali.jpg"  -->
+                                               <!--  height="200"> -->
+                                               <!--  <p style="text-align: center">Cali</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Charlie.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Charlie</p> -->
+                                        </td class="gallery__item">
+        
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Marge.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Marge</p> -->
+                                        </td>
+                                </tr>
+                        </div>      
+                        <div class="flexbox">
+                                <tr>
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Amari.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">
+                                                        Amari</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Richard.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Richard</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Lindy.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Lindy</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Mia.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Mia</p> -->
+                                        </td>
+                                </tr>
+                        </div>        
+                        <div class="flexbox">
+                                <tr>
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Rosie.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">
+                                                        Rosie</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Bosco.jpg"  -->
+                                                <!-- height="200"> -->
+                                                <!-- <p style="text-align: center">Bosco</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                               <!--  <img id="dog_pic" src="Artemis.jpg" 
+                                                height="200">
+                                                <p style="text-align: center">Artemis</p> -->
+                                        </td>
+        
+                                        <td class="gallery__item">
+                                                <!-- <img id="dog_pic" src="Willow.jpg"  -->
+                                                <!-- height="200"> -->
+                                                <!-- <p style="text-align: center">Willow</p> -->
+                                        </td>
+                                </tr> 
+                        </div>        
+                </table>
+        </div>
+                
+        <script language="javascript">
+                const images = document.querySelectorAll(".gallery__item img");
+                let imgSrc;
+                // get images src onclick
+                images.forEach((img) => {
+                img.addEventListener("click", (e) => {
+                                imgSrc = e.target.src;
+                                //run modal function
+                                imgModal(imgSrc);
+                        });
+                });
+                //creating the modal
+                let imgModal = (src) => {
+                        const modal = document.createElement("div");
+                        modal.setAttribute("class", "modal");
+                        
+                        //add the modal to the gallery section
+                        document.querySelector(".gallery").append(modal);
+                        
+                        //adding image to modal
+                        const newImage = document.createElement("img");
+                        newImage.setAttribute("src", src);
+                        
+                        //creating the close button
+                        const closeBtn = document.createElement("button");
+                        closeBtn.innerHTML = "✖";
+                        closeBtn.setAttribute("class", "closeBtn");
+                        
+                        //close function to close module on click
+                        closeBtn.onclick = () => {
+                                modal.remove();
+                        };
+                        
+                        modal.append(newImage, closeBtn);
+                };
+        </script>
+
+        <br/>
+                
+        <div class="spacer"></div>
+
+        <footer>
+                <br />
+                &copy;Screen Shuffle
+                <footer class="navigation-align-right">
+                       <!--  <a href="https://www.instagram.com/tuftsanimalaid/" target="_blank">
+                                <img src="images/instagram.png" alt="Instagram Icon" height="17px"></a>
+                                &nbsp; &nbsp;
+                                <a href="mailto:lcsanimalaid@gmail.com" target="_blank">
+                                <img src="images/email.png" alt="Email Icon" height="17px">
+                        </a> -->
+                </footer>
+
+        </footer>
+        
+</body>
+</html>

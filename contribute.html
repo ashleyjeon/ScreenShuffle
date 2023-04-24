@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <title>Contact</title>
+        <link rel="stylesheet" href="final.css">
+        <script
+                src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                crossorigin="anonymous">
+        </script>
+</head>
+
+<body>
+        <nav>
+                <nav>
+                         <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="100px"></a>
+                         <a href="default.html">Home</a>
+                         <a href="movies.html">Movies</a>
+                         <a href="tv_shows.html">TV Shows</a>
+                         <a href="actors.html">Actors</a>
+                         <a href="about.html">About Us</a>
+                         <a class="active" href="contribute.html">Contribute</a>                
+                 </nav>
+        </nav>
+
+        <header>
+                <!-- <img class="banner-image" src="banner-image.jpg" 
+                alt="Unsplash.com" height="625"> -->
+               <!--  <h1>Contact Us</h1> -->
+        </header>
+
+        <div class="spacer"></div>
+
+        <h2>Want to get involved?</h2>
+        <br/>
+
+        <div class="flexbox">
+                <div class="column" style="background-color: white">
+                        <form id="studentForm">
+                                <h4>Students: join our mailing list!</h4>
+                                
+                                <input type="text" name="txtName" id="studentName"
+                                placeholder="Name*">
+                                <br/>
+                                <input type="text" name="email" id="studentEmail"
+                                placeholder="Email*">
+                                <br/>
+                                <input type="button" id="studentButton" value="Submit">
+                        </form>
+
+                        <script>
+                                valid = false;
+                                
+                                $(document).ready(function() {
+                                        $("#studentButton").click(function() {
+                                                let name = $("#studentName").val();
+                                                let email = $("#studentEmail").val();
+                                                
+                                                if (name == "" || name == null) {
+                                                        alert("Please enter your full name.");
+                                                } else if (email == "" || email == null || !email.includes("@")) {
+                                                        alert("Please enter a valid email.");
+                                                } else {
+                                                        valid = true;
+                                                }
+
+                                                if (valid) {
+                                                        alert("Thank you for your interest in helping Animal Aid!");
+                                                        document.getElementById("studentForm").reset();
+                                                }
+                                        });
+
+                                });
+                        </script>
+
+                </div>
+
+                <div class="column" style="background-color: white">
+                        <form id="ownerForm">
+                                <h4>Dog owners: tell us about 
+                                <br/>  you (and your pup!)</h4>
+                                
+                                <input type="text" name="name" id="ownerName"
+                                placeholder="Name*">
+                                <br/>
+                                <input type="text" name="email" id="ownerEmail"
+                                placeholder="Email*">
+                                <br/>
+                                <input type="text" name="phone" id="ownerPhone"
+                                placeholder="Phone number*">
+                                <br/>
+                                <input type="text" name="name" id="dogName"
+                                placeholder="Dog name*">
+                                <br/>
+                                <input type="text" name="breed" id="dogBreed"
+                                placeholder="Dog breed*">
+                                <br/>
+                                <input type="text" name="address" id="ownerAddress" 
+                                placeholder="Your full address*">
+                                <br/>
+
+                                <p style="font-size: 18px">Select all preferred walking days*</p>
+                                <input type="checkbox" id="day1" name="week" value="Monday">
+                                <label for="day1">Monday</label><br/>
+                                
+                                <input type="checkbox" id="day2" name="week" value="Tuesday">
+                                <label for="day2">Tuesday</label><br/>
+                                
+                                <input type="checkbox" id="day3" name="week" value="Wednesday">
+                                <label for="day3">Wednesday</label><br/>
+                                
+                                <input type="checkbox" id="day4" name="week" value="Thursday">
+                                <label for="day4">Thursday</label><br/>
+                                
+                                <input type="checkbox" id="day5" name="week" value="Friday">
+                                <label for="day5">Friday</label><br/>
+                                
+                                <input type="checkbox" id="day6" name="week" value="Saturday">
+                                <label for="day6">Saturday</label><br/>
+                                
+                                <input type="checkbox" id="day7" name="week" value="Sunday">
+                                <label for="day7">Sunday</label><br/>
+                                
+                                <p style="font-size: 18px">Select all preferred walking times*</p>
+                                <input type="checkbox" id="time1" name="time" value="Mornings">
+                                <label for="time1">Mornings (9am-12pm)</label><br/>
+                                
+                                <input type="checkbox" id="day2" name="time" value="Afternoons">
+                                <label for="day2">Afternoons (12pm-5pm)</label><br/>
+                                <br/>
+
+                                <input type="text" name="description" 
+                                id="dogDescription" style="padding: 10px 10px 60px"
+                                placeholder="Tell us about your dog!*">
+                                <br/>
+                                <input type="text" name="extra" 
+                                id="additionalInfo" style="padding: 10px 10px 30px"
+                                placeholder="Anything else you'd like us to know?">
+                                <br/>
+                                <p style="font-size: small">Upload a picture of your dog! (optional)</p>
+                                <input type="file" id="photo" name="photoId">
+                                <br/>
+                                
+                                <input type="button" id="ownerButton" value="Submit">
+                        </form>
+        
+                        <script>
+                                valid = false;
+                                checked = false;
+                                
+                                $(document).ready(function() {
+                                        $("#ownerButton").click(function() {
+                                                let name = $("#ownerName").val();
+                                                let email = $("#ownerEmail").val();
+                                                let phone = $("#ownerPhone").val();
+                                                let dog_name = $("#dogName").val();
+                                                let dog_breed = $("#dogBreed").val();
+                                                let address = $("#ownerAddress").val();
+                                                let description = $("#dogDescription").val();
+                                                let days = document.getElementsByName("week");
+                                                let times = document.getElementsByName("time");
+
+                                                checked = check_schedule(days);
+                                                checked = check_schedule(times);
+                                                
+                                                function check_schedule(day_or_time)
+                                                {
+                                                        for (let i = 0; i < day_or_time.length; i++) {
+                                                                if (day_or_time[i].checked) {
+                                                                        return true;
+                                                                }
+                                                        }
+                                                }
+                                    
+                                                if (name == "" || name == null) {
+                                                        alert("Please enter your full name.");
+                                                } else if (email == "" || email == null || !email.includes("@")) {
+                                                        alert("Please enter a valid email.");
+                                                } else if (phone.length != 7 && phone.length != 10) {
+                                                        alert("Please enter a valid phone number.");
+                                                } else if (dog_name == "" || dog_name == null) {
+                                                        alert("Please enter your dog's name.");
+                                                } else if (dog_breed == "" || dog_breed == null){
+                                                        alert("Please enter your dog's breed.");
+                                                } else if (address == "" || address == null) {
+                                                        alert("Please enter your address.");
+                                                } else if (!checked) {
+                                                        alert("Please select both preferred walking days and times.");
+                                                } else if (description == "" || description == null) {
+                                                        alert("Please enter a short description of your dog.");
+                                                } else {
+                                                        valid = true;
+                                                }
+
+                                                if (valid) {
+                                                        alert("Thank you for your interest! We'll follow up with more information shortly.");
+                                                        document.getElementById("ownerForm").reset();
+
+                                                }
+                                        });
+                                });
+                        </script>
+                </div>
+        
+        </div>
+
+        <br/>
+        
+        <div class="spacer"></div>
+
+        <footer>
+                <br />
+                &copy;Screen Shuffle
+                <footer class="navigation-align-right">
+                        <a href="https://www.instagram.com/tuftsanimalaid/" target="_blank">
+                              <!--   <img src="images/instagram.png" alt="Instagram Icon" height="17px"></a>
+                                &nbsp; &nbsp;
+                                <a href="mailto:lcsanimalaid@gmail.com" target="_blank">
+                                <img src="images/email.png" alt="Email Icon" height="17px"> -->
+                        </a>
+                </footer>
+
+        </footer>
+        
+</body>
+</html>
