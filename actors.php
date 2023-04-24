@@ -12,12 +12,11 @@
 </head>
 <body>
         <nav>
-               <!--  Todo: Add logo here!!! -->
                 <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="100px"></a>
-                <a class="active" href="default.html">Home</a>
+                <a href="default.html">Home</a>
                 <a href="movies.html">Movies</a>
                 <a href="tv_shows.html">TV Shows</a>
-                <a href="actors.php">Actors</a>
+                <a class="active" href="actors.php">Actors</a>
                 <a href="about.html">About Us</a>
                 <a href="contribute.html">Contribute</a>                
         </nav>
