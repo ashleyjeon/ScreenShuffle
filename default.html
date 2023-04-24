@@ -71,7 +71,7 @@
                                 }
         
                                 strHTML += "</ol>";
-                                document.getElementById("data").innerHTML = strHTML;
+                                document.getElementById("datamovies").innerHTML = strHTML;
                                 
                         } else if (this.readyState === 4 && this.status !== 200) {
                                         document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
@@ -110,7 +110,7 @@
                                 }
         
                                 strHTML += "</ol>";
-                                document.getElementById("data").innerHTML = strHTML;
+                                document.getElementById("datatv").innerHTML = strHTML;
                                 
                         } else if (this.readyState === 4 && this.status !== 200) {
                                         document.getElementById("datatv").innerHTML = "Unable to retrieve data";
