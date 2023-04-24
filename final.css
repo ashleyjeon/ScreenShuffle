@@ -3,8 +3,7 @@ body {
         margin: auto;
 }
 
-nav {
-        background-color: #009dbd; overflow:hidden;
+nav {background-color: #009dbd; overflow:hidden;
         text-align: right;
         padding: 2% 5% 2%;
         /* position: sticky; */
@@ -23,7 +22,6 @@ nav {
 nav.logo {
         justify-content: left;
 }
-
 .logo {
         float: left;
         margin-left: -5%;
@@ -34,7 +32,6 @@ nav.logo {
 
 .logo img {
         display: block;
-        border-radius: 10px;
         margin: 0;
         padding: 0;
         border: none;
@@ -106,7 +103,7 @@ header {
 
 .spacer {
         display: flex;
-        padding: 0px 0 25px 0px;
+        padding: 25px 0 25px 0px;
 }
 
 form {
@@ -146,14 +143,14 @@ input[type=button] {
 
 
 h1 {
-        color: black;
-        font-size: 55px;
+        color: white;
+        font-size: 65px;
         text-align: center;
         font-family:Georgia, 'Times New Roman', Times, serif; 
-        /* position: absolute; */
-        /* top: 45%; */
-        /* left: 50%; */
-        /* transform: translate(-50%, -50%); */
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 }
 
 h2 { 
@@ -168,9 +165,9 @@ h2 {
 
 
 h3 {
-        color: black;
+        color: white;
         font-size: 22px; 
-        text-align: center;
+        text-align: auto;
         font-family:Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -191,7 +188,6 @@ p {
 button {
         background-color: #fdd06a;
         border-radius: 8px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
         padding: 8px 15px 8px 15px;
 }
 
@@ -386,11 +382,4 @@ div.fixed {
         padding: 0%;
         top: 0;
         z-index: 999;
-}
-
-.title_heading {
-        border-style: solid;
-        border-color: #fdd06a;
-        border-width: 3px;
-        border-radius: 8px;
 }
