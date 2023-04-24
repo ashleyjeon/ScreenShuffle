@@ -12,20 +12,21 @@
 </head>
 <body>
         <nav>
-        <!--  Todo: Add logo here!!! -->
-                <a href="default.html" class="logo"><img src="images/logo.png" alt="Logo" height="100px"></a>
-                <a  href="default.html">Home</a>
+               <!--  Todo: Add logo here!!! -->
+                <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="100px"></a>
+                <a class="active" href="default.html">Home</a>
                 <a href="movies.html">Movies</a>
                 <a href="tv_shows.html">TV Shows</a>
-                <a class="active" href="actors.html">Actors</a>
+                <a href="actors.php">Actors</a>
                 <a href="about.html">About Us</a>
                 <a href="contribute.html">Contribute</a>                
         </nav>
 
         <header>
-                <img class="banner-image" src="banner-image.jpg" 
-                alt="Unsplash.com" height="625">
+                <img class="banner-image" src="images/banner-image.jpeg" 
+                alt="Unsplash.com" height="250">
                 <h1>Popular Actors</h1>
+                
         </header>
 
         <?php
@@ -89,7 +90,7 @@
                                 }
                                 
                                 console.log(actorFilms.length);
-                                gallery += "<td>" + "<img src=" + actorImages[i] + " width='180px' height='220px';" 
+                                gallery += "<td id='" + name + "'>" + "<img src='" + actorImages[i] + "' width='180px' height='220px';" 
                                 + "<br/><br/>" + actorNames[i] + "<br/>"+ actorFilms[i] + "<br/><a href='" 
                                 + actorIMDBs[i] + "' target='_blank'>IMDB profile</a>" + "</td>";
 
@@ -100,18 +101,33 @@
 
                         dropdown += "</select>";
                         gallery += "</table>";
-                        console.log(dropdown);
+
+                        var footer = "<footer><br />&copy;Screen Shuffle<footer class='navigation-align-right'>"
+                                        + "<a href='https://www.instagram.com/tuftsanimalaid/' target='_blank'>"
+                                        + "<img src='images/instagram.png' alt='Instagram Icon' height='17px'></a>"
+                                        + "&nbsp; &nbsp;<a href='mailto:anika.kapoor@tufts.edu' target='_blank'>"
+                                        + "<img src='images/email.png' alt='Email Icon' height='17px'></a></footer></footer>";
 
                         $(document).ready(function() {
                                 $("body").append(dropdown);
                                 $("body").append(gallery);
+                                $("body").append("<div class='spacer'></div>");
+                                $("body").append(footer);
                                 
                                 $("select").change(function() {
-                                        console.log("changed");
+                                        for (let i = 0; i < actorNames.length; i++) {
+                                                if (actorNames[i] != this.value) {
+                                                        $("#" + actorNames[i]).hide();
+                                                }
+                                        }
                                 });   
                         });
 
                 </script>
         </div>
+
+        <br/>
+
+        
 </body>
 </html>
