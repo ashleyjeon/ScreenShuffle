@@ -12,7 +12,6 @@
                 .gallery__item {
                         cursor: pointer;
                         overflow: hidden;
-                        border-radius: 30px;
                 }
 
                 .gallery__item img {
@@ -148,7 +147,7 @@
         ?> 
         
         <div style="text-align: center; margin: auto; width: auto">
-                <script>
+                <script language="javascript">
                         /* get actorNames array from PHP */
                         var actorNames = <?php echo json_encode($names); ?>;
                         var actorImages = <?php echo json_encode($images); ?>;
@@ -161,16 +160,15 @@
                         for (let i = 0; i < actorNames.length; i++) {
                                 console.log(actorNames[i]);
                                 let name = actorNames[i];
-                                //dropdown += "<option>" + name + "</option>";
 
                                 if (i % 4 === 0) {
                                         gallery += "<tr>";
                                 }
                                 
-                                console.log(actorFilms.length);
-                                gallery += "<td class='gallery__item'>" + "<img src='" + actorImages[i] + "' width='180px' height='220px';" 
-                                + "<br/><br/>" + actorNames[i] + "<br/>"+ actorFilms[i] + "<br/><a href='" 
-                                + actorIMDBs[i] + "' target='_blank'>IMDB profile</a>" + "</td>";
+                                gallery += "<td class='gallery__item'>" 
+                                + "<img style='margin: auto auto 1% auto;' src='" + actorImages[i] + "' width='180px' height='220px';" 
+                                + "<br/><br/><p><strong>" + actorNames[i] + "</strong></p><p><i>"+ actorFilms[i] + "</i></p>"
+                                + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p>" + "</td>";
 
                                 if ((i - 3) % 4 === 0) {
                                         gallery += "</tr>";
@@ -181,10 +179,7 @@
                         gallery += "</div></table>";
 
                         var footer = "<footer><br />&copy;Screen Shuffle<footer class='navigation-align-right'>"
-                                        + "<a href='https://www.instagram.com/tuftsanimalaid/' target='_blank'>"
-                                        + "<img src='images/instagram.png' alt='Instagram Icon' height='17px'></a>"
-                                        + "&nbsp; &nbsp;<a href='mailto:anika.kapoor@tufts.edu' target='_blank'>"
-                                        + "<img src='images/email.png' alt='Email Icon' height='17px'></a></footer></footer>";
+                                        + "</footer></footer>";
 
                         $(document).ready(function() {
                                 // $("body").append(dropdown);
@@ -192,13 +187,45 @@
                                 $("body").append("<div class='spacer'></div>");
                                 $("body").append(footer);
                                 
-                                $("select").change(function() {
-                                        for (let i = 0; i < actorNames.length; i++) {
-                                                if (actorNames[i] != this.value) {
-                                                        $("#" + actorNames[i]).hide();
-                                                }
-                                        }
-                                });   
+                                const imgs = $(".gallery__item img");
+                                const images = Array.from(imgs);
+                                
+                                console.log("length of gallery items: " + images.length);
+                                let imgSrc;
+                                // get images src onclick
+                                images.forEach((img) => {
+                                        img.addEventListener("click", (e) => {
+                                                console.log("clicked");
+                                                imgSrc = e.target.src;
+                                                //run modal function
+                                                imgModal(imgSrc);
+                                        });
+                                });
+
+                                // creating the modal
+                                let imgModal = (src) => {
+                                        const modal = document.createElement("div");
+                                        modal.setAttribute("class", "modal");
+                                        
+                                        // add the modal to the gallery section
+                                        document.querySelector(".gallery").append(modal);
+                                        
+                                        // adding image to modal
+                                        const newImage = document.createElement("img");
+                                        newImage.setAttribute("src", src);
+                                        
+                                        // creating the close button
+                                        const closeBtn = document.createElement("button");
+                                        closeBtn.innerHTML = "✖";
+                                        closeBtn.setAttribute("class", "closeBtn");
+                                        
+                                        //close function to close module on click
+                                        closeBtn.onclick = () => {
+                                                modal.remove();
+                                        };
+                                        
+                                        modal.append(newImage, closeBtn);
+                                }; 
                         });
 
                 </script>
