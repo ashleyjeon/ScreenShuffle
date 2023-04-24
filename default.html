@@ -42,37 +42,42 @@
         <h3>Top 10 Movies</h3>
 
         <script>
-                function requestData() {
-                        var request = new XMLHttpRequest();
-                        var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
-        
-                        if (!request) {
-                                alert("Unable to create HTTPRequest object");
-                                return;
-                        }
-                    
-                        request.onreadystatechange = function() {
-                                if (this.readyState === 4 && this.status === 200) {
+        function requestData() {
+                var request = new XMLHttpRequest();
+                var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
+
+                if (!request) {
+                        alert("Unable to create HTTPRequest object");
+                        return;
+                }
+                
+                request.onreadystatechange = function() {
+                        console.log("ready: " + this.readyState);
+                        console.log("status: " + this.status);
+                        if (this.readyState === 4 && this.status === 200) {
                                 var data = JSON.parse(this.responseText);
                                 var retrieved = data.results;
                                 var strHTML = "<ol>";
-                                
+                        
+                                /* generates 10 titles */
                                 for (var i = 0; i < 10; i++) {
+                                        console.log("about to retrieve " + i);
                                         strHTML += "<li>" + retrieved[i].title + "</li>";
                                 }
-                
+        
                                 strHTML += "</ol>";
                                 document.getElementById("data").innerHTML = strHTML;
-                                } else if (this.readyState === 4 && this.status !== 200) {
-                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                
+                        } else if (this.readyState === 4 && this.status !== 200) {
+                                        document.getElementById("data").innerHTML = "Unable to retrieve data";
                                 }
                         }
-        
+
                         request.open("GET", api_link, true);
                         request.send();
                 }
         
-                        window.onload = function() {
+                window.onload = function() {
                         requestData();
                 };
         </script>
