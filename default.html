@@ -113,47 +113,12 @@
                                 document.getElementById("data").innerHTML = strHTML;
                                 
                         } else if (this.readyState === 4 && this.status !== 200) {
-                                        document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
+                                        document.getElementById("datatv").innerHTML = "Unable to retrieve data";
                                 }
                         }
 
                         requesttv.send();
                 }
-
-                if (!requesttv) {
-                        alert("Unable to create HTTPRequest object");
-                        return;
-                }
-                
-                console.log(api_link);
-
-                request.open("GET", api_link, true);
-
-                request.onreadystatechange = function() {
-                        console.log("ready: " + this.readyState);
-                        console.log("status: " + this.status);
-                        if (this.readyState === 4 && this.status === 200) {
-                                var data = JSON.parse(this.responseText);
-                                var retrieved = data.results;
-                                var strHTML = "<ol>";
-                        
-                                /* generates 10 titles */
-                                for (var i = 0; i < 10; i++) {
-                                        console.log("about to retrieve " + i);
-                                        strHTML += "<li>" + retrieved[i].title + "</li>";
-                                }
-        
-                                strHTML += "</ol>";
-                                document.getElementById("data").innerHTML = strHTML;
-                                
-                        } else if (this.readyState === 4 && this.status !== 200) {
-                                        document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
-                                }
-                        }
-
-                request.send();
-
-                
         
                 window.onload = function() {
                         requestDataMovies();
