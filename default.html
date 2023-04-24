@@ -25,41 +25,12 @@
                 <img class="banner-image" src="images/banner-image.jpeg" 
                 alt="Unsplash.com" height="250">
                 <h1>Screen Shuffle</h1>
-
-                <style>
-                        .movie-posters {
-                            display: flex;
-                            flex-wrap: wrap;
-                            justify-content: center;
-                            align-items: center;
-                            margin-top: 20px;
-                        }
-                    
-                        .movie-poster {
-                            width: 150px;
-                            margin: 10px;
-                            text-align: center;
-                        }
-                    
-                        .movie-poster img {
-                            width: 100%;
-                            height: auto;
-                            border-radius: 5px;
-                        }
-                    
-                        .movie-poster p {
-                            margin-top: 5px;
-                            font-size: 14px;
-                            font-weight: bold;
-                        }
-                    </style>
                 
         </header>
 
         <div class="spacer"></div>
 
         <h2>Find a movie or show to watch, fast!</h2>
-
         <br/>
 
 
@@ -71,45 +42,43 @@
         <div id="datamovies"></div>
         <script>
         function requestDataMovies() {
-    var request = new XMLHttpRequest();
+                var request = new XMLHttpRequest();
 
-    var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
+                var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
 
-    if (!request) {
-        alert("Unable to create HTTPRequest object");
-        return;
-    }
-    
-    console.log(api_link);
+                if (!request) {
+                        alert("Unable to create HTTPRequest object");
+                        return;
+                }
+                
+                console.log(api_link);
 
-    request.open("GET", api_link, true);
+                request.open("GET", api_link, true);
 
-    request.onreadystatechange = function() {
-        console.log("ready: " + this.readyState);
-        console.log("status: " + this.status);
-        if (this.readyState === 4 && this.status === 200) {
-            var data = JSON.parse(this.responseText);
-            var retrieved = data.results;
-            var strHTML = "<div class='movie-posters'>";
+                request.onreadystatechange = function() {
+                        console.log("ready: " + this.readyState);
+                        console.log("status: " + this.status);
+                        if (this.readyState === 4 && this.status === 200) {
+                                var data = JSON.parse(this.responseText);
+                                var retrieved = data.results;
+                                var strHTML = "<ol>";
+                        
+                                /* generates 10 titles */
+                                for (var i = 0; i < 10; i++) {
+                                        console.log("about to retrieve " + i);
+                                        strHTML += "<li>" + retrieved[i].title + "</li>";
+                                }
+        
+                                strHTML += "</ol>";
+                                document.getElementById("datamovies").innerHTML = strHTML;
+                                
+                        } else if (this.readyState === 4 && this.status !== 200) {
+                                        document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
+                                }
+                        }
 
-            /* generates 10 movie posters */
-            for (var i = 0; i < 10; i++) {
-                console.log("about to retrieve " + i);
-                var moviePosterPath = "https://image.tmdb.org/t/p/w500" + retrieved[i].poster_path;
-                var movieTitle = retrieved[i].title;
-                strHTML += "<div class='movie-poster'><img src='" + moviePosterPath + "' alt='" + movieTitle + "'><p>" + movieTitle + "</p></div>";
-            }
-
-            strHTML += "</div>";
-            document.getElementById("datamovies").innerHTML = strHTML;
-            
-        } else if (this.readyState === 4 && this.status !== 200) {
-            document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
+                        request.send();
         }
-    }
-
-    request.send();
-}
 
         function requestDataTV() {
                 var requesttv = new XMLHttpRequest();
@@ -162,13 +131,15 @@
                         <a href="about.html">EXPLORE</a>
                 </button>
                 <div class="spacer"></div>
+                <!-- <img src="Pete.jpg" height="250px">
+                <p>Pete is stoked you're here!</p><br/> -->
         </div>
         
         <div class="spacer"></div>
 
         <footer>
-                <br />
-                &copy;Screen Shuffle
+                <br/>&copy;Screen Shuffle
+                <footer class="navigation-align-right"></footer>
 
         </footer>
 
