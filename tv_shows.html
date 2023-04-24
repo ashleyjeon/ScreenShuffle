@@ -62,24 +62,21 @@
             <form id="filters">
                     <label for="genre">Genre:</label>
                     <select id="genre" name="genre">
-                            <option value="28">Action</option>
-                            <option value="12">Adventure</option>
+                            <option value="10759">Action & Adventure</option>
                             <option value="16">Animation</option>
                             <option value="35">Comedy</option>
                             <option value="80">Crime</option>
                             <option value="99">Documentary</option>
                             <option value="18">Drama</option>
                             <option value="10751">Family</option>
-                            <option value="14">Fantasy</option>
-                            <option value="36">History</option>
-                            <option value="27">Horror</option>
-                            <option value="10402">Music</option>
+                            <option value="10762">Kids</option>
                             <option value="9648">Mystery</option>
-                            <option value="10749">Romance</option>
-                            <option value="878">Science Fiction</option>
-                            <option value="10770">TV Movie</option>
-                            <option value="53">Thriller</option>
-                            <option value="10752">War</option>
+                            <option value="10763">News</option>
+                            <option value="10764">Reality</option>
+                            <option value="10765">Sci-Fi & Fantasy</option>
+                            <option value="10766">Soap</option>
+                            <option value="10767">Talk</option>
+                            <option value="10768">War & Politics</option>
                             <option value="37">Western</option>
                     </select>
                     &nbsp &nbsp
@@ -130,7 +127,7 @@
                             return;
                     }
                     
-                    var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&page=1&with_genres=" 
+                    var api_link = "https://api.themoviedb.org/3/discover/tv?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&page=1&with_genres=" 
                                     + genreId + "&vote_average.gte=" + rating;
                     
                     console.log(api_link);
@@ -156,9 +153,9 @@
                                    
                                     console.log(retrieved[random].poster_path);
                                     document.getElementById("data").innerHTML = "<br>" + link + retrieved[random].poster_path + "'>";
-                                    document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
+                                    document.getElementById("data").innerHTML += "<br>" + retrieved[random].name + "<br>";
                                     document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
-                                    document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
+                                    document.getElementById("data").innerHTML += "<p>First Air Date: " + retrieved[random].first_air_date + "</p>";
                                     document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
                                     document.getElementById("data").innerHTML += "<p>Overview: " + retrieved[random].overview + "</p><br>";
     
@@ -172,11 +169,6 @@
             }
             
              </script>
-
-
-
-
-
 
 
          <footer>
