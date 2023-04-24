@@ -36,13 +36,13 @@
 
 
         <h3>Top 10 TV Shows</h3>
-
+        <div id="datatvshows"></div>
         <br>
 
         <h3>Top 10 Movies</h3>
-        <div id="data"></div>
+        <div id="datamovies"></div>
         <script>
-        function requestData() {
+        function requestDataMovies() {
                 var request = new XMLHttpRequest();
 
                 var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
@@ -74,15 +74,90 @@
                                 document.getElementById("data").innerHTML = strHTML;
                                 
                         } else if (this.readyState === 4 && this.status !== 200) {
-                                        document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                        document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
                                 }
                         }
 
                         request.send();
+        }
+
+        function requestDataTV() {
+                var requesttv = new XMLHttpRequest();
+
+                var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
+
+                if (!requesttv) {
+                        alert("Unable to create HTTPRequest object");
+                        return;
                 }
+                
+                console.log(api_link);
+
+                requesttv.open("GET", api_link, true);
+
+                requesttv.onreadystatechange = function() {
+                        console.log("ready: " + this.readyState);
+                        console.log("status: " + this.status);
+                        if (this.readyState === 4 && this.status === 200) {
+                                var data = JSON.parse(this.responseText);
+                                var retrieved = data.results;
+                                var strHTML = "<ol>";
+                        
+                                /* generates 10 titles */
+                                for (var i = 0; i < 10; i++) {
+                                        console.log("about to retrieve " + i);
+                                        strHTML += "<li>" + retrieved[i].title + "</li>";
+                                }
+        
+                                strHTML += "</ol>";
+                                document.getElementById("data").innerHTML = strHTML;
+                                
+                        } else if (this.readyState === 4 && this.status !== 200) {
+                                        document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
+                                }
+                        }
+
+                        requesttv.send();
+                }
+
+                if (!requesttv) {
+                        alert("Unable to create HTTPRequest object");
+                        return;
+                }
+                
+                console.log(api_link);
+
+                request.open("GET", api_link, true);
+
+                request.onreadystatechange = function() {
+                        console.log("ready: " + this.readyState);
+                        console.log("status: " + this.status);
+                        if (this.readyState === 4 && this.status === 200) {
+                                var data = JSON.parse(this.responseText);
+                                var retrieved = data.results;
+                                var strHTML = "<ol>";
+                        
+                                /* generates 10 titles */
+                                for (var i = 0; i < 10; i++) {
+                                        console.log("about to retrieve " + i);
+                                        strHTML += "<li>" + retrieved[i].title + "</li>";
+                                }
+        
+                                strHTML += "</ol>";
+                                document.getElementById("data").innerHTML = strHTML;
+                                
+                        } else if (this.readyState === 4 && this.status !== 200) {
+                                        document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
+                                }
+                        }
+
+                request.send();
+
+                
         
                 window.onload = function() {
-                        requestData();
+                        requestDataMovies();
+                        requestDataTV();
                 };
         </script>
         <br><br>
