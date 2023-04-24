@@ -191,6 +191,7 @@ p {
 button {
         background-color: #fdd06a;
         border-radius: 8px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
         padding: 8px 15px 8px 15px;
 }
 

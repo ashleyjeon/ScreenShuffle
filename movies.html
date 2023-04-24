@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="final.css">
     <title>Movies</title>
 
+    <style>
+            #filters {
+                font-size: 20px;
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            #rating {
+                font-size: 15px;
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            #genre {
+                font-size: 15px;
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            #data {
+                margin-top: 2px;
+                font-size: 30px;
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            #data img {
+                    height: 200px; 
+            }
+    </style>
+
 </head>
 <body>
         <nav>
@@ -15,7 +46,7 @@
             <a href="default.html">Home</a>
             <a class="active" href="movies.html">Movies</a>
             <a href="tv_shows.html">TV Shows</a>
-            <a href="actors.html">Actors</a>
+            <a href="actors.php">Actors</a>
             <a href="about.html">About Us</a>
             <a href="contribute.html">Contribute</a>      
          </nav>
@@ -25,7 +56,6 @@
 
 
         <div id="title_heading">
-
             <h1>Random Movie Generator</h1>
         </div>
         
@@ -34,7 +64,7 @@
         <br>
         <br>
 
-        <form>
+        <form id="filters">
                 <label for="genre">Genre:</label>
                 <select id="genre" name="genre">
                         <option value="28">Action</option>
@@ -57,13 +87,7 @@
                         <option value="10752">War</option>
                         <option value="37">Western</option>
                 </select>
-
-               <!--  <label for="from">From:</label>
-                <input type="date" id="movie_start_date" name="movie_start_date">
-
-                <label for="to">To:</label>
-                <input type="date" id="movie_end_date" name="movie_end_date"> -->
-
+                &nbsp &nbsp
 
                 <label for="rating">Rating of at least:</label>
                 <select id="rating" name="rating">
@@ -78,15 +102,16 @@
                         <option value="9">9</option>
                         <option value="10">10</option>
                 </select>
-                
-               <!--  <label for="keyword">Keyword</label>
-                <input type="text" id="keyword" name="keyword">
-                <br><br> -->
+
+
+                &nbsp &nbsp
 
                 <button type="button" onclick="getFilterInfo()">Shuffle</button>
         </form>
         
-        <div id="data"></div>
+        <div id="data">
+                
+        </div>
 
         
          <script language="javascript">
@@ -125,43 +150,6 @@
                 
                 console.log(api_link);
                      
-                // request.open("GET", api_link, true);
-             
-                  
-/*             // Step 3: set up event handler/callback
-            request.onreadystatechange = function() {
-                console.log("3 - readystatechange event fired.");
-    
-                if (request.readyState == 4 && request.status == 200) {
-                        // Step 5: wait for done + success
-                        console.log("5 - response received");
-                        result = request.responseText;
-        
-                        
-                        characters = JSON.parse(result);
-                        characters = characters["data"];
-
-                        strHTML = "<ul>";
-                        for (var i = 0; i < characters.length; i++) {
-                                strHTML += "<li>" + "Character name: " + characters[i].name + "</br>"
-                                        + "Link to their image: " + characters[i].imageUrl + "</br>" +
-                                        "</li>";
-                        }
-                        strHTML += "</ul>";
-                                
-                        document.getElementById("data").innerHTML = strHTML;
-                    
-                } else if (request.readyState == 4 && request.status != 200) {
-                    document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
-                } else if (request.readyState == 3) {
-                    document.getElementById("data").innerHTML = "Too soon!  Try again";
-                }
-            }
-
-    
-                // Step 4: fire off the HTTP request
-            request.send();
-            console.log("4 - Request sent"); */
 
                 if (!request) {
                         {alert("Unable to get HTTPRequest object"); return;}
@@ -178,9 +166,27 @@
                                 /* generates a random number */
                                 var random = Math.ceil((Math.random() * 19));
                                 console.log("What is the random number: " + random);
-                        
-                                console.log(retrieved);
-                                document.getElementById("data").innerHTML = retrieved[random].title;
+                                
+
+                               
+
+                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+                               
+                                console.log(retrieved[random].poster_path);
+                                document.getElementById("data").innerHTML = "<br>" + link + retrieved[random].poster_path + "'>";
+                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
+                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Overview: " + retrieved[random].overview + "</p><br>";
+
+                
+                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
+                                //         "<img loading='lazy' class='poster' src='" + link;
+                                //<img loading="lazy" class="poster" src="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg" srcset="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x" alt="">
+
+                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
+                                //retrieved[poster_path];
 
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
