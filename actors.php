@@ -76,13 +76,13 @@
                         var actorFilms = <?php echo json_encode($films); ?>;
                         var actorIMDBs = <?php echo json_encode($imdbs); ?>;
 
-                        var dropdown = "<select style='margin: auto'>";
+                        //var dropdown = "<select style='margin: auto'>";
                         var gallery = "<table style='text-align: center; margin: auto; width: auto'>";
 
                         for (let i = 0; i < actorNames.length; i++) {
                                 console.log(actorNames[i]);
                                 let name = actorNames[i];
-                                dropdown += "<option>" + name + "</option>";
+                                //dropdown += "<option>" + name + "</option>";
 
                                 if (i % 4 === 0) {
                                         gallery += "<tr>";
@@ -98,7 +98,7 @@
                                 }
                         }
 
-                        dropdown += "</select>";
+                        //dropdown += "</select>";
                         gallery += "</table>";
 
                         var footer = "<footer><br />&copy;Screen Shuffle<footer class='navigation-align-right'>"
@@ -108,7 +108,7 @@
                                         + "<img src='images/email.png' alt='Email Icon' height='17px'></a></footer></footer>";
 
                         $(document).ready(function() {
-                                $("body").append(dropdown);
+                                // $("body").append(dropdown);
                                 $("body").append(gallery);
                                 $("body").append("<div class='spacer'></div>");
                                 $("body").append(footer);
