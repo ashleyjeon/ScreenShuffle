@@ -44,12 +44,17 @@
         <script>
         function requestData() {
                 var request = new XMLHttpRequest();
+
                 var api_link = "https://api.themoviedb.org/3/movie/popular?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
 
                 if (!request) {
                         alert("Unable to create HTTPRequest object");
                         return;
                 }
+                
+                console.log(api_link);
+
+                request.open("GET", api_link, true);
                 
                 request.onreadystatechange = function() {
                         console.log("ready: " + this.readyState);
@@ -73,7 +78,6 @@
                                 }
                         }
 
-                        request.open("GET", api_link, true);
                         request.send();
                 }
         
