@@ -75,12 +75,16 @@
                         if (this.readyState === 4 && this.status === 200) {
                                 var data = JSON.parse(this.responseText);
                                 var retrieved = data.results;
-                                var strHTML = "<ol>";
+                                var strHTML = "";
                         
                                 /* generates 10 titles */
                                 for (var i = 0; i < 10; i++) {
+                                        var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                         console.log("about to retrieve " + i);
-                                        strHTML += "<li>" + retrieved[i].title + "</li>";
+                                        strHTML += "<div class='movie-item'><div id='data" + i +
+                                                   "'>" + link + retrieved[i].poster_path + "'>" +  "</div><div class='movie-info'>" + "<h4>" +
+                                                   retrieved[i].title + "</h4>" + "<p>Release Date: " + retrieved[i].release_date +  "</p>" +
+                                                   "</div></div>";
                                 }
         
                                 strHTML += "</ol>";
