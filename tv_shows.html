@@ -79,9 +79,29 @@
 
                 .banner-image {
                         width: 100%;
+                        height: 70%;
                         background-repeat: no-repeat;
                         background-size: contain;
-                }
+
+                        filter: brightness(100%);
+            }       
+
+            h1 {
+                color: #4683B7;
+                position: absolute;
+                width: 80%;
+                font-size: 50px;
+                text-align: center;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: rgb(231, 231, 231);
+                padding: 3px;
+                border-radius: 5px;
+                border-style: solid;
+                border-width: 2px;
+                border-color: black;
+            }
         </style>
 </head>
 <body>
@@ -96,10 +116,15 @@
         </nav>
 
         <header>
-                <img class="banner-image" src="images/banner-image.jpeg" 
+                <img class="banner-image" src="images/film1.jpeg" 
                 alt="Unsplash.com" height="450">
-                <h1>Random TV Show Generator</h1>
-        </header>
+    
+                <div class="title_heading" id="title_heading">
+                    <h1>Random TV Show Generator</h1>
+                </div>
+               
+                
+            </header>
             
                 <br><br>
                 <h2>Search Filters</h2>

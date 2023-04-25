@@ -72,6 +72,9 @@ header {
         position: relative;
         text-align: center;
         color: white;
+        display: flex;
+        align-items: center;
+        vertical-align: middle;
 }
 
 .banner-image {
@@ -215,7 +218,7 @@ button a:hover {
 }
 
 footer {
-        background-color: #009dbd;
+        background-color: black;
         overflow:hidden;
         color: white;
         font-size: small;
@@ -387,8 +390,15 @@ div.fixed {
 
 
 .title_heading {
-        border-style: solid;
-        border-color: #fdd06a;
+        width: 100%;
+      /*   border-style: solid; */
+        /* border-color: #fdd06a; */
         border-width: 3px;
         border-radius: 8px;
+    /*     display: flex;
+        align-items: center; */
+
+        position: absolute;
+        top: 35%;
+        transform: translateY(-50%);
 }
