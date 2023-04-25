@@ -29,14 +29,72 @@
 
             #data {
                 margin-top: 2px;
-                font-size: 30px;
+                font-size: 20px;
                 text-align: center;
                 font-family: Verdana, Geneva, Tahoma, sans-serif;
             }
 
+
             #data img {
                     height: 200px; 
+                    border-radius: 8px;
             }
+
+            #dataContainer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+
+            #data0 {
+                display: flex;
+                flex-direction: column;
+                width: 170px;
+                margin-left: 30px;
+            }
+
+            #data1 {
+                display: flex;
+                flex-direction: column;
+                width: 170px;
+            }
+
+            #data2 {
+                display: flex;
+                flex-direction: column;
+                width: 170px;
+            }
+
+            #data3 {
+                display: flex;
+                flex-direction: column;
+                width: 170px;
+                margin-right: 30px;
+            }
+
+            #overview {
+                width: 60%;
+                margin: 0 auto;
+            }
+
+            .banner-image {
+                width: 100%;
+                background-repeat: no-repeat;
+                background-size: contain;
+
+                /* filter: brightness(35%); */
+            }       
+
+            h1 {
+                color: pink;
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+
     </style>
 
 </head>
@@ -52,14 +110,23 @@
          </nav>
 
          
+         <header>
+            <img class="banner-image" src="images/film1.jpeg" 
+            alt="Unsplash.com" height="450">
+
+            <div class="title_heading" id="title_heading">
+                <h1>Random Movie Generator</h1>
+            </div>
+           
+            
+        </header>
 
 
-
-        <div id="title_heading">
+        <!-- <div id="title_heading">
             <h1>Random Movie Generator</h1>
-        </div>
+        </div> -->
         
-        <br><br>
+
         <h2>Search Filters</h2>
         <br>
         <br>
@@ -67,6 +134,7 @@
         <form id="filters">
                 <label for="genre">Genre:</label>
                 <select id="genre" name="genre">
+                        <option value ="">No Selected Value</option>
                         <option value="28">Action</option>
                         <option value="12">Adventure</option>
                         <option value="16">Animation</option>
@@ -91,6 +159,7 @@
 
                 <label for="rating">Rating of at least:</label>
                 <select id="rating" name="rating">
+                        <option value="">No Selected Value</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -106,16 +175,70 @@
 
                 &nbsp &nbsp
 
+                <script>
+
+                function now_playing()
+                {
+                        var request = new XMLHttpRequest();
+
+                        console.log("requested");
+
+                        if (!request) {
+                                alert("Unable to create HTTPRequest object");
+                                return;
+                        }
+
+                        var api_link = "https://api.themoviedb.org/3/movie/now_playing?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
+
+                        if (!request) {
+                                {alert("Unable to get HTTPRequest object"); return;}
+                        }
+                        
+                        request.open("GET", api_link, true);
+                        request.onreadystatechange = function() {
+                                console.log("ready: " + this.readyState);
+                                console.log("status: " + this.status);
+                                if (this.readyState === 4 && this.status === 200) {
+                                        var data = this.responseText;
+                                        var info = JSON.parse(data);
+                                        var retrieved = info["results"];
+                                
+                                        for (var i = 0; i < 4; i++) {
+                                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+                                                document.getElementById("data" + [i]).innerHTML += "<br>" + link + retrieved[i].poster_path + "'>";
+                                                document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].title + "<br>";
+                                                document.getElementById("data" + [i]).innerHTML += "<p>Release Date: " + retrieved[i].release_date + "</p>";
+                                        }
+
+                                                
+                                } else if (this.readyState == 4 && this.status != 200) {
+                                        document.getElementById("topMovie").innerHTML = "Unable to retrieve data";
+                                }
+                        }
+                                request.send();
+                        }
+
+                now_playing();
+                </script>
+
+
                 <button type="button" onclick="getFilterInfo()">Shuffle</button>
         </form>
         
         <div id="data">
-                
+                <div id="dataContainer">
+                        <div id="data0"></div>
+                        <div id="data1"></div>
+                        <div id="data2"></div>
+                        <div id="data3"></div>
+                </div>
         </div>
 
         
          <script language="javascript">
             var genreId, rating;
+
+            
         
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
@@ -124,8 +247,16 @@
                     rating = document.getElementById("rating").value;
                     console.log(rating);
 
+                    
                     requestData();                
             }
+
+
+           
+
+
+
+
 
             function requestData() {
                 var request = new XMLHttpRequest();
@@ -139,6 +270,8 @@
                 
                 var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&page=1&with_genres=" 
                                 + genreId + "&vote_average.gte=" + rating;
+
+                
                 
                 console.log(api_link);
                      
@@ -167,7 +300,7 @@
                                 document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
-                                document.getElementById("data").innerHTML += "<p>Overview: " + retrieved[random].overview + "</p><br>";
+                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
 
                 
                         } else if (this.readyState == 4 && this.status != 200) {
