@@ -51,6 +51,10 @@
             <a href="contribute.html">Contribute</a>      
          </nav>
 
+         
+
+
+
         <header>
                 <img class="banner-image" src="images/banner-image.jpeg" 
                 alt="Unsplash.com" height="400">
@@ -114,15 +118,25 @@
         
          <script language="javascript">
             var genreId, rating;
-        
+            
+           /*  start_date, end_date,  keyword; */
+
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
                     console.log(genreId);
 
+                //     start_date = document.getElementById("movie_start_date").value;
+                //     end_date = document.getElementById("movie_end_date").value;
+                //     console.log(end_date);
+            
                     rating = document.getElementById("rating").value;
                     console.log(rating);
 
-                    requestData();                
+                //     keyword = document.getElementById("keyword").value;
+                //     console.log(keyword);
+
+                    requestData();
+                
             }
 
             function requestData() {
@@ -144,6 +158,7 @@
                 if (!request) {
                         {alert("Unable to get HTTPRequest object"); return;}
                 }
+                
                 request.open("GET", api_link, true);
                 request.onreadystatechange = function() {
                         console.log("ready: " + this.readyState);
@@ -157,6 +172,9 @@
                                 var random = Math.ceil((Math.random() * 19));
                                 console.log("What is the random number: " + random);
                                 
+
+                               
+
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
                                 console.log(retrieved[random].poster_path);
@@ -168,6 +186,13 @@
                                 document.getElementById("data").innerHTML += "<p>Overview: " + retrieved[random].overview + "</p><br>";
 
                 
+                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
+                                //         "<img loading='lazy' class='poster' src='" + link;
+                                //<img loading="lazy" class="poster" src="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg" srcset="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x" alt="">
+
+                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
+                                //retrieved[poster_path];
+
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
                         }
@@ -175,25 +200,15 @@
                 request.send();
         }
         
-         </script>
+        </script>
     
 
+        <div class="spacer"></div>
+        
+        <footer>
+                <br/>&copy;Screen Shuffle
+                <footer class="navigation-align-right"></footer>
 
-
-
-
-          <footer>
-                 <br />
-                 &copy;Screen Shuffle
-                 <footer class="navigation-align-right">
-                        <!--  <a href="https://www.instagram.com/tuftsanimalaid/" target="_blank">
-//                                 <img src="images/instagram.png" alt="Instagram Icon" height="17px"></a>
-//                                 &nbsp; &nbsp;
-//                                 <a href="mailto:lcsanimalaid@gmail.com" target="_blank">
-//                                 <img src="images/email.png" alt="Email Icon" height="17px">
-//                         </a> -->
-                 </footer>
-
-         </footer>
+        </footer>
  </body>
  </html>

@@ -54,22 +54,22 @@
                         align-items: center;
                         background-color: rgba(0, 0, 0, 0.733);
                         animation: zoom 0.3s ease-in-out;
+                        flex-direction: column;
                 }
 
-                .actorInfo {
-                        width: 100%;
-                        height: 100%;
-                        position: fixed;
-                        top: 0;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        color: white;
-                }
-                
-                .modal img {
+                .modal-image {
                         height: 75%;
                         object-fit: cover;
+                        display: block;
+                        margin-top: 3%; /* Add margin bottom to create space between image and actorInfo */
+                }
+
+                .modal-actorInfo {
+                        text-align: center;
+                        display: block; /* Display actorInfo element as a block element */
+                        max-height: 25%;
+                        overflow-y: auto;
+                        margin-bottom: 3%;
                 }
 
                 button {
@@ -156,20 +156,6 @@
 
                 $conn->close();
         ?> 
-        
-
-        <div class="container">
-
-               <!--  <img src="dogs.png" alt="President" height="100px" class="image" onclick="openPopup()">
-
-                <div class="popup" id="popup">
-                <img src="dogs.png" alt="President" height="100px" class="image">
-                        <h2>Dis is where the Name goes</h2>
-                        
-                        <button type="button" onclick="closePopup()">OK</button>
-                </div> -->
-        </div>
-
 
 
         <div style="text-align: center; margin: auto; width: auto">
@@ -193,7 +179,7 @@
                                 }
                         
                                 gallery += "<td class='gallery__item'>" 
-                                + "<img style='margin: 3% auto 3% auto; cursor: pointer;' src='" + actorImages[i] 
+                                + "<img style='margin: 3% auto 5% auto; cursor: pointer;' src='" + actorImages[i] 
                                         + "' width='180px' height='220px'>" 
                                 + "<br/><p><strong>" + name + "</strong></p><p style='width: 100%'><i>" + actorFilms[i] + "</i></p>"
                                 + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p><br/>" + "</td>";
@@ -248,11 +234,11 @@
                                         // adding image to modal
                                         const newImage = document.createElement("img");
                                         newImage.setAttribute("src", src);
+                                        newImage.setAttribute("class", "modal-image"); // add modal-image class for the image element
                                         
                                         const actorInfo = document.createElement("p");
-                                        actorInfo.setAttribute("class", "actorInfo");
-                                        actorInfo.setAttribute("id", "popup");
-                                        
+                                        actorInfo.setAttribute("class", "modal-actorInfo");
+
                                         // creating the close button
                                         const closeBtn = document.createElement("button");
                                         closeBtn.innerHTML = "✖";
@@ -272,15 +258,9 @@
                                 var actorFname = first;
                                 var actorLname = last;
 
-                                let popup = document.getElementById("popup");
-                                // popup.classList.add("open-popup");
                                 requestData(actorFname, actorLname);
                         }
                         
-
-                        // function closePopup() {
-                        //         popup.classList.remove("open-popup");
-                        // }
 
                         function requestData(actorFname, actorLname) {
                                 console.log('in request data');
@@ -309,10 +289,10 @@
                                                 var info = JSON.parse(data);
                                                 var retrieved = info["results"];
                                         
-                                                document.getElementById("popup").innerHTML += "<br><br>" + api_link + retrieved[0].poster_path + "<br>";
-                                                document.getElementById("popup").innerHTML += "<br><p style='color: white'>" + retrieved[0].name + "</p><br>";
-                                                document.getElementById("popup").innerHTML += "<p style='color: white'>Occupation: " + retrieved[0].known_for_department + "</p>";
-                                                document.getElementById("popup").innerHTML += "<p style='color: white'>Most Known For: " + retrieved[0].known_for[0].title + "</p>";
+                                                // $(".modal-actorInfo").append("<br><p style='color: white'>" + api_link + retrieved[0].poster_path + "</p><br>");
+                                                $(".modal-actorInfo").append("<h3 style='color: white'>" + retrieved[0].name + "</h3>");
+                                                $(".modal-actorInfo").append("<p style='color: white'>Occupation: " + retrieved[0].known_for_department + "</p>");
+                                                $(".modal-actorInfo").append("<p style='color: white'>Most Known For: " + retrieved[0].known_for[0].title + "</p>");
                                                
                                 
                                         } else if (this.readyState == 4 && this.status != 200) {
