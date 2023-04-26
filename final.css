@@ -3,7 +3,9 @@ body {
         margin: auto;
 }
 
-nav {background-color: black; overflow:hidden;
+nav {
+        background-color: black; 
+/*         overflow:hidden; */
         text-align: right;
         padding: 2% 5% 2%;
         /* position: sticky; */
