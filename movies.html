@@ -52,7 +52,7 @@
                 display: flex;
                 flex-direction: column;
                 width: 170px;
-                margin-left: 25%;
+                margin-left: 90px;
             }
 
             #data1 {
@@ -71,7 +71,7 @@
                 display: flex;
                 flex-direction: column;
                 width: 170px;
-                margin-right: 25%;
+                margin-right: 90px;
             }
 
             #overview {
@@ -79,13 +79,15 @@
                 margin: 0 auto;
             }
 
-/*             .banner-image {
+            .banner-image {
                 width: 100%;
                 height: 70%;
                 background-repeat: no-repeat;
                 background-size: contain;
+
                 filter: brightness(100%);
             }       
+
             h1 {
                 color: #4683B7;
                 position: absolute;
@@ -101,99 +103,73 @@
                 border-style: solid;
                 border-width: 2px;
                 border-color: black;
-            } */
-
-            /* #data img:hover {
-                opacity: 0.4;
-                position: relative;
             }
-            #data.poster.caption {
-                position: absolute;
-                background-color: rgba(0, 0, 0, 0.6);
-                color: white;
-                padding: 10px;
-                text-align: center;
-                opacity: 0;
-                visibility: hidden;
-            }
-            #data .poster {
-                position: relative;
-            }
-            #data .poster .caption {
-                position: absolute;
-                background-color: rgba(0, 0, 0, 0.6);
-                color: white;
-                padding: 10px;
-                text-align: center;
-                opacity: 0;
-                visibility: hidden;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-            }
-            #data .poster:hover .caption {
-                opacity: 1;
-                visibility: visible;
-                border-radius: 15px;
-            }
-            #data0 a {
-                color:pink;
-            } */
 
             #data0 .moviePoster:hover {
                     position: relative;
-                    opacity: 0.4;
                     /* background-color: rgba(0, 0, 0, 0.5); */
             }
 
             #data1 .moviePoster:hover {
                     position: relative;
-                    opacity: 0.4;
-                    /* background-color: rgba(0, 0, 0, 0.5); */
+
             }
 
             #data2 .moviePoster:hover {
                     position: relative;
-                    opacity: 0.4;
-                    /* background-color: rgba(0, 0, 0, 0.5); */
             }
 
             #data3 .moviePoster:hover {
                     position: relative;
-                    opacity: 0.4;
-                    /* background-color: rgba(0, 0, 0, 0.5); */
             }
 
             .overlay {
-                    position: absolute;
+                    /* position: absolute; */
                     top: 50%;
                     left: 50%;
-                    transform: translate(-50%, -50%);
-                    /* background-color: rgba(0, 0, 0, 0.5); */
+                    transform: translate(25%, -400%);
                     color: #000000;
                     padding: 10px;
                     display: block;
+                    background-color: rgb(200, 200, 200);
+                    opacity: 0.8;
+                    z-index: 9999;
+                    width: 60%;
+                    font-size: 16px;
+                    font-weight: bold;
+                    padding: 4px;
+                    border-style: solid;
+                    border-width: 0;
+                    border-radius: 5px;
+                    display: none;
+            }
+
+            .moviePoster:hover .overlay {
+               display: block;
             }
 
             .overlay a {
-                color: black;
+                color: rgb(0, 0, 0);
+               
+                /* z-index: 1; */
             }
 
-            /* #data0:hover .overlay {
-                    display: block;
-            }
-            
-            #data1:hover .overlay {
-                    display: block;
-            }
-            #data2:hover .overlay {
-                    display: block;
-            }
-            #data3:hover .overlay {
-                    display: block;
-            } */
         
+            #data .poster:hover {
+                position: relative;
+                opacity: 0.4;
+            }
+
+            .moviePoster {
+                width: 133.33px;
+                height: 230px;
+                align-items: center;
+                margin: 0 auto;
+                justify-content: center;
+                text-align: center;
+            }
+
+            
 
     </style>
 
@@ -209,26 +185,17 @@
             <a href="contribute.html">Contribute</a>      
          </nav>
 
-         
-         <!-- <header>
-            <img class="banner-image" src="images/film1.jpeg" 
-            alt="Unsplash.com" height="450">
-            <div class="title_heading" id="title_heading">
-                <h1>Random Movie Generator</h1>
-            </div>
-    
-            
-        </header> -->
-
 
         <header>
-                <img class="banner-image" src="images/film2.jpg" 
-                alt="Unsplash.com" height="400">
+                <img class="banner-image" src="images/banner-image.jpeg" 
+                alt="Unsplash.com" height="300">
                 <h1>Random Movie Generator</h1>
         </header>
         
         <br><br>
         <h2>Search Filters</h2>
+        <br>
+        <br>
 
         <form id="filters">
                 <label for="genre">Genre:</label>
@@ -306,11 +273,12 @@
                                                 // document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'>"
 
                                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                                                document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'><br>" + link + retrieved[i].poster_path + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>"; 
+                                                document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'><br>" + link + retrieved[i].poster_path 
+                                                                    + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>"; 
                                                 /* added here */
                                                 
                                                 document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].title + "<br>";
-                                                document.getElementById("data" + [i]).innerHTML += "<p>Release Date: <br>" + retrieved[i].release_date + "</p>";
+                                                document.getElementById("data" + [i]).innerHTML += "<p>Release Date: " + retrieved[i].release_date + "</p>";
                                                 
                                         }
 
@@ -331,8 +299,7 @@
         </form>
         
         <div id="data">
-                <br>
-            <strong>Top Rated Movies</strong>
+                <h4>Top Rated Movies</h4>
                 <div id="dataContainer">
                         <div id="data0"></div>
                         <div id="data1"></div>
@@ -340,13 +307,6 @@
                         <div id="data3"></div>
                 </div>
         </div>
-
-        <!-- <div class="container">
-                <a href="https://www.google.com">
-                  <img src="img.jpeg" alt="Example Image">
-                  <div class="overlay">Click here to go to example.com</div>
-                </a>
-        </div> -->
 
         <br>
         <br>
@@ -359,10 +319,6 @@
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
                     console.log(genreId);
-
-                //     start_date = document.getElementById("movie_start_date").value;
-                //     end_date = document.getElementById("movie_end_date").value;
-                //     console.log(end_date);
             
                     rating = document.getElementById("rating").value;
                     console.log(rating);
@@ -405,27 +361,15 @@
                                 /* generates a random number */
                                 var random = Math.ceil((Math.random() * 19));
                                 console.log("What is the random number: " + random);
-                                
-
-                               
 
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
-                                console.log(retrieved[random].poster_path);
-                                document.getElementById("data").innerHTML = "<br>" + link + retrieved[random].poster_path + "'>";
+                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>";
                                 document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
                                 document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
                                 document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
-
-                
-                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
-                                //         "<img loading='lazy' class='poster' src='" + link;
-                                //<img loading="lazy" class="poster" src="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg" srcset="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x" alt="">
-
-                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
-                                //retrieved[poster_path];
 
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
