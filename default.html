@@ -20,6 +20,53 @@
                         left: 50%;
                         transform: translate(-50%, -50%);
                 } 
+
+                #data {
+                margin-top: 2px;
+                font-size: 20px;
+                text-align: center;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin-bottom: 20px;
+                }
+
+
+                #data img {
+                        height: 200px; 
+                        border-radius: 8px;
+                }
+
+                #dataContainer {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                }
+
+
+                #data0 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 170px;
+                        margin-left: 30px;
+                }
+
+                #data1 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 170px;
+                }
+
+                #data2 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 170px;
+                }
+
+                #data3 {
+                        display: flex;
+                        flex-direction: column;
+                        width: 170px;
+                        margin-right: 30px;
+                }
         </style>
 </head>
 
@@ -53,7 +100,20 @@
         <br>
 
         <h3>Top 10 Movies</h3>
-        <div id="datamovies"></div>
+        <div id="datamovies">
+                <div id="dataContainerMovies">
+                        <div id="data0"></div>
+                        <div id="data1"></div>
+                        <div id="data2"></div>
+                        <div id="data3"></div>
+                        <div id="data4"></div>
+                        <div id="data5"></div>
+                        <div id="data6"></div>
+                        <div id="data7"></div>
+                        <div id="data8"></div>
+                        <div id="data9"></div>
+                </div>
+        </div>
         <script>
         function requestDataMovies() {
                 var request = new XMLHttpRequest();
@@ -81,15 +141,11 @@
                                 for (var i = 0; i < 10; i++) {
                                         var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                         console.log("about to retrieve " + i);
-                                        strHTML += "<div class='movie-item'><div id='data" + i +
-                                                   "'>" + link + retrieved[i].poster_path + "'>" +  "</div><div class='movie-info'>" + "<h4>" +
-                                                   retrieved[i].title + "</h4>" + "<p>Release Date: " + retrieved[i].release_date +  "</p>" +
-                                                   "</div></div>";
+                                        document.getElementById("data" + [i]).innerHTML += "<br>" + link + retrieved[i].poster_path + "'>";
+                                        document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].title + "<br>";
+                                        document.getElementById("data" + [i]).innerHTML += "<p>Release Date: " + retrieved[i].release_date + "</p>";
                                 }
-        
-                                strHTML += "</ol>";
-                                document.getElementById("datamovies").innerHTML = strHTML;
-                                
+                                        
                         } else if (this.readyState === 4 && this.status !== 200) {
                                         document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
                                 }
