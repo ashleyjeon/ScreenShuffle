@@ -73,6 +73,11 @@
             font-size: 14px;
             line-height: 1.2;
         }
+
+        #datamovies h3, #datatv h3 {
+                margin-bottom: 20px;
+        }
+
         </style>
 </head>
 
@@ -100,19 +105,17 @@
         <h2>Find a movie or show to watch, fast!</h2>
         <br/>
 
-
-        
-        <div id="datatv">
-                <h3>Top 10 TV Shows</h3>
-                <div class="tv-container"></div>
-        </div>
-        <br>
-
-
         <div id="datamovies">
                 <h3>Top 10 Movies</h3>
                 <div class="movie-container"></div>
         </div>
+
+        <div id="datatv">
+                <h3>Top 10 TV Shows</h3>
+                <div class="tv-container"></div>
+        </div>
+
+        <br>
         <script>
         function requestDataMovies() {
                 var request = new XMLHttpRequest();
