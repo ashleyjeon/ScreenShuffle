@@ -55,22 +55,10 @@
             border-radius: 8px;
         }
 
-        .movie-info {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
+        .movie-details {
                 padding: 10px;
-                background-color: rgba(0, 0, 0, 0.7);
-                color: #fff;
                 text-align: center;
-                height: 0;
-                overflow: hidden;
-                transition: height 0.3s ease-in-out;
-        }
-
-        .movie-poster:hover .movie-info {
-                height: auto;
+                color: #000;
         }
 
         .movie-title {
@@ -153,10 +141,9 @@
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
                                         strHTML += '</div>';
-                                        strHTML += '<div class="movie-info">';
-                                        strHTML += '<h4 class="movie-title">' + movieTitle + '</h4>';
+                                        strHTML += '<div class="movie-details">';
+                                        strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + movieTitle + '</h4>';
                                         strHTML += '<p class="movie-rating">Rating: ' + movieRating + '</p>';
-                                        strHTML += '</div>'; /* corresponds to movie-info */
                                         strHTML += '</div>';
                                         strHTML += '</div>';
                                 }
