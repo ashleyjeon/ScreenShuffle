@@ -3,7 +3,9 @@ body {
         margin: auto;
 }
 
-nav {background-color: black; overflow:hidden;
+nav {
+        background-color: black; 
+/*         overflow:hidden; */
         text-align: right;
         padding: 2% 5% 2%;
         /* position: sticky; */
@@ -115,7 +117,15 @@ form {
 input[type=text] {
         font-size: 14px;
         width: 100%;
-        padding: 10px 10px;
+        padding: 2% 2%;
+        margin: 8px 0;
+        box-sizing: border-box;
+}
+
+input[type=date] {
+        font-size: 14px;
+        width: 100%;
+        padding: 2% 2%;
         margin: 8px 0;
         box-sizing: border-box;
 }
