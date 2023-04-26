@@ -209,7 +209,7 @@
 </head>
 <body>
         <nav>
-            <a href="default.html" class="logo"><img src="images/logo.png" alt="Logo" height="100px"></a>
+            <a href="default.html" class="logo"><img src="images/logo.png" alt="Logo" height="80px"></a>
             <a href="default.html">Home</a>
             <a class="active" href="movies.html">Movies</a>
             <a href="tv_shows.html">TV Shows</a>
@@ -231,9 +231,17 @@
         </header>
 
 
+<<<<<<< HEAD
+        <header>
+                <img class="banner-image" src="images/banner-image.jpeg" 
+                alt="Unsplash.com" height="400">
+                <h1>Random Movie Generator</h1>
+        </header>
+=======
         <!-- <div id="title_heading">
             <h1>Random Movie Generator</h1>
         </div> -->
+>>>>>>> b48fc56c508cd62416abe9899ae708e9b812de6a
         
         <br><br>
         <h2>Search Filters</h2>
@@ -362,18 +370,36 @@
         
          <script language="javascript">
             var genreId, rating;
+<<<<<<< HEAD
+            
+           /*  start_date, end_date,  keyword; */
+
+=======
 
             
         
+>>>>>>> b48fc56c508cd62416abe9899ae708e9b812de6a
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
                     console.log(genreId);
 
+                //     start_date = document.getElementById("movie_start_date").value;
+                //     end_date = document.getElementById("movie_end_date").value;
+                //     console.log(end_date);
+            
                     rating = document.getElementById("rating").value;
                     console.log(rating);
 
+<<<<<<< HEAD
+                //     keyword = document.getElementById("keyword").value;
+                //     console.log(keyword);
+
+                    requestData();
+                
+=======
                     
                     requestData();                
+>>>>>>> b48fc56c508cd62416abe9899ae708e9b812de6a
             }
 
             function requestData() {
@@ -397,6 +423,7 @@
                 if (!request) {
                         {alert("Unable to get HTTPRequest object"); return;}
                 }
+                
                 request.open("GET", api_link, true);
                 request.onreadystatechange = function() {
                         console.log("ready: " + this.readyState);
@@ -410,6 +437,9 @@
                                 var random = Math.ceil((Math.random() * 19));
                                 console.log("What is the random number: " + random);
                                 
+
+                               
+
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
                                 console.log(retrieved[random].poster_path);
@@ -421,6 +451,13 @@
                                 document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
 
                 
+                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
+                                //         "<img loading='lazy' class='poster' src='" + link;
+                                //<img loading="lazy" class="poster" src="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg" srcset="/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x" alt="">
+
+                                //"<img loading='lazy' class='poster' src='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg' srcset='/t/p/w220_and_h330_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 1x, /t/p/w440_and_h660_face/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg 2x' alt=''>"
+                                //retrieved[poster_path];
+
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
                         }
@@ -428,6 +465,18 @@
                 request.send();
         }
         
+<<<<<<< HEAD
+        </script>
+    
+
+        <div class="spacer"></div>
+        
+        <footer>
+                <br/>&copy;Screen Shuffle
+                <footer class="navigation-align-right"></footer>
+
+        </footer>
+=======
          </script>
 
 
@@ -444,5 +493,6 @@
                  </footer>
 
          </footer>
+>>>>>>> b48fc56c508cd62416abe9899ae708e9b812de6a
  </body>
  </html>

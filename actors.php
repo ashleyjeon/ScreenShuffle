@@ -54,11 +54,22 @@
                         align-items: center;
                         background-color: rgba(0, 0, 0, 0.733);
                         animation: zoom 0.3s ease-in-out;
+                        flex-direction: column;
                 }
-                
-                .modal img {
+
+                .modal-image {
                         height: 75%;
                         object-fit: cover;
+                        display: block;
+                        margin-top: 3%; /* Add margin bottom to create space between image and actorInfo */
+                }
+
+                .modal-actorInfo {
+                        text-align: center;
+                        display: block; /* Display actorInfo element as a block element */
+                        max-height: 25%;
+                        overflow-y: auto;
+                        margin-bottom: 3%;
                 }
 
                 button {
@@ -90,7 +101,7 @@
 </head>
 <body>
         <nav>
-                <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="100px"></a>
+                <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="80px"></a>
                 <a href="default.html">Home</a>
                 <a href="movies.html">Movies</a>
                 <a href="tv_shows.html">TV Shows</a>
@@ -101,10 +112,8 @@
 
         <header>
                 <img class="banner-image" src="images/banner-image.jpeg" 
-                alt="Unsplash.com" height="450">
+                alt="Unsplash.com" height="400">
                 <h1>Popular Actors</h1>
-                
-        </header>
 
         <?php
                 $servername = "localhost";
@@ -124,14 +133,16 @@
                 $result = $conn->query($sql);
 
                 // Building dropdown menu to select actors/actresses
-                $names = array();
+                $fnames = array();
+                $lnames = array();
                 $images = array();
                 $films = array();
                 $imdbs = array();
                 if ($result->num_rows > 0) {                                
                         $i = 0;
                         while ($row = $result->fetch_assoc()) {
-                                $names[$i] = $row["fname"]." ".$row["lname"];
+                                $fnames[$i] = $row["fname"];
+                                $lnames[$i] = $row["lname"];
                                 $images[$i] = $row["image"];
                                 $films[$i] = $row["film"];
                                 $imdbs[$i] = $row["imdb"];
@@ -145,30 +156,38 @@
 
                 $conn->close();
         ?> 
-        
+
+
         <div style="text-align: center; margin: auto; width: auto">
                 <script language="javascript">
                         /* get actorNames array from PHP */
-                        var actorNames = <?php echo json_encode($names); ?>;
+                        var actorFirstNames = <?php echo json_encode($fnames); ?>;
+                        var actorLastNames = <?php echo json_encode($lnames); ?>;
                         var actorImages = <?php echo json_encode($images); ?>;
                         var actorFilms = <?php echo json_encode($films); ?>;
                         var actorIMDBs = <?php echo json_encode($imdbs); ?>;
 
-                        //var dropdown = "<select style='margin: auto'>";
+                        console.log("got arrays");
                         var gallery = "<div class='gallery' style='margin: auto'><div class='flexbox'><table style='text-align: center; margin: auto; width: auto'>";
 
-                        for (let i = 0; i < actorNames.length; i++) {
-                                console.log(actorNames[i]);
-                                let name = actorNames[i];
+                        for (let i = 0; i < actorFirstNames.length; i++) {
+                                console.log(actorFirstNames[i]);
+                                let name = actorFirstNames[i] + " " + actorLastNames[i];
 
                                 if (i % 4 === 0) {
                                         gallery += "<tr>";
                                 }
-                                
+                        
                                 gallery += "<td class='gallery__item'>" 
-                                + "<img style='margin: auto auto 3% auto;' src='" + actorImages[i] + "' width='180px' height='220px';" 
-                                + "<br/><br/><p><strong>" + actorNames[i] + "</strong></p><p><i>"+ actorFilms[i] + "</i></p>"
-                                + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p>" + "</td>";
+                                + "<img style='margin: 3% auto 5% auto; cursor: pointer;' src='" + actorImages[i] 
+                                        + "' width='180px' height='220px'>" 
+                                + "<br/><p><strong>" + name + "</strong></p><p style='width: 100%'><i>" + actorFilms[i] + "</i></p>"
+                                + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p><br/>" + "</td>";
+
+                                // gallery += "<td class='gallery__item'>" 
+                                // + "<img style='margin: auto auto 3% auto;' src='" + actorImages[i] + "' width='180px' height='220px';" 
+                                // + "<br/><br/><p><strong>" + name + "</strong></p><p><i>"+ actorFilms[i] + "</i></p>"
+                                // + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p>" + "</td>";
 
                                 if ((i - 3) % 4 === 0) {
                                         gallery += "</tr>";
@@ -195,10 +214,12 @@
                                 // get images src onclick
                                 images.forEach((img) => {
                                         img.addEventListener("click", (e) => {
-                                                console.log("clicked");
+                                                console.log(" actor is " + images.indexOf(img));
+                                                let index = images.indexOf(img);
                                                 imgSrc = e.target.src;
                                                 //run modal function
                                                 imgModal(imgSrc);
+                                                openPopup(actorFirstNames[index], actorLastNames[index]);
                                         });
                                 });
 
@@ -213,7 +234,11 @@
                                         // adding image to modal
                                         const newImage = document.createElement("img");
                                         newImage.setAttribute("src", src);
+                                        newImage.setAttribute("class", "modal-image"); // add modal-image class for the image element
                                         
+                                        const actorInfo = document.createElement("p");
+                                        actorInfo.setAttribute("class", "modal-actorInfo");
+
                                         // creating the close button
                                         const closeBtn = document.createElement("button");
                                         closeBtn.innerHTML = "✖";
@@ -224,10 +249,58 @@
                                                 modal.remove();
                                         };
                                         
-                                        modal.append(newImage, closeBtn);
+                                        modal.append(newImage, actorInfo, closeBtn);
                                 }; 
                         });
 
+                        function openPopup(first, last) {
+                                console.log('in open popup');
+                                var actorFname = first;
+                                var actorLname = last;
+
+                                requestData(actorFname, actorLname);
+                        }
+                        
+
+                        function requestData(actorFname, actorLname) {
+                                console.log('in request data');
+                                var request = new XMLHttpRequest();
+                        
+                                if (!request) {
+                                        alert("Unable to create HTTPRequest object");
+                                        return;
+                                }
+                                
+                                var api_link = "http://api.tmdb.org/3/search/person?api_key=d769a465cff5b60a61415cc4a7f30648&query="
+                                                + actorFname + "%20" + actorLname;
+                                
+                                console.log(api_link);
+                                
+
+                                if (!request) {
+                                        {alert("Unable to get HTTPRequest object"); return;}
+                                }
+                                request.open("GET", api_link, true);
+                                request.onreadystatechange = function() {
+                                        console.log("ready: " + this.readyState);
+                                        console.log("status: " + this.status);
+                                        if (this.readyState === 4 && this.status === 200) {
+                                                var data = this.responseText;
+                                                var info = JSON.parse(data);
+                                                var retrieved = info["results"];
+                                        
+                                                // $(".modal-actorInfo").append("<br><p style='color: white'>" + api_link + retrieved[0].poster_path + "</p><br>");
+                                                $(".modal-actorInfo").append("<h3 style='color: white'>" + retrieved[0].name + "</h3>");
+                                                $(".modal-actorInfo").append("<p style='color: white'>Occupation: " + retrieved[0].known_for_department + "</p>");
+                                                $(".modal-actorInfo").append("<p style='color: white'>Most Known For: " + retrieved[0].known_for[0].title + "</p>");
+                                               
+                                
+                                        } else if (this.readyState == 4 && this.status != 200) {
+                                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                        }
+                                }
+                                request.send();
+                        }
                 </script>
         </div>
 
