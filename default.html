@@ -56,20 +56,21 @@
         }
 
         .movie-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 10px;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #fff;
+                text-align: center;
+                height: 0;
+                overflow: hidden;
+                transition: height 0.3s ease-in-out;
         }
 
         .movie-poster:hover .movie-info {
-            opacity: 1;
+                height: auto;
         }
 
         .movie-title {
