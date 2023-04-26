@@ -4,6 +4,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="final.css">
         <style type="text/css">
+                p {
+                        margin: 0.5% auto 0.5% auto;
+                }
+                
                 .gallery {
                                 display: grid;
                                 width: auto;
@@ -52,24 +56,24 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        background-color: rgba(0, 0, 0, 0.733);
+                        background-color: rgba(0, 0, 0, 0.85);
                         animation: zoom 0.3s ease-in-out;
                         flex-direction: column;
+                        overflow-y: auto;
                 }
 
                 .modal-image {
-                        height: 75%;
+                        height: 65%;
                         object-fit: cover;
                         display: block;
-                        margin-top: 3%; /* Add margin bottom to create space between image and actorInfo */
+                        margin-top: 8%; /* Add margin bottom to create space between image and actorInfo */
                 }
 
                 .modal-actorInfo {
                         text-align: center;
                         display: block; /* Display actorInfo element as a block element */
                         max-height: 25%;
-                        overflow-y: auto;
-                        margin-bottom: 3%;
+                        margin-bottom: 5%;
                 }
 
                 button {
@@ -179,10 +183,8 @@
                                 }
                         
                                 gallery += "<td class='gallery__item'>" 
-                                + "<img style='margin: 3% auto 5% auto; cursor: pointer;' src='" + actorImages[i] 
-                                        + "' width='180px' height='220px'>" 
-                                + "<br/><p><strong>" + name + "</strong></p><p style='width: 100%'><i>" + actorFilms[i] + "</i></p>"
-                                + "<p><a href='" + actorIMDBs[i] + "' target='_blank'>IMDB profile</a></p><br/>" + "</td>";
+                                + "<img style='margin: 3% auto 4% auto; cursor: pointer;' src='" + actorImages[i] 
+                                + "' width='180px' height='220px'><br/><p style='width: 85.5%; padding: 3% 0% 3% 0%; background-color: #f1f6fe; font-weight: bold; border-left: 10px solid #5d83c3'>" + name + "</p><br/></td>";
 
                                 // gallery += "<td class='gallery__item'>" 
                                 // + "<img style='margin: auto auto 3% auto;' src='" + actorImages[i] + "' width='180px' height='220px';" 
@@ -219,7 +221,7 @@
                                                 imgSrc = e.target.src;
                                                 //run modal function
                                                 imgModal(imgSrc);
-                                                openPopup(actorFirstNames[index], actorLastNames[index]);
+                                                openPopup(actorFirstNames[index], actorLastNames[index], actorIMDBs[index]);
                                         });
                                 });
 
@@ -253,16 +255,16 @@
                                 }; 
                         });
 
-                        function openPopup(first, last) {
+                        function openPopup(first, last, IMDB) {
                                 console.log('in open popup');
                                 var actorFname = first;
                                 var actorLname = last;
 
-                                requestData(actorFname, actorLname);
+                                requestData(actorFname, actorLname, IMDB);
                         }
                         
 
-                        function requestData(actorFname, actorLname) {
+                        function requestData(actorFname, actorLname, IMDB) {
                                 console.log('in request data');
                                 var request = new XMLHttpRequest();
                         
@@ -290,11 +292,50 @@
                                                 var retrieved = info["results"];
                                         
                                                 // $(".modal-actorInfo").append("<br><p style='color: white'>" + api_link + retrieved[0].poster_path + "</p><br>");
-                                                $(".modal-actorInfo").append("<h3 style='color: white'>" + retrieved[0].name + "</h3>");
-                                                $(".modal-actorInfo").append("<p style='color: white'>Occupation: " + retrieved[0].known_for_department + "</p>");
-                                                $(".modal-actorInfo").append("<p style='color: white'>Most Known For: " + retrieved[0].known_for[0].title + "</p>");
+                                                $(".modal-actorInfo").append("<h2 style='color: white'>" + retrieved[0].name + "</h2>");
+                                                $(".modal-actorInfo").append("<p style='color: white'>Most Known For: <i>" + retrieved[0].known_for[0].title 
+                                                                                + "</i>, <i>" + retrieved[0].known_for[1].title + "</i>, <i>" 
+                                                                                + retrieved[0].known_for[2].title + "</i></p>");
+                                                $(".modal-actorInfo").append("<p><a style='color: white' href='" + IMDB + "' target='_blank'>IMDB profile</a></p><br/>");
                                                
+                                                console.log(retrieved[0].id);
+                                                let actor_id = retrieved[0].id;
+                                                openBio(actor_id);
+                                        } else if (this.readyState == 4 && this.status != 200) {
+                                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                        }
+                                }
+                                request.send();
+                        }
+
+                        function openBio(actor_id) {
+                                console.log('in openBio');
+                                var request = new XMLHttpRequest();
+                        
+                                if (!request) {
+                                        alert("Unable to create HTTPRequest object");
+                                        return;
+                                }
                                 
+                                var api_link = "https://api.themoviedb.org/3/person/" + actor_id 
+                                + "?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US";
+                                
+                                console.log(api_link);
+                                
+                                if (!request) {
+                                        {alert("Unable to get HTTPRequest object"); return;}
+                                }
+                                request.open("GET", api_link, true);
+                                request.onreadystatechange = function() {
+                                        console.log("ready: " + this.readyState);
+                                        console.log("status: " + this.status);
+                                        if (this.readyState === 4 && this.status === 200) {
+                                                var data = this.responseText;
+                                                var info = JSON.parse(data);
+
+                                                console.log(info.biography);
+
+                                                $(".modal-actorInfo").append("<p style='color: white; margin: auto 18% auto 18%; text-align: center'>" + info.biography + "</p><br/><br/>");
                                         } else if (this.readyState == 4 && this.status != 200) {
                                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
                                         }
