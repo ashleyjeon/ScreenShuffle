@@ -94,7 +94,7 @@ header {
 
 .column {
         background-color: #009dbd;
-        border: 3px solid #009dbd;
+        border: 3px solid black;
         width: 450px;
         margin: 0 0.5% 0 0.5%;
         padding: 2% 30px 2% 30px;
