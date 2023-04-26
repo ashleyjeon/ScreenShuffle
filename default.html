@@ -110,7 +110,7 @@
 
         <h3>Top 10 Movies</h3>
         <div id="datamovies">
-                <div id="dataContainerMovies">
+                <div class=""movie-container>
                         <div id="data0"></div>
                         <div id="data1"></div>
                         <div id="data2"></div>
@@ -161,6 +161,8 @@
                                         strHTML += '</div>';
                                         strHTML += '</div>';
                                 }
+
+                                document.getElementById("datamovies").innerHTML = strHTML;
                                         
                         } else if (this.readyState === 4 && this.status !== 200) {
                                         document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
