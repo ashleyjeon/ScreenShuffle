@@ -118,6 +118,7 @@
                 <img class="banner-image" src="images/banner-image.jpeg" 
                 alt="Unsplash.com" height="400">
                 <h1>Popular Actors</h1>
+        <br/>
 
         <?php
                 $servername = "localhost";
@@ -204,6 +205,7 @@
 
                         $(document).ready(function() {
                                 // $("body").append(dropdown);
+                                $("body").append("<p style='text-align: center; font-size: small;'><em>Click images to expand</em></p>");
                                 $("body").append(gallery);
                                 $("body").append("<div class='spacer'></div>");
                                 $("body").append(footer);
