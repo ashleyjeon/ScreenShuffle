@@ -52,7 +52,7 @@
                 display: flex;
                 flex-direction: column;
                 width: 170px;
-                margin-left: 30px;
+                margin-left: 90px;
             }
 
             #data1 {
@@ -71,7 +71,7 @@
                 display: flex;
                 flex-direction: column;
                 width: 170px;
-                margin-right: 30px;
+                margin-right: 90px;
             }
 
             #overview {
@@ -105,6 +105,104 @@
                 border-color: black;
             }
 
+            /* #data img:hover {
+                opacity: 0.4;
+                position: relative;
+            }
+
+            #data.poster.caption {
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 10px;
+                text-align: center;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            #data .poster {
+                position: relative;
+            }
+
+            #data .poster .caption {
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 10px;
+                text-align: center;
+                opacity: 0;
+                visibility: hidden;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+            }
+
+            #data .poster:hover .caption {
+                opacity: 1;
+                visibility: visible;
+                border-radius: 15px;
+            }
+
+            #data0 a {
+                color:pink;
+            } */
+
+            #data0 .moviePoster:hover {
+                    position: relative;
+                    opacity: 0.4;
+                    /* background-color: rgba(0, 0, 0, 0.5); */
+            }
+
+            #data1 .moviePoster:hover {
+                    position: relative;
+                    opacity: 0.4;
+                    /* background-color: rgba(0, 0, 0, 0.5); */
+            }
+
+            #data2 .moviePoster:hover {
+                    position: relative;
+                    opacity: 0.4;
+                    /* background-color: rgba(0, 0, 0, 0.5); */
+            }
+
+            #data3 .moviePoster:hover {
+                    position: relative;
+                    opacity: 0.4;
+                    /* background-color: rgba(0, 0, 0, 0.5); */
+            }
+
+            .overlay {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    /* background-color: rgba(0, 0, 0, 0.5); */
+                    color: #000000;
+                    padding: 10px;
+                    display: block;
+            }
+
+            .overlay a {
+                color: black;
+            }
+
+            /* #data0:hover .overlay {
+                    display: block;
+            }
+            
+            #data1:hover .overlay {
+                    display: block;
+            }
+
+            #data2:hover .overlay {
+                    display: block;
+            }
+
+            #data3:hover .overlay {
+                    display: block;
+            } */
+        
 
     </style>
 
@@ -214,10 +312,16 @@
                                         var retrieved = info["results"];
                                 
                                         for (var i = 0; i < 4; i++) {
+
+                                                // document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'>"
+
                                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                                                document.getElementById("data" + [i]).innerHTML += "<br>" + link + retrieved[i].poster_path + "'>";
+                                                document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'><br>" + link + retrieved[i].poster_path + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>"; 
+                                                /* added here */
+                                                
                                                 document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].title + "<br>";
                                                 document.getElementById("data" + [i]).innerHTML += "<p>Release Date: " + retrieved[i].release_date + "</p>";
+                                                
                                         }
 
                                                 
@@ -237,6 +341,7 @@
         </form>
         
         <div id="data">
+                Top Rated Movies
                 <div id="dataContainer">
                         <div id="data0"></div>
                         <div id="data1"></div>
@@ -244,6 +349,13 @@
                         <div id="data3"></div>
                 </div>
         </div>
+
+        <!-- <div class="container">
+                <a href="https://www.google.com">
+                  <img src="img.jpeg" alt="Example Image">
+                  <div class="overlay">Click here to go to example.com</div>
+                </a>
+        </div> -->
 
         <br>
         <br>
@@ -264,13 +376,6 @@
                     requestData();                
             }
 
-
-           
-
-
-
-
-
             function requestData() {
                 var request = new XMLHttpRequest();
 
@@ -281,7 +386,7 @@
                         return;
                 }
                 
-                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&page=1&with_genres=" 
+                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" 
                                 + genreId + "&vote_average.gte=" + rating;
 
                 
