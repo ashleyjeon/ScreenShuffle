@@ -82,10 +82,10 @@
                         <form id="mailingForm">
                                 <h4>Join our mailing list for updates about latest movie releases!</h4>
                                 
-                                <input type="text" name="txtName" id="studentName"
+                                <input type="text" name="txtName" id="userName"
                                 placeholder="Name*">
                                 <br/>
-                                <input type="text" name="email" id="studentEmail"
+                                <input type="text" name="email" id="userEmail"
                                 placeholder="Email*">
                                 <br/>
                                 <input type="button" id="mailingBtn" value="Submit">
@@ -96,8 +96,8 @@
                                 
                                 $(document).ready(function() {
                                         $("#mailingBtn").click(function() {
-                                                let name = $("#studentName").val();
-                                                let email = $("#studentEmail").val();
+                                                let name = $("#userName").val();
+                                                let email = $("#userEmail").val();
                                                 
                                                 if (name == "" || name == null) {
                                                         alert("Please enter your full name.");
@@ -132,46 +132,51 @@
 
                                 <!-- all input fields for movies -->
                                 <input type="text" class="movie-info" id="movie-name"
-                                placeholder="Name*">
+                                placeholder="Title*">
 
                                 <input type="text" class="movie-info" id="movie-genre"
                                 placeholder="Genre*">
 
                                 <input type="text" class="movie-info" id="movie-rating"
-                                placeholder="Rating*">
+                                placeholder="Rating (out of 10)*">
 
-                                <input type="text" class="movie-info" id="movie-date"
-                                placeholder="Release date">
+                                <p style="text-align: left; margin: 5% auto 1% auto; font-size: 14px" class="movie-info">
+                                        Release date*<br/>
+                                </p>
+                                <input type="date" class="movie-info" id="movie-date">
 
                                 <input type="text" class="movie-info" id="movie-lang"
-                                placeholder="Language">
+                                placeholder="Language*">
                                 
                                 
                                 <!-- all input fields for TV shows -->
                                 <input type="text" class="tv-info" id="tv-name"
-                                placeholder="Name*">
+                                placeholder="Title*">
                                 
                                 <input type="text" class="tv-info" id="tv-genre"
                                 placeholder="Genre*">
                                 
                                 <input type="text" class="tv-info" id="tv-rating"
-                                placeholder="Rating*">
+                                placeholder="Rating (out of 10)*">
                                 
-                                <input type="text" class="tv-info" id="tv-date"
-                                placeholder="Release date">
+                                <p style="text-align: left; margin: 5% auto 1% auto; font-size: 14px" class="tv-info">
+                                        First air date*<br/>
+                                </p>
+                                <input type="date" class="tv-info" id="movie-date">
+
                                 
                                 <input type="text" class="tv-info" id="tv-lang"
-                                placeholder="Language">
+                                placeholder="Language*">
                                 
 
                                 <!-- all input fields for actors -->
                                 <input type="text" class="actor-info" id="actor-name"
-                                placeholder="Name*">
+                                placeholder="Full name*">
                                 
                                 <p style="margin: 5% auto 1% auto; font-size: 14px" class="actor-info">
                                         Please upload a picture*<br/>
                                 </p>
-                                <input style="margin-bottom: 3%; padding-left: 15%;" class="actor-info" type="file" id="photo" name="photoId">
+                                <input style="margin-bottom: 3%; padding-left: 15%;" class="actor-info" type="file" id="actor-photo" name="photoId">
 
                                 <input type="text" class="actor-info" id="actor-known"
                                 placeholder="Most known films (minimum 3, separate by commas)*">
@@ -185,45 +190,164 @@
         
                         <script>
                                 $(document).ready(function() {
+                                        var choice = "movie";
                                         $(".tv-info").hide();
                                         $(".actor-info").hide();
                                         
-                                        /* shows or hides fields depending
-                                        on if user selects "Movie", "TV Show," or "Actor/Actress" */
+                                        /* shows or hides fields depending on if user 
+                                        selects "Movie", "TV Show," or "Actor/Actress" */
                                         $("input[name='choice']").change(function() {
                                                 console.log("choice changed to " + this.value);
                                                 
                                                 if (this.value == "movie") {
+                                                        choice = "movie";
                                                         $(".movie-info").show();
                                                         $(".actor-info").hide();
                                                         $(".tv-info").hide();
+                                                
                                                 } else if (this.value == "tv") {
+                                                        choice = "tv";
                                                         $(".tv-info").show();
                                                         $(".movie-info").hide();
                                                         $(".actor-info").hide();
+                                                
                                                 } else {
+                                                        choice = "actor";
                                                         $(".actor-info").show();
                                                         $(".movie-info").hide();
                                                         $(".tv-info").hide();
                                                 }
                                         })
                                 
-                                $("#contributeBtn").click(function() {
-                                                let name = $("#actor-name").val();
-                                    
-                                                if (name == "" || name == null) {
-                                                        alert("Please enter your full name.");
-                                                } else {
-                                                        valid = true;
-                                                }
+                                        $("#contributeBtn").click(function() {
+                                                // have validate function return valid true/false
+                                                let valid = true;
 
+                                                if (choice == "movie") {
+                                                        valid = validate_movie();
+                                                        
+                                                } else if (choice == "tv") {
+                                                        valid = validate_tv();
+
+                                                } else if (choice == "actor") {
+                                                        valid = validate_actor();
+                                                }
+                                                
                                                 if (valid) {
                                                         alert("Thank you for your contribution to Screen Shuffle!");
                                                         document.getElementById("contributionForm").reset();
-
+                                                        $(".movie-info").show();
+                                                        $(".actor-info").hide();
+                                                        $(".tv-info").hide();
                                                 }
                                         });
                                 });
+
+                                function validate_movie()
+                                {
+                                        let valid_movie = true;
+                                        
+                                        let movie_name = $("#movie-name").val();
+                                        let movie_genre = $("#movie-genre").val();
+                                        let movie_rating = $("#movie-rating").val();
+                                        let movie_date = $("#movie-date").val();
+                                        let movie_lang = $("#movie-lang").val();
+                                
+                                        if (movie_name == "" || movie_name == null) {
+                                                alert("Please enter the title of the movie.");
+                                                valid_movie = false;
+                                        } else {
+                                                if (movie_genre == "" || movie_genre == null) {
+                                                        alert("Please enter the genre of the movie.");
+                                                        valid_movie = false;
+                                                } else {
+                                                        if (movie_rating == "" || movie_rating == null || isNaN(movie_rating)) {
+                                                                alert("Please enter a numerical rating of the movie.");
+                                                                valid_movie = false;
+                                                        } else {
+                                                                if (movie_date == "" || movie_date == null) {
+                                                                        alert("Please enter the release date of the movie.");
+                                                                        valid_movie = false;
+                                                                } else {
+                                                                        if (movie_lang == "" || movie_lang == null) {
+                                                                                alert("Please enter the language of the movie.");
+                                                                                valid_movie = false;
+                                                                        }
+                                                                }
+                                                                
+                                                        }
+                                                }
+                                        }
+
+                                        return valid_movie;
+                                }
+
+                                function validate_tv()
+                                {
+                                        let valid_tv = true;
+                                        
+                                        let tv_name = $("#tv-name").val();
+                                        let tv_genre = $("#tv-genre").val();
+                                        let tv_rating = $("#tv-rating").val();
+                                        let tv_date = $("#tv-date").val();
+                                        let tv_lang = $("#tv-lang").val();
+                                
+                                        if (tv_name == "" || tv_name == null) {
+                                                alert("Please enter the title of the TV show.");
+                                                valid_tv = false;
+                                        } else {
+                                                if (tv_genre == "" || tv_genre == null) {
+                                                        alert("Please enter the genre of the TV show.");
+                                                        valid_tv = false;
+                                                } else {
+                                                        if (tv_rating == "" || tv_rating == null || isNan(tv_rating)) {
+                                                                alert("Please enter a numerical rating of the TV show.");
+                                                                valid_tv = false;
+                                                        } else {
+                                                                // make more thorough
+                                                                if (tv_date == "" || tv_date == null) {
+                                                                        alert("Please enter the release date of the TV show.");
+                                                                        valid_tv = false;
+                                                                } else {
+                                                                        if (tv_lang == "" || tv_lang == null) {
+                                                                                alert("Please enter the language of the TV show.");
+                                                                                valid_tv = false;
+                                                                        }
+                                                                }
+                                                                
+                                                        }
+                                                }
+                                        }
+
+                                        return valid_tv;
+                                }
+                               
+                                function validate_actor()
+                                {
+                                        let valid_actor = true;
+                                        
+                                        let actor_name = $("#actor-name").val();
+                                        let actor_photo = $("#actor-photo").val();
+                                        let actor_known = $("#actor-known").val();
+                                
+                                        if (actor_name == "" || actor_name == null) {
+                                                alert("Please enter the full name of the actor/actress.");
+                                                valid_actor = false;
+                                        } else {
+                                                if (actor_photo == "" || actor_photo == null) {
+                                                        alert("Please upload a picture of the actor/actress.");
+                                                        valid_actor = false;
+                                                } else {
+                                                        // check that there are 3 commas
+                                                        if (actor_known == "" || actor_known == null || (actor_known.split(",").length - 1) != 2) {
+                                                                alert("Please enter at least 3 films for the actor/actress.");
+                                                                valid_actor = false;
+                                                        }
+                                                }
+                                        }
+
+                                        return valid_actor;
+                                }
                         </script>
                 </div>
         
@@ -237,14 +361,7 @@
                 <br />
                 &copy;Screen Shuffle
                 <footer class="navigation-align-right">
-                        <a href="https://www.instagram.com/tuftsanimalaid/" target="_blank">
-                              <!--   <img src="images/instagram.png" alt="Instagram Icon" height="17px"></a>
-                                &nbsp; &nbsp;
-                                <a href="mailto:lcsanimalaid@gmail.com" target="_blank">
-                                <img src="images/email.png" alt="Email Icon" height="17px"> -->
-                        </a>
                 </footer>
-
         </footer>
         
 </body>
