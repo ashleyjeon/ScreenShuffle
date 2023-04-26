@@ -277,15 +277,7 @@
                                 request.send();
                         }
 
-                function showBuyMovie() {
-                        $('data').on('click', '#buyNow', function() {
-                                buyMovie();
-                        });
-                }
-                
                 now_playing();
-                showBuyMovie();
-
                 </script>
 
                 <button type="button" onclick="getFilterInfo()">Shuffle</button>
@@ -358,7 +350,7 @@
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
                                 document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path 
-                                                                          + "'><div class='overlay'><button type='button' id='buyNow'>Buy Now</button></div></div>";
+                                                                          + "'><div class='overlay'><button type='button' id='buyNow' onclick='buyMovie()'>Buy Now</button></div></div>";
                                 document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
                                 document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
@@ -371,18 +363,19 @@
                 }
                 request.send();
         }
-        // $('#buyNow').click(function() {
-        
-        //         var newWindow = window.open("");
-        //         newWindow.document.write("<h1> Purchase Movie </h1>");
-        //         // if (document.querySelector('input[value=pickup]').checked) {
-        //         //         newWindow.document.write("Your order will be ready at: " + pickupTime);
-        //         // } else {
-        //         //         newWindow.document.write("Your order will be delivered at: " + deliveryTime);
-        //         // }
-        //         // newWindow.document.write("<h3>Receipt</h3>");
 
-        // })
+        $('#buyNow').click(function() {
+        
+                var newWindow = window.open("");
+                newWindow.document.write("<h1> Purchase Movie </h1>");
+                // if (document.querySelector('input[value=pickup]').checked) {
+                //         newWindow.document.write("Your order will be ready at: " + pickupTime);
+                // } else {
+                //         newWindow.document.write("Your order will be delivered at: " + deliveryTime);
+                // }
+                // newWindow.document.write("<h3>Receipt</h3>");
+
+        })
 
         // document.getElementById('buyNow').onclick = function() {
         //         var newWindow = window.open("");
