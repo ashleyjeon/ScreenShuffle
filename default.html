@@ -31,8 +31,15 @@
         }
 
         .movie-container {
-            width: 50%;
-            float: left;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .movie-item {
+            width: 20%;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .movie-poster {
@@ -110,18 +117,7 @@
 
         <h3>Top 10 Movies</h3>
         <div id="datamovies">
-                <div class="movie-container">
-                        <div id="data0"></div>
-                        <div id="data1"></div>
-                        <div id="data2"></div>
-                        <div id="data3"></div>
-                        <div id="data4"></div>
-                        <div id="data5"></div>
-                        <div id="data6"></div>
-                        <div id="data7"></div>
-                        <div id="data8"></div>
-                        <div id="data9"></div>
-                </div>
+                <div class="movie-container"></div>
         </div>
         <script>
         function requestDataMovies() {
@@ -153,11 +149,11 @@
 
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
-                                        strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + '">';
+                                        strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-info">';
-                                        strHTML += '<h4>' + movieTitle + '</h4>';
-                                        strHTML += '<p>Rating: ' + movieRating + '</p>';
+                                        strHTML += '<h4 class="movie-title">' + movieTitle + '</h4>';
+                                        strHTML += '<p class="movie-rating">Rating: ' + movieRating + '</p>';
                                         strHTML += '</div>';
                                         strHTML += '</div>';
                                 }
