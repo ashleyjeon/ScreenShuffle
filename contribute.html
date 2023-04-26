@@ -9,36 +9,78 @@
                 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
                 crossorigin="anonymous">
         </script>
+
+        <style>
+                h1 {
+                        color: white;
+                        font-size: 70px;
+                        text-align: center;
+                        margin-top: 1%;
+                        margin-bottom: 2%;
+                }
+
+                .contribute_above {
+                        background-color: #4683B7;
+                        margin-top: 0px;
+                        padding: 30px;
+                        margin-bottom: 20px;
+                }
+
+                .disney {
+                        display: flex;
+                        position: absolute;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        margin-bottom: 0px;
+                }
+
+                .disney img {
+                        width: 50%;
+                        border-radius: 8px;
+                        border-style: solid;
+                        border-color: white;
+                        border-width: 2px;
+                }
+
+                .content {
+                        width: 50%;
+                        text-align: justify;
+                        margin: 0 auto;
+                        margin-top: 26%;
+                }
+        </style>
 </head>
 
 <body>
         <nav>
-                <nav>
-                         <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="80px"></a>
-                         <a href="default.html">Home</a>
-                         <a href="movies.html">Movies</a>
-                         <a href="tv_shows.html">TV Shows</a>
-                         <a href="actors.html">Actors</a>
-                         <a href="about.html">About Us</a>
-                         <a class="active" href="contribute.html">Contribute</a>                
-                 </nav>
+                
+                <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="80px"></a>
+                <a href="default.html">Home</a>
+                <a href="movies.html">Movies</a>
+                <a href="tv_shows.html">TV Shows</a>
+                <a href="actors.php">Actors</a>
+                <a href="about.html">About Us</a>
+                <a class="active" href="contribute.html">Contribute</a>                
+                 
         </nav>
 
-        <header>
-                <!-- <img class="banner-image" src="banner-image.jpg" 
-                alt="Unsplash.com" height="400"> -->
-               <!--  <h1>Contact Us</h1> -->
-        </header>
+        <div class="contribute_above">
+                <h1>Contribute</h1>
+                <div class="disney">
+                        <img src="images/disney.jpeg" alt="Disney Characters">
+                </div>
+        </div>
 
         <div class="spacer"></div>
 
         <h2>Want to get involved?</h2>
         <br/>
 
-        <div class="flexbox">
+        <div class="flexbox" style="margin-top: 20%;">
                 <div class="column" style="background-color: white">
-                        <form id="studentForm">
-                                <h4>Students: join our mailing list!</h4>
+                        <form id="mailingForm">
+                                <h4>Join our mailing list for updates about latest movie releases!</h4>
                                 
                                 <input type="text" name="txtName" id="studentName"
                                 placeholder="Name*">
@@ -46,14 +88,14 @@
                                 <input type="text" name="email" id="studentEmail"
                                 placeholder="Email*">
                                 <br/>
-                                <input type="button" id="studentButton" value="Submit">
+                                <input type="button" id="mailingBtn" value="Submit">
                         </form>
 
                         <script>
                                 valid = false;
                                 
                                 $(document).ready(function() {
-                                        $("#studentButton").click(function() {
+                                        $("#mailingBtn").click(function() {
                                                 let name = $("#studentName").val();
                                                 let email = $("#studentEmail").val();
                                                 
@@ -66,8 +108,8 @@
                                                 }
 
                                                 if (valid) {
-                                                        alert("Thank you for your interest in helping Animal Aid!");
-                                                        document.getElementById("studentForm").reset();
+                                                        alert("Thank you for your interest in Screen Shuffle!");
+                                                        document.getElementById("mailingForm").reset();
                                                 }
                                         });
 
@@ -77,125 +119,107 @@
                 </div>
 
                 <div class="column" style="background-color: white">
-                        <form id="ownerForm">
-                                <h4>Dog owners: tell us about 
-                                <br/>  you (and your pup!)</h4>
+                        <form id="contributionForm">
+                                <h4>Add to our collection of <br/> movies, shows, and actors!</h4>
                                 
-                                <input type="text" name="name" id="ownerName"
+                                <p>Please indicate what you are adding:<br/><br/>
+                                        <input type="radio"  name="choice" value = "movie" checked="checked"/>Movie  
+                                        <input type="radio"  name='choice' value = 'tv'/>TV Show
+                                        <input type="radio"  name='choice' value = 'actor'/>Actor/Actress
+                                </p>
+
+                                <br/><br/>
+
+                                <!-- all input fields for movies -->
+                                <input type="text" class="movie-info" id="movie-name"
                                 placeholder="Name*">
-                                <br/>
-                                <input type="text" name="email" id="ownerEmail"
-                                placeholder="Email*">
-                                <br/>
-                                <input type="text" name="phone" id="ownerPhone"
-                                placeholder="Phone number*">
-                                <br/>
-                                <input type="text" name="name" id="dogName"
-                                placeholder="Dog name*">
-                                <br/>
-                                <input type="text" name="breed" id="dogBreed"
-                                placeholder="Dog breed*">
-                                <br/>
-                                <input type="text" name="address" id="ownerAddress" 
-                                placeholder="Your full address*">
-                                <br/>
 
-                                <p style="font-size: 18px">Select all preferred walking days*</p>
-                                <input type="checkbox" id="day1" name="week" value="Monday">
-                                <label for="day1">Monday</label><br/>
-                                
-                                <input type="checkbox" id="day2" name="week" value="Tuesday">
-                                <label for="day2">Tuesday</label><br/>
-                                
-                                <input type="checkbox" id="day3" name="week" value="Wednesday">
-                                <label for="day3">Wednesday</label><br/>
-                                
-                                <input type="checkbox" id="day4" name="week" value="Thursday">
-                                <label for="day4">Thursday</label><br/>
-                                
-                                <input type="checkbox" id="day5" name="week" value="Friday">
-                                <label for="day5">Friday</label><br/>
-                                
-                                <input type="checkbox" id="day6" name="week" value="Saturday">
-                                <label for="day6">Saturday</label><br/>
-                                
-                                <input type="checkbox" id="day7" name="week" value="Sunday">
-                                <label for="day7">Sunday</label><br/>
-                                
-                                <p style="font-size: 18px">Select all preferred walking times*</p>
-                                <input type="checkbox" id="time1" name="time" value="Mornings">
-                                <label for="time1">Mornings (9am-12pm)</label><br/>
-                                
-                                <input type="checkbox" id="day2" name="time" value="Afternoons">
-                                <label for="day2">Afternoons (12pm-5pm)</label><br/>
-                                <br/>
+                                <input type="text" class="movie-info" id="movie-genre"
+                                placeholder="Genre*">
 
-                                <input type="text" name="description" 
-                                id="dogDescription" style="padding: 10px 10px 60px"
-                                placeholder="Tell us about your dog!*">
-                                <br/>
-                                <input type="text" name="extra" 
-                                id="additionalInfo" style="padding: 10px 10px 30px"
-                                placeholder="Anything else you'd like us to know?">
-                                <br/>
-                                <p style="font-size: small">Upload a picture of your dog! (optional)</p>
-                                <input type="file" id="photo" name="photoId">
-                                <br/>
+                                <input type="text" class="movie-info" id="movie-rating"
+                                placeholder="Rating*">
+
+                                <input type="text" class="movie-info" id="movie-date"
+                                placeholder="Release date">
+
+                                <input type="text" class="movie-info" id="movie-lang"
+                                placeholder="Language">
                                 
-                                <input type="button" id="ownerButton" value="Submit">
+                                
+                                <!-- all input fields for TV shows -->
+                                <input type="text" class="tv-info" id="tv-name"
+                                placeholder="Name*">
+                                
+                                <input type="text" class="tv-info" id="tv-genre"
+                                placeholder="Genre*">
+                                
+                                <input type="text" class="tv-info" id="tv-rating"
+                                placeholder="Rating*">
+                                
+                                <input type="text" class="tv-info" id="tv-date"
+                                placeholder="Release date">
+                                
+                                <input type="text" class="tv-info" id="tv-lang"
+                                placeholder="Language">
+                                
+
+                                <!-- all input fields for actors -->
+                                <input type="text" class="actor-info" id="actor-name"
+                                placeholder="Name*">
+                                
+                                <p style="margin: 5% auto 1% auto; font-size: 14px" class="actor-info">
+                                        Please upload a picture*<br/>
+                                </p>
+                                <input style="margin-bottom: 3%; padding-left: 15%;" class="actor-info" type="file" id="photo" name="photoId">
+
+                                <input type="text" class="actor-info" id="actor-known"
+                                placeholder="Most known films (minimum 3, separate by commas)*">
+                                
+                                <textarea type="text" class="actor-info" id="actor-bio"
+                                placeholder="Give a brief biography (optional)"
+                                style="margin-top: 2%; padding-bottom: 10%; font-size: 14px; width: 100%; max-width: 100%;"></textarea>
+                                
+                                <input type="button" id="contributeBtn" value="Submit">
                         </form>
         
                         <script>
-                                valid = false;
-                                checked = false;
-                                
                                 $(document).ready(function() {
-                                        $("#ownerButton").click(function() {
-                                                let name = $("#ownerName").val();
-                                                let email = $("#ownerEmail").val();
-                                                let phone = $("#ownerPhone").val();
-                                                let dog_name = $("#dogName").val();
-                                                let dog_breed = $("#dogBreed").val();
-                                                let address = $("#ownerAddress").val();
-                                                let description = $("#dogDescription").val();
-                                                let days = document.getElementsByName("week");
-                                                let times = document.getElementsByName("time");
-
-                                                checked = check_schedule(days);
-                                                checked = check_schedule(times);
+                                        $(".tv-info").hide();
+                                        $(".actor-info").hide();
+                                        
+                                        /* shows or hides fields depending
+                                        on if user selects "Movie", "TV Show," or "Actor/Actress" */
+                                        $("input[name='choice']").change(function() {
+                                                console.log("choice changed to " + this.value);
                                                 
-                                                function check_schedule(day_or_time)
-                                                {
-                                                        for (let i = 0; i < day_or_time.length; i++) {
-                                                                if (day_or_time[i].checked) {
-                                                                        return true;
-                                                                }
-                                                        }
+                                                if (this.value == "movie") {
+                                                        $(".movie-info").show();
+                                                        $(".actor-info").hide();
+                                                        $(".tv-info").hide();
+                                                } else if (this.value == "tv") {
+                                                        $(".tv-info").show();
+                                                        $(".movie-info").hide();
+                                                        $(".actor-info").hide();
+                                                } else {
+                                                        $(".actor-info").show();
+                                                        $(".movie-info").hide();
+                                                        $(".tv-info").hide();
                                                 }
+                                        })
+                                
+                                $("#contributeBtn").click(function() {
+                                                let name = $("#actor-name").val();
                                     
                                                 if (name == "" || name == null) {
                                                         alert("Please enter your full name.");
-                                                } else if (email == "" || email == null || !email.includes("@")) {
-                                                        alert("Please enter a valid email.");
-                                                } else if (phone.length != 7 && phone.length != 10) {
-                                                        alert("Please enter a valid phone number.");
-                                                } else if (dog_name == "" || dog_name == null) {
-                                                        alert("Please enter your dog's name.");
-                                                } else if (dog_breed == "" || dog_breed == null){
-                                                        alert("Please enter your dog's breed.");
-                                                } else if (address == "" || address == null) {
-                                                        alert("Please enter your address.");
-                                                } else if (!checked) {
-                                                        alert("Please select both preferred walking days and times.");
-                                                } else if (description == "" || description == null) {
-                                                        alert("Please enter a short description of your dog.");
                                                 } else {
                                                         valid = true;
                                                 }
 
                                                 if (valid) {
-                                                        alert("Thank you for your interest! We'll follow up with more information shortly.");
-                                                        document.getElementById("ownerForm").reset();
+                                                        alert("Thank you for your contribution to Screen Shuffle!");
+                                                        document.getElementById("contributionForm").reset();
 
                                                 }
                                         });
