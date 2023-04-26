@@ -345,28 +345,52 @@
                         if (this.readyState === 4 && this.status === 200) {
                                 var data = this.responseText;
                                 var info = JSON.parse(data);
-                                var retrieved = info["results"];
-                                var total_results = info["total_results"] - 1;
+                                var totalPages = info["total_pages"];
 
-                                /* generates a random number */
-                                var random = Math.ceil((Math.random() * total_results));
-                                console.log("What is the random number: " + random);
+                                var randomPage = Math.ceil(Math.random() * totalPages);
 
-                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                               
-                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>";
-                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
-                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
-                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
-                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
-                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
-
+                                accessPage(api_link, randomPage);
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
                         }
                 }
                 request.send();
         }
+
+        function accessPage(api_link, randomPage) {
+                var request = new XMLHttpRequest();
+
+                if (!request) {
+                        alert("Unable to create HTTPRequest object");
+                        return;
+                }
+
+                var newApiLink = api_link.replace("page=1", "page=" + randomPage);
+
+                request.open("GET", newApiLink, true);
+                request.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                                var data = this.responseText;
+                                var info = JSON.parse(data);
+                                var retrieved = info["results"];
+
+                                /* generates a random number */
+                                var random = Math.ceil((Math.random() * retrieved.length));
+                                console.log("What is the random number: " + random);
+
+                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+                                
+                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>";
+                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
+                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
+                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
+                        }
+                }
+                request.send();
+        }
+
         
         </script>
     

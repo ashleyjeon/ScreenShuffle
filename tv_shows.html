@@ -348,10 +348,9 @@
                                 var data = this.responseText;
                                 var info = JSON.parse(data);
                                 var retrieved = info["results"];
-                                var total_results = info["total_results"] - 1;
 
                                 /* generates a random number */
-                                var random = Math.ceil((Math.random() * total_results));
+                                var random = Math.ceil((Math.random() * retrieved.length));
                                 console.log("What is the random number: " + random);
 
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
