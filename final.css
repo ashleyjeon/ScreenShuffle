@@ -24,9 +24,9 @@ nav.logo {
 }
 .logo {
         float: left;
-        margin-left: -5%;
-        margin-top: -3%;
-        margin-bottom: -3%;
+        margin-left: -4%;
+        margin-top: -2%;
+        margin-bottom: -2%;
         overflow: hidden;
 }
 
@@ -82,7 +82,7 @@ header {
         background-repeat: no-repeat;
         background-size: contain;
 
-        filter: brightness(35%);
+        filter: brightness(40%);
 }
 
 .flexbox {
@@ -94,7 +94,7 @@ header {
 
 .column {
         background-color: #009dbd;
-        border: 3px solid #009dbd;
+        border: 3px solid black;
         width: 450px;
         margin: 0 0.5% 0 0.5%;
         padding: 2% 30px 2% 30px;
@@ -105,7 +105,7 @@ header {
 
 .spacer {
         display: flex;
-        padding: 5% 0 5% 0px;
+        padding: 2.5% 0 2.5% 0px;
 }
 
 form {
@@ -148,6 +148,7 @@ h1 {
         color: white;
         font-size: 65px;
         text-align: center;
+        width: 100%;
         font-family:Georgia, 'Times New Roman', Times, serif; 
         /* position: absolute;
         top: 45%;
