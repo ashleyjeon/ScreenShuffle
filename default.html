@@ -8,16 +8,20 @@
         
         
         <style>
-                h1 {
-                        color: white;
-                        font-size: 55px;
-                        text-align: center;
-                        font-family:Georgia, 'Times New Roman', Times, serif; 
-                        position: absolute;
-                        top: 45%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                } 
+        h1 {
+                color: white;
+                font-size: 55px;
+                text-align: center;
+                font-family:Georgia, 'Times New Roman', Times, serif; 
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+        } 
+                
+        h3 {
+                font-size: 30px;
+        }
 
         * {
             box-sizing: border-box;
@@ -32,6 +36,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            margin: 0% 5% 0% 5%;
         }
 
         .movie-item {
@@ -125,7 +130,6 @@
 
 <body>
         <nav>
-               <!--  Todo: Add logo here!!! -->
                 <a href="default.html" class="logo"> <img src="images/logo.png" alt="Logo" height="80px"></a>
                 <a class="active" href="default.html">Home</a>
                 <a href="movies.html">Movies</a>
@@ -142,7 +146,7 @@
                 
         </header>
 
-        <div class="spacer" style="height: 100px;"></div>
+        <div class="spacer"></div>
 
         <h2>Find a movie or show to watch, fast!</h2>
         <br/>
@@ -156,7 +160,7 @@
                 </button>
         </div>
 
-        <hr style="width: 80%; margin: 20px auto;">
+        <hr style="width: 80%; margin: 2% auto;">
         <div class="spacer" style="height: 20px;"></div>
 
         <div id="datamovies">
