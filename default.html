@@ -158,7 +158,7 @@
                                         strHTML += '</div>';
                                 }
 
-                                document.getElementById("datamovies").innerHTML = strHTML;
+                                document.getElementById(".movie-container").innerHTML = strHTML;
                                         
                         } else if (this.readyState === 4 && this.status !== 200) {
                                         document.getElementById("datamovies").innerHTML = "Unable to retrieve data";
