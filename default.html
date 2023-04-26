@@ -30,7 +30,7 @@
             padding: 0;
         }
 
-        .movie-container {
+        .movie-container, .tv-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -102,7 +102,9 @@
 
 
         <h3>Top 10 TV Shows</h3>
-        <div id="datatv"></div>
+        <div id="datatv">
+                <div class="tv-container"></div>
+        </div>
         <br>
 
         <h3>Top 10 Movies</h3>
@@ -178,16 +180,26 @@
                         if (this.readyState === 4 && this.status === 200) {
                                 var data = JSON.parse(this.responseText);
                                 var retrieved = data.results;
-                                var strHTML = "<ol>";
+                                var strHTML = "";
                         
                                 /* generates 10 titles */
                                 for (var i = 0; i < 10; i++) {
-                                        console.log("about to retrieve " + i);
-                                        strHTML += "<li>" + retrieved[i].name + "</li>";
+                                        var posterURL = "https://www.themoviedb.org/t/p/w440_and_h660_face" + retrieved[i].poster_path;
+                                        var tvTitle = retrieved[i].title;
+                                        var tvRating = retrieved[i].vote_average;
+
+                                        strHTML += '<div class="movie-item">';
+                                        strHTML += '<div class="movie-poster">';
+                                        strHTML += '<img class="poster" src="' + posterURL + '" alt="' + tvTitle + 'Poster">';
+                                        strHTML += '</div>';
+                                        strHTML += '<div class="movie-details">';
+                                        strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + tvTitle + '</h4>';
+                                        strHTML += '<p class="movie-rating">Rating: ' + tvRating + '</p>';
+                                        strHTML += '</div>';
+                                        strHTML += '</div>';
                                 }
         
-                                strHTML += "</ol>";
-                                document.getElementById("datatv").innerHTML = strHTML;
+                                document.querySelector(".tv-container").innerHTML = strHTML;
                                 
                         } else if (this.readyState === 4 && this.status !== 200) {
                                         document.getElementById("datatv").innerHTML = "Unable to retrieve data";
