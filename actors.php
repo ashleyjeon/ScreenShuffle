@@ -26,7 +26,7 @@
                        
                 }
 
-                .gallery__item {
+        .gallery__item {
                         cursor: pointer;
                         overflow: hidden;
                 }
@@ -147,14 +147,13 @@
                         die("Connection failed: " . $conn->connect_error);
                 } 
 
-                $sql = "SELECT fname, lname, image, film, imdb FROM actors";
+                $sql = "SELECT fname, lname, image, imdb FROM actors";
                 $result = $conn->query($sql);
 
                 // Building dropdown menu to select actors/actresses
                 $fnames = array();
                 $lnames = array();
                 $images = array();
-                $films = array();
                 $imdbs = array();
                 if ($result->num_rows > 0) {                                
                         $i = 0;
@@ -162,7 +161,6 @@
                                 $fnames[$i] = $row["fname"];
                                 $lnames[$i] = $row["lname"];
                                 $images[$i] = $row["image"];
-                                $films[$i] = $row["film"];
                                 $imdbs[$i] = $row["imdb"];
 
                                 $i++;
@@ -182,7 +180,6 @@
                         var actorFirstNames = <?php echo json_encode($fnames); ?>;
                         var actorLastNames = <?php echo json_encode($lnames); ?>;
                         var actorImages = <?php echo json_encode($images); ?>;
-                        var actorFilms = <?php echo json_encode($films); ?>;
                         var actorIMDBs = <?php echo json_encode($imdbs); ?>;
 
                         console.log("got arrays");
@@ -218,6 +215,8 @@
 
                         $(document).ready(function() {
                                 // $("body").append(dropdown);
+                                $("body").append("<br/>");
+                                $("body").append("<p style='text-align: center; font-size: small;'><em>Click images to expand.</em></p><br/>");
                                 $("body").append(gallery);
                                 $("body").append("<div class='spacer'></div>");
                                 $("body").append(footer);
@@ -307,7 +306,7 @@
                                         
                                                 // $(".modal-actorInfo").append("<br><p style='color: white'>" + api_link + retrieved[0].poster_path + "</p><br>");
                                                 $(".modal-actorInfo").append("<h2 style='color: white'>" + retrieved[0].name + "</h2>");
-                                                $(".modal-actorInfo").append("<p style='color: white'>Most Known For: <i>" + retrieved[0].known_for[0].title 
+                                                $(".modal-actorInfo").append("<p style='color: white; margin: auto 18% auto 18%;'>Most Known For: <i>" + retrieved[0].known_for[0].title 
                                                                                 + "</i>, <i>" + retrieved[0].known_for[1].title + "</i>, <i>" 
                                                                                 + retrieved[0].known_for[2].title + "</i></p>");
                                                 $(".modal-actorInfo").append("<p><a style='color: white' href='" + IMDB + "' target='_blank'>IMDB profile</a></p><br/>");
