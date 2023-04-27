@@ -112,25 +112,6 @@
             }
 
             .overlay {
-                    /* position: absolute; */
-                    /* top: 50%;
-                    left: 50%;
-                    transform: translate(25%, -400%);
-                    color: #000000;
-                    padding: 10px;
-                    display: block;
-                    background-color: rgb(200, 200, 200);
-                    opacity: 0.8;
-                    z-index: 9999;
-                    width: 60%;
-                    font-size: 16px;
-                    font-weight: bold;
-                    padding: 4px;
-                    border-style: solid;
-                    border-width: 0;
-                    border-radius: 5px;
-                    display: none; */
-
                         position: absolute;
                         top: 50%;
                         left: 50%;
@@ -159,10 +140,19 @@
         .poster:hover::before {
                 opacity: 1;
         }
+        .poster {
+                width: 133.33px;
+                height: 230px;
+                align-items: center;
+                margin: 0 auto;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+        }
 
-            .moviePoster:hover .overlay {
-               display: block;
-            }
+        .poster:hover .overlay {
+                opacity: 1;
+        }
 
             .poster button {
                 /* color: rgb(0, 0, 0);
@@ -199,33 +189,6 @@
                 text-align: center;
                 position: relative;
             }
-
-            /* .popup {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -100%) scale(0.1);
-                    text-align: center;
-                    padding: 1%;
-                    color: #333;
-                    background-color: white;
-                    visibility: hidden;
-                    transition: transform 0.4s, top 0.4s;
-                    align-items: center;
-                    animation: zoom 0.8s ease-in-out;
-            }
-
-        
-            .open-popup {
-                visibility: visible;
-                top: 50%;
-                transform: translate(-50%, 20%) scale(1);
-                width: 60%;
-                background-color: #e3edfd;
-                border-radius: 15px;
-                border: 5px solid #5d83c3;
-                transition: transform 0.4s, top 0.4s;
-            } */
 
             .popup {
                 position: fixed;
@@ -276,10 +239,6 @@
                 margin-top: 3%;
             }
 
-            /* .buyButton {
-                margin-left: 10%;
-            } */
-
             .buyForm {
                 margin-top: 30px;
                 text-align: center;                
@@ -297,6 +256,18 @@
                 width: 20%;
                 font-size: 18px;
             }
+
+            .overlay button {
+                width: 100px;
+                height: 30px;
+                color: rgb(0, 0, 0);
+                background-color: rgba(206, 206, 206, 0.799);
+                border-width: 0;
+                font-weight: bold;
+                font-size: 14px;
+                padding: 4% 3% 4% 3%;
+                border-radius: 8px;
+        }
 
         
     </style>
