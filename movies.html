@@ -587,6 +587,10 @@
                                 var info = JSON.parse(data);
                                 var totalPages = Math.floor(info["total_results"] / 20);
 
+                                if (totalPages > 100) {
+                                        totalPages = 100;
+                                }
+
                                 console.log("total pages: " + totalPages);
 
                                 var randomPage = Math.floor(Math.random() * totalPages) + 1;
