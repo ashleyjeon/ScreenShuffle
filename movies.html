@@ -594,9 +594,9 @@
 
                                 var updated_request = new XMLHttpRequest();
 
-                                requestMovies.open("GET", updated_api_link, true);
+                                updated_request.open("GET", updated_api_link, true);
 
-                                requestMovies.onreadystatechange = function() {
+                                updated_request.onreadystatechange = function() {
                                         if (this.readyState === 4 && this.status === 200) {
                                         var moviesData = this.responseText;
                                         var moviesInfo = JSON.parse(moviesData);
