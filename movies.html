@@ -113,7 +113,7 @@
 
             .overlay {
                     /* position: absolute; */
-                    top: 50%;
+                    /* top: 50%;
                     left: 50%;
                     transform: translate(25%, -400%);
                     color: #000000;
@@ -129,7 +129,17 @@
                     border-style: solid;
                     border-width: 0;
                     border-radius: 5px;
-                    display: none;
+                    display: none; */
+
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        padding: 10px;
+                        background-color: transparent;
+                        border-radius: 8px;
+                        display: none;
+
             }
 
             .moviePoster:hover .overlay {
@@ -137,12 +147,24 @@
             }
 
             .overlay button {
+                /* color: rgb(0, 0, 0);
+                background-color: rgba(206, 206, 206, 0.799);
+                border-width: 0;
+                font-weight: bold;
+                font-size: 11px;
+                padding: 2px; */
+                width: 100%;
+                height: 100%;
                 color: rgb(0, 0, 0);
                 background-color: rgba(206, 206, 206, 0.799);
                 border-width: 0;
                 font-weight: bold;
                 font-size: 11px;
-                padding: 2px;
+                padding: 3%;
+                padding-top: 4%;
+                padding-bottom: 4%;
+                border-radius: 8px;
+
             }
 
         
@@ -160,7 +182,7 @@
                 text-align: center;
             }
 
-            .popup {
+            /* .popup {
                     position: absolute;
                     top: 50%;
                     left: 50%;
@@ -185,7 +207,35 @@
                 border-radius: 15px;
                 border: 5px solid #5d83c3;
                 transition: transform 0.4s, top 0.4s;
-            }
+            } */
+
+            .popup {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                padding: 1%;
+                color: #333;
+                background-color: white;
+                visibility: hidden;
+                transition: transform 0.4s, top 0.4s;
+                align-items: center;
+                animation: zoom 0.8s ease-in-out;
+        }
+
+
+        .open-popup {
+                visibility: visible;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+                width: 60%;
+                background-color: #e3edfd;
+                border-radius: 15px;
+                border: 5px solid #5d83c3;
+                transition: transform 0.4s, top 0.4s;
+        }
 
         
             .close {
