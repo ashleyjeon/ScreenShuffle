@@ -430,6 +430,20 @@
                         requestDataMovies();
                         requestDataTV();
                 };
+
+                $(document).ready(function() {
+                        // Show popup on hover
+                        $(document).on('mouseenter', '.poster', function() {
+                        $(this).find('.overlay').css('display', 'block');
+                        }).on('mouseleave', '.poster', function() {
+                        $(this).find('.overlay').css('display', 'none');
+                        });
+
+                        // Close popup
+                        $(document).on('click', '.buyButton, .noBuyButton', function() {
+                        $(this).closest('.container1').remove();
+                });
+        });
         </script>
         <br><br>
 
