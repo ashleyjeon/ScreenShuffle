@@ -461,23 +461,28 @@
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="emailInput"]').value.length == 0) {
-                                alert("Please input your email address.");
+                        if (document.querySelector('input[id="emailInput"]').value.length == 0 ||
+                        !(($('input[id="emailInput"]').val()).includes("@a") || 
+                        ($('input[id="emailInput"]').val()).includes("."))) {
+                                alert("Please input a valid email address.");
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="ccNumberInput"]').value.length != 12) {
+                        if (document.querySelector('input[id="ccNumberInput"]').value.length != 12 ||
+                        isNaN(document.querySelector('input[id="ccNumberInput"]').value)) {
                                 alert("Please input a valid credit card number.");
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="expirationInput"]').value.length != 5) {
+                        if (document.querySelector('input[id="expirationInput"]').value.length != 5 ||
+                        !($('input[id="expirationInput"]').val()).includes("/")) {
                                 alert("Please input a valid expiration date in the format MM/YY.");
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="securityInput"]').value.length != 3 &&
-                                document.querySelector('input[id="securityInput"]').value.length != 4) {
+                        if ((document.querySelector('input[id="securityInput"]').value.length != 3 &&
+                                document.querySelector('input[id="securityInput"]').value.length != 4) ||
+                                isNaN(document.querySelector('input[id="securityInput"]').value)) {
                                 alert("Please input a valid security code.");
                                 return false;
                         }
