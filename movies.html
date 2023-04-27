@@ -422,7 +422,7 @@
                         submitButton.setAttribute("type", "button");
                         submitButton.setAttribute("class", "buyButton");
                         submitButton.setAttribute("onclick", "closePopup()");
-                        submitButton.append("Buy Now!");
+                        submitButton.append("Rent Now!");
 
 
                         const noBuy = document.createElement("button");
@@ -482,7 +482,7 @@
                                                 var released = retrieved[i].release_date;
 
                                                 document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'><br>" + link 
-                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Buy Now</button></div></div>";
+                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
                                                 
                                                 document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].title + "<br>";
                                                 document.getElementById("data" + [i]).innerHTML += "<p>Release Date: <br>" + retrieved[i].release_date + "</p>";
