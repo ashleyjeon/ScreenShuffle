@@ -93,73 +93,64 @@
                 padding: 3px;
             }
 
-            .moviePoster::before {
+            .moviePoster {
+    position: relative; /* Add this line */
+    width: 133.33px;
+    height: 230px;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+}
+
+.moviePoster::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0);
-    opacity: 1; 
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
     border-radius: 8px;
 }
 
 .moviePoster:hover::before {
-    opacity: 0.5;
+    opacity: 1;
 }
 
 
-            .overlay {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 10px;
-                background-color: transparent;
-                border-radius: 8px;
-                display: none;
-            }
 
-            .moviePoster:hover .overlay {
-               border-radius: 8px;
-               position: relative;
-                display: inline-block;
-                text-align: center;
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    z-index: 9999;
+    border-radius: 8px;
+    transition: opacity 0.3s;
+}
 
-            }
+.moviePoster:hover .overlay {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
+}
 
-            .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: rgba(200, 200, 200, 0.5);
-                opacity: 0;
-                z-index: 9999;
-                border-radius: 8px;
-                transition: opacity 0.3s;
-        }
+
 
         
             #data .poster:hover {
                 position: relative;
             }
 
-            .moviePoster {
-                width: 133.33px;
-                height: 230px;
-                align-items: center;
-                margin: 0 auto;
-                justify-content: center;
-                text-align: center;
-            }
 
             .popup {
                     position: fixed;
