@@ -628,7 +628,9 @@
                                         } else if (this.readyState == 4 && this.status != 200) {
                                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
                                         }
-                                }              
+
+                                }
+                                updated_request.send();              
                         } else if (this.readyState == 4 && this.status != 200) {
                                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
                         }
