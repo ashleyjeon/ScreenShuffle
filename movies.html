@@ -568,14 +568,15 @@
                         alert("Unable to create HTTPRequest object");
                         return;
                 }
+
+                var page = Math.ceil(Math.random() * 4);
                 
-                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" 
+                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=" + page + "&with_genres=" 
                                 + genreId + "&vote_average.gte=" + rating;
 
                 
                 
                 console.log(api_link);
-                     
 
                 if (!request) {
                         {alert("Unable to get HTTPRequest object"); return;}
