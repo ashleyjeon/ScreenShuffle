@@ -259,26 +259,26 @@
         <form id="filters">
                 <label style="display: inline" for="genre">Genre:</label>
                 <select id="genre" name="genre">
-                        <option value ="" pages="">No Selected Value</option>
-                        <option value="28" pages="41">Action</option>
-                        <option value="12" pages="28">Adventure</option>
-                        <option value="16" pages="36">Animation</option>
-                        <option value="35" pages="100">Comedy</option>
-                        <option value="80" pages="24">Crime</option>
-                        <option value="99" pages="100">Documentary</option>
-                        <option value="18" pages="100">Drama</option>
-                        <option value="10751" pages="25">Family</option>
-                        <option value="14" pages="21">Fantasy</option>
-                        <option value="36" pages="16">History</option>
-                        <option value="27" pages="46">Horror</option>
-                        <option value="10402" pages="49">Music</option>
-                        <option value="9648" pages="24">Mystery</option>
-                        <option value="10749" pages="37">Romance</option>
-                        <option value="878" pages="20">Science Fiction</option>
-                        <option value="10770" pages="15">TV Movie</option>
-                        <option value="53" pages="43">Thriller</option>
-                        <option value="10752" pages="7">War</option>
-                        <option value="37" pages="4">Western</option>
+                        <option value ="">No Selected Value</option>
+                        <option value="28">Action</option>
+                        <option value="12">Adventure</option>
+                        <option value="16">Animation</option>
+                        <option value="35">Comedy</option>
+                        <option value="80">Crime</option>
+                        <option value="99">Documentary</option>
+                        <option value="18">Drama</option>
+                        <option value="10751">Family</option>
+                        <option value="14">Fantasy</option>
+                        <option value="36">History</option>
+                        <option value="27">Horror</option>
+                        <option value="10402">Music</option>
+                        <option value="9648">Mystery</option>
+                        <option value="10749">Romance</option>
+                        <option value="878">Science Fiction</option>
+                        <option value="10770">TV Movie</option>
+                        <option value="53">Thriller</option>
+                        <option value="10752">War</option>
+                        <option value="37">Western</option>
                 </select>
                 &nbsp &nbsp
 
@@ -546,7 +546,7 @@
         <br><br>
         
          <script language="javascript">
-            var genreId, rating, pages;
+            var genreId, rating;
         
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
@@ -554,9 +554,7 @@
             
                     rating = document.getElementById("rating").value;
                     console.log(rating);
-                
-                    pages = document.getElementById("genre").pages;
-                    console.log(pages);
+
                     
                     requestData();                
             }
@@ -571,9 +569,7 @@
                         return;
                 }
                 
-                var randomPage = Math.ceil((Math.random() * pages));
-
-                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page="+ randomPage + "&with_genres=" 
+                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" 
                                 + genreId + "&vote_average.gte=" + rating;
 
                 
