@@ -172,6 +172,184 @@
 
         <br>
         <script>
+
+        function closePopup() {
+
+                        if (validate() === true) {
+                            let popup = document.getElementById("popup");
+                       
+                            popup.parentNode.removeChild(popup);
+                        
+                            popup.classList.remove("open-popup");
+
+                            alert("Your order has been placed. Thanks for renting!");
+
+                        }
+                        
+                }
+
+
+        function closeCancel() {
+                let popup = document.getElementById("popup");
+                console.log(popup);
+
+                popup.parentNode.removeChild(popup);
+                
+                popup.classList.remove("open-popup");
+        }
+
+        function openPopup(title, release_date) {
+                console.log(title);
+                console.log(release_date);
+
+                const container1 = document.createElement("div");
+                container1.setAttribute("class", "container1");
+
+                const popup = document.createElement("div");
+                popup.setAttribute("class", "popup");
+                popup.setAttribute("id", "popup");
+                popup.classList.add("open-popup");
+                
+
+                const movieTitle = document.createElement("h2");
+                // movieTitle.append("Rent: " + title);
+                movieTitle.innerHTML = "Rent &nbsp;<i>" + title + "</i>";
+
+                const text = document.createElement("p");
+                text.append("Price: $9.99");
+                
+
+                const buyForm = document.createElement("form");
+                buyForm.setAttribute("class", "buyForm");
+
+                /* for name */
+                const nameLabel = document.createElement("label");
+                nameLabel.setAttribute("for", "nameInput");
+                nameLabel.textContent = "Name: ";
+                const nameInput = document.createElement("input");
+                nameInput.setAttribute("type", "text");
+                nameInput.setAttribute("id", "nameInput");
+                buyForm.appendChild(nameLabel);
+                buyForm.appendChild(nameInput);
+                buyForm.appendChild(document.createElement("br"));
+                
+                /* for email */
+                const emailLabel = document.createElement("label");
+                emailLabel.setAttribute("for", "emailInput");
+                emailLabel.textContent = "Email: ";
+                const emailInput = document.createElement("input");
+                emailInput.setAttribute("type", "text");
+                emailInput.setAttribute("id", "emailInput");
+                buyForm.appendChild(emailLabel);
+                buyForm.appendChild(emailInput);
+                buyForm.appendChild(document.createElement("br"));
+
+                /* for credit card number */
+                const ccNumberLabel = document.createElement("label");
+                ccNumberLabel.setAttribute("for", "ccNumberInput");
+                ccNumberLabel.textContent = "Credit Card Number: ";
+                const ccNumberInput = document.createElement("input");
+                ccNumberInput.setAttribute("type", "text");
+                ccNumberInput.setAttribute("id", "ccNumberInput");
+                buyForm.appendChild(ccNumberLabel);
+                buyForm.appendChild(ccNumberInput);
+                buyForm.appendChild(document.createElement("br"));
+                
+                /* for expiration date */
+                const expirationLabel = document.createElement("label");
+                expirationLabel.setAttribute("for", "expirationInput");
+                expirationLabel.textContent = "Expiration Date: ";
+                const expirationInput = document.createElement("input");
+                expirationInput.setAttribute("type", "text");
+                expirationInput.setAttribute("id", "expirationInput");
+                buyForm.appendChild(expirationLabel);
+                buyForm.appendChild(expirationInput);
+                buyForm.appendChild(document.createElement("br"));
+
+                /* for security code */
+                const securityLabel = document.createElement("label");
+                securityLabel.setAttribute("for", "securityInput");
+                securityLabel.textContent = "Security Code: ";
+                const securityInput = document.createElement("input");
+                securityInput.setAttribute("type", "text");
+                securityInput.setAttribute("id", "securityInput");
+                buyForm.appendChild(securityLabel);
+                buyForm.appendChild(securityInput);
+                buyForm.appendChild(document.createElement("br"));
+                                        
+                /* for billing address */
+                const billLabel = document.createElement("label");
+                billLabel.setAttribute("for", "emailInput");
+                billLabel.textContent = "Billing Address: ";
+                const billInput = document.createElement("input");
+                billInput.setAttribute("type", "text");
+                billInput.setAttribute("id", "billInput");
+                buyForm.appendChild(billLabel);
+                buyForm.appendChild(billInput);
+                buyForm.appendChild(document.createElement("br"));
+
+                const submitButton = document.createElement("button");
+                submitButton.setAttribute("type", "button");
+                submitButton.setAttribute("class", "buyButton");
+                submitButton.setAttribute("onclick", "closePopup()");
+                submitButton.append("Rent Now!");
+
+                const noBuy = document.createElement("button");
+                noBuy.setAttribute("type", "button");
+                noBuy.setAttribute("class", "noBuyButton");
+                noBuy.setAttribute("onclick", "closeCancel()");
+                noBuy.append("Cancel");
+
+                popup.appendChild(movieTitle);
+                popup.appendChild(text);
+                popup.appendChild(buyForm);
+                popup.appendChild(submitButton);
+                popup.appendChild(noBuy);
+                container1.appendChild(popup);
+                
+                document.body.append(container1);
+        }
+
+        function validate() {
+                if (document.querySelector('input[id="nameInput"]').value.length == 0) {
+                        alert("Please input your name.");
+                        return false;
+                }
+
+                if (document.querySelector('input[id="emailInput"]').value.length == 0 ||
+                !(($('input[id="emailInput"]').val()).includes("@a") || 
+                ($('input[id="emailInput"]').val()).includes("."))) {
+                        alert("Please input a valid email address.");
+                        return false;
+                }
+
+                if (document.querySelector('input[id="ccNumberInput"]').value.length != 12 ||
+                isNaN(document.querySelector('input[id="ccNumberInput"]').value)) {
+                        alert("Please input a valid credit card number.");
+                        return false;
+                }
+
+                if (document.querySelector('input[id="expirationInput"]').value.length != 5 ||
+                !($('input[id="expirationInput"]').val()).includes("/")) {
+                        alert("Please input a valid expiration date in the format MM/YY.");
+                        return false;
+                }
+
+                if ((document.querySelector('input[id="securityInput"]').value.length != 3 &&
+                        document.querySelector('input[id="securityInput"]').value.length != 4) ||
+                        isNaN(document.querySelector('input[id="securityInput"]').value)) {
+                        alert("Please input a valid security code.");
+                        return false;
+                }
+
+                if (document.querySelector('input[id="billInput"]').value.length == 0) {
+                        alert("Please input your billing address.");
+                        return false;
+                }
+                
+                return true;
+        }
+                
         function requestDataMovies() {
                 var request = new XMLHttpRequest();
 
@@ -202,7 +380,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
-                                        strHTML += '<div class="overlay"><a href="buyNow.html">Buy Now</a></div>';
+                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Rent Now</button></div></div>";
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + movieTitle + '</h4>';
