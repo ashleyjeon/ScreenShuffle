@@ -559,84 +559,51 @@
                     requestData();                
             }
 
-            function requestData() {
-                var request = new XMLHttpRequest();
+            async function requestData() {
+                try {
+                        const api_link = `https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=${genreId}&vote_average.gte=${rating}`;
+                        const response = await fetch(api_link);
 
-                console.log("requested");
-              
-                if (!request) {
-                        alert("Unable to create HTTPRequest object");
-                        return;
-                }
-                
-                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" + genreId + "&vote_average.gte=" + rating;
-
-                console.log(api_link);
-                     
-
-                if (!request) {
-                        {alert("Unable to get HTTPRequest object"); return;}
-                }
-                
-                request.open("GET", api_link, true);
-                request.onreadystatechange = function() {
-                        console.log("ready: " + this.readyState);
-                        console.log("status: " + this.status);
-                        if (this.readyState === 4 && this.status === 200) {
-                                var data = this.responseText;
-                                var info = JSON.parse(data);
-                                var totalPages = Math.floor(info["total_results"] / 20);
-
-                                if (totalPages > 100) {
-                                        totalPages = 100;
-                                }
-
-                                console.log("total pages: " + totalPages);
-
-                                var randomPage = Math.ceil(Math.random() * totalPages);
-
-                                var updated_api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=" + randomPage + "&with_genres=" + genreId + "&vote_average.gte=" + rating;
-                                console.log(updated_api_link);
-
-                                var updated_request = new XMLHttpRequest();
-
-                                updated_request.open("GET", updated_api_link, true);
-
-                                updated_request.onreadystatechange = function() {
-                                        if (this.readyState === 4 && this.status === 200) {
-                                                var moviesData = this.responseText;
-                                                var moviesInfo = JSON.parse(moviesData);
-                                                var retrieved = moviesInfo["results"];
-
-                                                /* generates a random number */
-                                                var random = Math.floor((Math.random() * 20));
-                                                console.log("What is the random number: " + random);
-
-                                                var title = retrieved[random].title;
-                                                var released = retrieved[random].release_date;
-
-                                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                                        
-                                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
-                                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
-                                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
-                                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
-                                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
-                                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
-                                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
-
-                                        } else if (this.readyState == 4 && this.status != 200) {
-                                                document.getElementById("data").innerHTML = "Unable to retrieve data";
-                                        }
-
-                                }
-                                updated_request.send();              
-                        } else if (this.readyState == 4 && this.status != 200) {
-                                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                        if (!response.ok) {
+                        throw new Error('Unable to retrieve data');
                         }
+
+                        const data = await response.json();
+                        let totalPages = Math.floor(data["total_results"] / 20);
+
+                        if (totalPages > 100) {
+                        totalPages = 100;
+                        }
+
+                        const randomPage = Math.ceil(Math.random() * totalPages);
+                        const updated_api_link = `https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=${randomPage}&with_genres=${genreId}&vote_average.gte=${rating}`;
+                        const updated_response = await fetch(updated_api_link);
+
+                        if (!updated_response.ok) {
+                        throw new Error('Unable to retrieve data');
+                        }
+
+                        const moviesData = await updated_response.json();
+                        const retrieved = moviesData["results"];
+                        const random = Math.floor((Math.random() * 20));
+
+                        const title = retrieved[random].title;
+                        const released = retrieved[random].release_date;
+                        const link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+
+                        document.getElementById("movieInfo").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
+                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
+                        document.getElementById("movieInfo").innerHTML += "<br>" + retrieved[random].title + "<br>";
+                        document.getElementById("movieInfo").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
+                        document.getElementById("movieInfo").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
+                        document.getElementById("movieInfo").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
+                        document.getElementById("movieInfo").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
+
+                } catch (error) {
+                        document.getElementById("movieInfo").innerHTML = error.message;
                 }
-                request.send();
         }
+
         </script>
 
         <div class="spacer"></div>
