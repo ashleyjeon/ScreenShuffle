@@ -568,14 +568,9 @@
                         alert("Unable to create HTTPRequest object");
                         return;
                 }
+                
+                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" + genreId + "&vote_average.gte=" + rating;
 
-                var randomPage = Math.floor(Math.random() * 10) + 1;
-                
-                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page="
-                                + randomPage + "&with_genres=" + genreId + "&vote_average.gte=" + rating;
-
-                
-                
                 console.log(api_link);
                      
 
@@ -590,28 +585,48 @@
                         if (this.readyState === 4 && this.status === 200) {
                                 var data = this.responseText;
                                 var info = JSON.parse(data);
-                                var retrieved = info["results"];
+                                var totalPages = info["total_pages"];
 
-                                /* generates a random number */
-                                var random = Math.ceil((Math.random() * 19));
-                                console.log("What is the random number: " + random);
+                                var randomPage = Math.floor(Math.random() * totalPages) + 1;
 
-                                var title = retrieved[random].title;
-                                var released = retrieved[random].release_date;
+                                var updated_api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=" + randomPage + "&with_genres=" + genreId + "&vote_average.gte=" + rating;
+                                console.log(updated_api_link);
 
-                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                               
-                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
-                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
-                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
-                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
-                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
-                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
-                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
+                                var updated_request = new XMLHttpRequest();
 
-                        } else if (this.readyState == 4 && this.status != 200) {
-                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                requestMovies.open("GET", updated_api_link, true);
+
+                                requestMovies.onreadystatechange = function() {
+                                        if (this.readyState === 4 && this.status === 200) {
+                                        var moviesData = this.responseText;
+                                        var moviesInfo = JSON.parse(moviesData);
+                                        var retrieved = moviesInfo["results"];
+
+
+                                        /* generates a random number */
+                                        var random = Math.ceil((Math.random() * 19));
+                                        console.log("What is the random number: " + random);
+
+                                        var title = retrieved[random].title;
+                                        var released = retrieved[random].release_date;
+
+                                        var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+                                
+                                        document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
+                                                                + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
+                                        document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
+                                        document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
+                                        document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
+                                        document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
+                                        document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
+
+                                } else if (this.readyState == 4 && this.status != 200) {
+                                        document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                }
                         }
+                } else if (this.readyState == 4 && this.status != 200) {
+                                        document.getElementById("data").innerHTML = "Unable to retrieve data";
+                }
                 }
                 request.send();
         }
