@@ -472,7 +472,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
-                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Rent Now</button></div>";
+                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + movieTitle + "','" + retrieved[i].released + "')\">Rent Now</button></div>";
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + movieTitle + '</h4>';
@@ -522,7 +522,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + tvName + 'Poster">';
-                                        strHTML += '<div class="overlay"><a href="buyNow.html">Buy Now</a></div>';
+                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + tvName + "','" + retrieved[i].released + "')\">Rent Now</button></div>";
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + tvName + '</h4>';
