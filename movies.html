@@ -259,26 +259,26 @@
         <form id="filters">
                 <label style="display: inline" for="genre">Genre:</label>
                 <select id="genre" name="genre">
-                        <option value ="">No Selected Value</option>
-                        <option value="28">Action</option>
-                        <option value="12">Adventure</option>
-                        <option value="16">Animation</option>
-                        <option value="35">Comedy</option>
-                        <option value="80">Crime</option>
-                        <option value="99">Documentary</option>
-                        <option value="18">Drama</option>
-                        <option value="10751">Family</option>
-                        <option value="14">Fantasy</option>
-                        <option value="36">History</option>
-                        <option value="27">Horror</option>
-                        <option value="10402">Music</option>
-                        <option value="9648">Mystery</option>
-                        <option value="10749">Romance</option>
-                        <option value="878">Science Fiction</option>
-                        <option value="10770">TV Movie</option>
-                        <option value="53">Thriller</option>
-                        <option value="10752">War</option>
-                        <option value="37">Western</option>
+                        <option value ="" pages="">No Selected Value</option>
+                        <option value="28" pages="41">Action</option>
+                        <option value="12" pages="28">Adventure</option>
+                        <option value="16" pages="36">Animation</option>
+                        <option value="35" pages="100">Comedy</option>
+                        <option value="80" pages="24">Crime</option>
+                        <option value="99" pages="100">Documentary</option>
+                        <option value="18" pages="100">Drama</option>
+                        <option value="10751" pages="25">Family</option>
+                        <option value="14" pages="21">Fantasy</option>
+                        <option value="36" pages="16">History</option>
+                        <option value="27" pages="46">Horror</option>
+                        <option value="10402" pages="49">Music</option>
+                        <option value="9648" pages="24">Mystery</option>
+                        <option value="10749" pages="37">Romance</option>
+                        <option value="878" pages="20">Science Fiction</option>
+                        <option value="10770" pages="15">TV Movie</option>
+                        <option value="53" pages="43">Thriller</option>
+                        <option value="10752" pages="7">War</option>
+                        <option value="37" pages="4">Western</option>
                 </select>
                 &nbsp &nbsp
 
@@ -546,7 +546,7 @@
         <br><br>
         
          <script language="javascript">
-            var genreId, rating;
+            var genreId, rating, pages;
         
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
@@ -554,7 +554,9 @@
             
                     rating = document.getElementById("rating").value;
                     console.log(rating);
-
+                
+                    pages = document.getElementById("genre").pages;
+                    console.log(pages);
                     
                     requestData();                
             }
@@ -569,8 +571,13 @@
                         return;
                 }
                 
-                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" + genreId + "&vote_average.gte=" + rating;
+                var randomPage = Math.ceil((Math.random() * pages));
 
+                var api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page="+ randomPage + "&with_genres=" 
+                                + genreId + "&vote_average.gte=" + rating;
+
+                
+                
                 console.log(api_link);
                      
 
@@ -585,58 +592,27 @@
                         if (this.readyState === 4 && this.status === 200) {
                                 var data = this.responseText;
                                 var info = JSON.parse(data);
-                                var totalPages = Math.floor(info["total_results"] / 20);
+                                var retrieved = info["results"];
 
-                                if (totalPages > 100) {
-                                        totalPages = 100;
-                                }
+                                /* generates a random number */
+                                var random = Math.ceil((Math.random() * 19));
+                                console.log("What is the random number: " + random);
 
-                                console.log("total pages: " + totalPages);
+                                var title = retrieved[random].title;
+                                var released = retrieved[random].release_date;
 
-                                var randomPage = Math.ceil(Math.random() * totalPages);
+                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+                               
+                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
+                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
+                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
+                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
+                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
+                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
 
-                                var updated_api_link = "https://api.themoviedb.org/3/discover/movie?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=" + randomPage + "&with_genres=" + genreId + "&vote_average.gte=" + rating;
-                                console.log(updated_api_link);
-
-                                var updated_request = new XMLHttpRequest();
-
-                                if (!updated_request) {
-                                        alert("Unable to get HTTPRequest object"); return;
-                                }
-
-                                updated_request.open("GET", updated_api_link, true);
-
-                                updated_request.onreadystatechange = function() {
-                                        if (this.readyState === 4 && this.status === 200) {
-                                                var moviesData = this.responseText;
-                                                var moviesInfo = JSON.parse(moviesData);
-                                                var retrieved = moviesInfo["results"];
-
-                                                /* generates a random number */
-                                                var random = Math.floor((Math.random() * 20));
-                                                console.log("What is the random number: " + random);
-
-                                                var title = retrieved[random].title;
-                                                var released = retrieved[random].release_date;
-
-                                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                                        
-                                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
-                                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
-                                                document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
-                                                document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
-                                                document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
-                                                document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
-                                                document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
-
-                                        } else if (this.readyState == 4 && this.status != 200) {
-                                                document.getElementById("data").innerHTML = "Unable to retrieve data";
-                                        }
-
-                                }
-                                updated_request.send();              
                         } else if (this.readyState == 4 && this.status != 200) {
-                                                document.getElementById("data").innerHTML = "Unable to retrieve data";
+                                document.getElementById("data").innerHTML = "Unable to retrieve data";
                         }
                 }
                 request.send();
