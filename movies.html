@@ -160,15 +160,6 @@
                 text-align: center;
             }
 
-            /* added here */
-            /* .container1 {
-                        width: 100%;
-                        height: 100vh;
-                        background: #3c5077;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-            } */
             .popup {
                     width: 40%;
                     background: #fff;
@@ -178,32 +169,25 @@
                     left: 50%;
                     transform: translate(-50%, -100%) scale(0.1);
                     text-align: center;
-                    padding: 0 30x 30px;
+                    padding: 30px;
                     color: #333;
                     background-color: white;
                     visibility: hidden;
                     transition: transform 0.4s, top 0.4s;
+                    align-items: center;
             }
 
         
             .open-popup {
                 visibility: visible;
                 top: 50%;
-                transform: translate(-50%, 0%) scale(1);
+                transform: translate(-50%, 20%) scale(1);
                 width: 80%;
-                background-color: rgb(201, 185, 185);
+                background-color: rgb(246, 240, 240);
                 border-radius: 6px;
             }
 
-           
-            
-
-            /* .popup img {
-                    width: 100x;
-                    margin-top: -50px;
-                    border-radius: 50%;
-                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            } */
+        
             .close {
                     color: #aaa;
                     float: right;
@@ -220,19 +204,29 @@
 
             .noBuyButton {
                 margin-left: 30px;
+                margin-bottom: 30px;
+                margin-top: 30px;
+            }
+
+            .buyButton {
+                margin-left: 10%;
             }
 
             .buyForm {
                 margin-top: 30px;
-                text-align: left;
-                margin-left: 10px;
+                text-align: center;                
             }
 
             input[type=text] {
+                display: inline-block;
                 width: 60%;
             }
 
-
+            label {
+                display: inline-block;
+                align-items: left;
+                width: 100px;
+            }
 
         
     </style>
@@ -252,7 +246,7 @@
 
         <header>
                 <img class="banner-image" src="images/banner-movies.jpg" 
-                alt="Unsplash.com" height="400">
+                alt="Movie Banner" height="400">
                 <h1>Random Movie Generator</h1>
         </header>
         
@@ -306,7 +300,22 @@
                 <script>
 
                 function closePopup() {
-                        console.log("HERE");
+
+                        if (validate() === true) {
+                            let popup = document.getElementById("popup");
+                       
+                            popup.parentNode.removeChild(popup);
+                        
+                            popup.classList.remove("open-popup");
+
+                            alert("Your order has been placed. Thanks for renting!");
+
+                        }
+                        
+                }
+
+
+                function closeCancel() {
                         let popup = document.getElementById("popup");
                         console.log(popup);
 
@@ -337,10 +346,6 @@
 
                         const buyForm = document.createElement("form");
                         buyForm.setAttribute("class", "buyForm");
-                        
-                        // const fname = document.createElement("input");
-                        // fname.setAttribute("type", "text");
-                        // fname.setAttribute("name", "fname");
 
                         /* for name */
                         const nameLabel = document.createElement("label");
@@ -408,27 +413,16 @@
                         buyForm.appendChild(billInput);
                         buyForm.appendChild(document.createElement("br"));
 
-
-                        
-                        // <input type="text" name="txtName" id="studentName"
-                        //         placeholder="Name*">
-                        //         <br/>
-                        //         <input type="text" name="email" id="studentEmail"
-                        //         placeholder="Email*">
-                        //         <br/>
-                        //         <input type="button" id="mailingBtn" value="Submit">
-
                         const submitButton = document.createElement("button");
                         submitButton.setAttribute("type", "button");
                         submitButton.setAttribute("class", "buyButton");
                         submitButton.setAttribute("onclick", "closePopup()");
                         submitButton.append("Rent Now!");
 
-
                         const noBuy = document.createElement("button");
                         noBuy.setAttribute("type", "button");
                         noBuy.setAttribute("class", "noBuyButton");
-                        noBuy.setAttribute("onclick", "closePopup()");
+                        noBuy.setAttribute("onclick", "closeCancel()");
                         noBuy.append("Cancel");
 
                         popup.appendChild(movieTitle);
@@ -441,14 +435,40 @@
                         document.body.append(container1);
                 }
 
+                function validate() {
+                        if (document.querySelector('input[id="nameInput"]').value.length == 0) {
+                                alert("Please input your name.");
+                                return false;
+                        }
 
-                
+                        if (document.querySelector('input[id="emailInput"]').value.length == 0) {
+                                alert("Please input your email address.");
+                                return false;
+                        }
 
-                $('#buyButton').click(function() {
-                    console.log("OWEIJFOI");
-                    let popup = document.getElementById("popup");
-                    popup.classList.remove("open-popup");
-                });
+                        if (document.querySelector('input[id="ccNumberInput"]').value.length != 12) {
+                                alert("Please input a valid credit card number.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="expirationInput"]').value.length != 5) {
+                                alert("Please input a valid expiration date in the format MM/YY.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="securityInput"]').value.length != 3 &&
+                                document.querySelector('input[id="securityInput"]').value.length != 4) {
+                                alert("Please input a valid security code.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="billInput"]').value.length == 0) {
+                                alert("Please input your billing address.");
+                                return false;
+                        }
+                        
+                        return true;
+                }
 
 
                 function now_playing()
@@ -488,22 +508,6 @@
                                                 document.getElementById("data" + [i]).innerHTML += "<p>Release Date: <br>" + retrieved[i].release_date + "</p>";
                                                 
                                         }
-
-                        
-                                        // second button option
-                                        /* $('.buyNow').click(function() {
-                                                // console.log("Hello")
-                                                const modal = document.createElement("div");
-                                                modal.setAttribute("class", "modal");
-
-                                                const newImage = document.createElement("img");
-
-
-                                                $("body").append()
-
-
-                                        }); */
-
                                                 
                                 } else if (this.readyState == 4 && this.status != 200) {
                                         document.getElementById("topMovie").innerHTML = "Unable to retrieve data";
@@ -513,8 +517,6 @@
                         }
 
                 now_playing();
-
-
 
                 </script>
 
@@ -533,10 +535,7 @@
                 </div>
         </div>
 
-      
-
-        <br>
-        <br>
+        <br><br>
         
          <script language="javascript">
             var genreId, rating;
@@ -587,22 +586,18 @@
                                 var random = Math.ceil((Math.random() * 19));
                                 console.log("What is the random number: " + random);
 
+                                var title = retrieved[random].title;
+                                var released = retrieved[random].release_date;
+
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
-                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path 
-                                                                          + "'><div class='overlay'><button type='button' class='buyNow'>Buy Now</button></div></div>";
+                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
+                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
                                 document.getElementById("data").innerHTML += "<br>" + retrieved[random].title + "<br>";
                                 document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Release Date: " + retrieved[random].release_date + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
                                 document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
-
-
-                                $('.buyNow').click(function() {
-                                       
-                                        var newWindow = window.open("");
-                                        newWindow.document.write("<h1> Purchase Movie </h1>");
-                                });
 
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
@@ -610,12 +605,7 @@
                 }
                 request.send();
         }
-
-    
-
         </script>
-
-    
 
         <div class="spacer"></div>
         

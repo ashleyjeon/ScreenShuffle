@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="final.css">
-    <title>TV Shows</title>
+    <title>Movies</title>
 
     <style>
             #filters {
@@ -75,12 +75,12 @@
             #overview {
                 width: 60%;
                 margin: 0 auto;
-            }   
-
+            }
+        
             .banner-image {
                 filter: brightness(30%);
             }
-        
+
             h1 {
                 color: white;
                 position: absolute;
@@ -93,27 +93,22 @@
                 padding: 3px;
             }
 
-            #data0 .tvPoster:hover {
+            #data0 .moviePoster:hover {
                     position: relative;
                     /* background-color: rgba(0, 0, 0, 0.5); */
             }
 
-            #data1 .tvPoster:hover {
+            #data1 .moviePoster:hover {
                     position: relative;
-                    /* opacity: 0.4; */
-                    /* background-color: rgba(0, 0, 0, 0.5); */
+
             }
 
-            #data2 .tvPoster:hover {
+            #data2 .moviePoster:hover {
                     position: relative;
-                    /* opacity: 0.4; */
-                    /* background-color: rgba(0, 0, 0, 0.5); */
             }
 
-            #data3 .tvPoster:hover {
+            #data3 .moviePoster:hover {
                     position: relative;
-                    /* opacity: 0.4; */
-                    /* background-color: rgba(0, 0, 0, 0.5); */
             }
 
             .overlay {
@@ -137,13 +132,17 @@
                     display: none;
             }
 
-            .tvPoster:hover .overlay {
+            .moviePoster:hover .overlay {
                display: block;
             }
 
-            .overlay a {
+            .overlay button {
                 color: rgb(0, 0, 0);
-                /* z-index: 1; */
+                background-color: rgba(206, 206, 206, 0.799);
+                border-width: 0;
+                font-weight: bold;
+                font-size: 11px;
+                padding: 2px;
             }
 
         
@@ -152,7 +151,7 @@
                 opacity: 0.4;
             }
 
-            .tvPoster {
+            .moviePoster {
                 width: 133.33px;
                 height: 230px;
                 align-items: center;
@@ -161,8 +160,92 @@
                 text-align: center;
             }
 
+            /* added here */
+            /* .container1 {
+                        width: 100%;
+                        height: 100vh;
+                        background: #3c5077;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+            } */
+            .popup {
+                    width: 40%;
+                    background: #fff;
+                    border-radius: 6px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -100%) scale(0.1);
+                    text-align: center;
+                    padding: 30px;
+                    color: #333;
+                    background-color: white;
+                    visibility: hidden;
+                    transition: transform 0.4s, top 0.4s;
+                    align-items: center;
+            }
+
+        
+            .open-popup {
+                visibility: visible;
+                top: 50%;
+                transform: translate(-50%, 20%) scale(1);
+                width: 80%;
+                background-color: rgb(246, 240, 240);
+                border-radius: 6px;
+            }
+
+           
             
 
+            /* .popup img {
+                    width: 100x;
+                    margin-top: -50px;
+                    border-radius: 50%;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            } */
+            .close {
+                    color: #aaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                    visibility: hidden;
+            }
+
+            .close:hover, .close:focus {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+            }
+
+            .noBuyButton {
+                margin-left: 30px;
+                margin-bottom: 30px;
+                margin-top: 30px;
+            }
+
+            .buyButton {
+                margin-left: 10%;
+            }
+
+            .buyForm {
+                margin-top: 30px;
+                text-align: center;                
+            }
+
+            input[type=text] {
+                display: inline-block;
+                width: 60%;
+            }
+
+            label {
+                display: inline-block;
+                align-items: left;
+                width: 100px;
+            }
+
+        
     </style>
 
 </head>
@@ -180,7 +263,7 @@
 
         <header>
                 <img class="banner-image" src="images/banner-tv.jpg" 
-                alt="Unsplash.com" height="400">
+                alt="Tv Show Banner" height="400">
                 <h1>Random TV Show Generator</h1>
         </header>
         
@@ -230,11 +313,183 @@
 
                 <script>
 
+                function closePopup() {
+
+                        if (validate() === true) {
+                                let popup = document.getElementById("popup");
+                                popup.parentNode.removeChild(popup);
+                                popup.classList.remove("open-popup");
+
+                                alert("Your order has been placed. Thanks for renting!");
+
+                        }
+                }
+
+
+                function closeCancel() {
+                        let popup = document.getElementById("popup");
+                        console.log(popup);
+
+                        popup.parentNode.removeChild(popup);
+
+                        popup.classList.remove("open-popup");
+                }
+
+                function openPopup(title, release_date) {
+                        console.log(title);
+                        console.log(release_date);
+
+                        const container1 = document.createElement("div");
+                        container1.setAttribute("class", "container1");
+
+                        const popup = document.createElement("div");
+                        popup.setAttribute("class", "popup");
+                        popup.setAttribute("id", "popup");
+                        popup.classList.add("open-popup");
+                        
+
+                        const movieTitle = document.createElement("h2");
+                        movieTitle.append(title);
+
+                        const text = document.createElement("p");
+                        text.append("Price: $4.99");
+                       
+
+                        const buyForm = document.createElement("form");
+                        buyForm.setAttribute("class", "buyForm");
+                        
+
+                        /* for name */
+                        const nameLabel = document.createElement("label");
+                        nameLabel.setAttribute("for", "nameInput");
+                        nameLabel.textContent = "Name: ";
+                        const nameInput = document.createElement("input");
+                        nameInput.setAttribute("type", "text");
+                        nameInput.setAttribute("id", "nameInput");
+                        buyForm.appendChild(nameLabel);
+                        buyForm.appendChild(nameInput);
+                        buyForm.appendChild(document.createElement("br"));
+                        
+                        /* for email */
+                        const emailLabel = document.createElement("label");
+                        emailLabel.setAttribute("for", "emailInput");
+                        emailLabel.textContent = "Email: ";
+                        const emailInput = document.createElement("input");
+                        emailInput.setAttribute("type", "text");
+                        emailInput.setAttribute("id", "emailInput");
+                        buyForm.appendChild(emailLabel);
+                        buyForm.appendChild(emailInput);
+                        buyForm.appendChild(document.createElement("br"));
+
+                        /* for credit card number */
+                        const ccNumberLabel = document.createElement("label");
+                        ccNumberLabel.setAttribute("for", "ccNumberInput");
+                        ccNumberLabel.textContent = "Credit Card Number: ";
+                        const ccNumberInput = document.createElement("input");
+                        ccNumberInput.setAttribute("type", "text");
+                        ccNumberInput.setAttribute("id", "ccNumberInput");
+                        buyForm.appendChild(ccNumberLabel);
+                        buyForm.appendChild(ccNumberInput);
+                        buyForm.appendChild(document.createElement("br"));
+                        
+                        /* for expiration date */
+                        const expirationLabel = document.createElement("label");
+                        expirationLabel.setAttribute("for", "expirationInput");
+                        expirationLabel.textContent = "Expiration Date: ";
+                        const expirationInput = document.createElement("input");
+                        expirationInput.setAttribute("type", "text");
+                        expirationInput.setAttribute("id", "expirationInput");
+                        buyForm.appendChild(expirationLabel);
+                        buyForm.appendChild(expirationInput);
+                        buyForm.appendChild(document.createElement("br"));
+
+                        /* for security code */
+                        const securityLabel = document.createElement("label");
+                        securityLabel.setAttribute("for", "securityInput");
+                        securityLabel.textContent = "Security Code: ";
+                        const securityInput = document.createElement("input");
+                        securityInput.setAttribute("type", "text");
+                        securityInput.setAttribute("id", "securityInput");
+                        buyForm.appendChild(securityLabel);
+                        buyForm.appendChild(securityInput);
+                        buyForm.appendChild(document.createElement("br"));
+                                                
+                        /* for billing address */
+                        const billLabel = document.createElement("label");
+                        billLabel.setAttribute("for", "emailInput");
+                        billLabel.textContent = "Billing Address: ";
+                        const billInput = document.createElement("input");
+                        billInput.setAttribute("type", "text");
+                        billInput.setAttribute("id", "billInput");
+                        buyForm.appendChild(billLabel);
+                        buyForm.appendChild(billInput);
+                        buyForm.appendChild(document.createElement("br"));
+
+                        const submitButton = document.createElement("button");
+                        submitButton.setAttribute("type", "button");
+                        submitButton.setAttribute("class", "buyButton");
+                        submitButton.setAttribute("onclick", "closePopup()");
+                        submitButton.append("Rent Now!");
+
+
+                        const noBuy = document.createElement("button");
+                        noBuy.setAttribute("type", "button");
+                        noBuy.setAttribute("class", "noBuyButton");
+                        noBuy.setAttribute("onclick", "closeCancel()");
+                        noBuy.append("Cancel");
+                        
+                        popup.appendChild(movieTitle);
+                        popup.appendChild(text);
+                        popup.appendChild(buyForm);
+                        popup.appendChild(submitButton);
+                        popup.appendChild(noBuy);
+                        container1.appendChild(popup);
+                        
+                        document.body.append(container1);
+                }
+
+
+                
+
+                function validate() {
+                        if (document.querySelector('input[id="nameInput"]').value.length == 0) {
+                                alert("Please input your name.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="emailInput"]').value.length == 0) {
+                                alert("Please input your email address.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="ccNumberInput"]').value.length != 12) {
+                                alert("Please input a valid credit card number.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="expirationInput"]').value.length != 5) {
+                                alert("Please input a valid expiration date in the format MM/YY.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="securityInput"]').value.length != 3 &&
+                                document.querySelector('input[id="securityInput"]').value.length != 4) {
+                                alert("Please input a valid security code.");
+                                return false;
+                        }
+
+                        if (document.querySelector('input[id="billInput"]').value.length == 0) {
+                                alert("Please input your billing address.");
+                                return false;
+                        }
+                        
+                        return true;
+                }
+
+
                 function now_playing()
                 {
                         var request = new XMLHttpRequest();
-
-                        console.log("requested");
 
                         if (!request) {
                                 alert("Unable to create HTTPRequest object");
@@ -243,52 +498,52 @@
 
                         var api_link = "https://api.themoviedb.org/3/tv/on_the_air?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&page=1";
 
+
                         if (!request) {
                                 {alert("Unable to get HTTPRequest object"); return;}
                         }
                         
                         request.open("GET", api_link, true);
-                        request.onreadystatechange = function() {
-                                console.log("ready: " + this.readyState);
-                                console.log("status: " + this.status);
-                                if (this.readyState === 4 && this.status === 200) {
-                                        var data = this.responseText;
-                                        var info = JSON.parse(data);
-                                        var retrieved = info["results"];
-                                
-                                        for (var i = 0; i < 4; i++) {
+                                request.onreadystatechange = function() {
+                                        if (this.readyState === 4 && this.status === 200) {
+                                                var data = this.responseText;
+                                                var info = JSON.parse(data);
+                                                var retrieved = info["results"];
 
-                                                // document.getElementById("data" + [i]).innerHTML += "<div class='tvPoster'>"
+                                                for (var i = 0; i < 4; i++) {
 
-                                                var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
-                                                document.getElementById("data" + [i]).innerHTML += "<div class='tvPoster'><br>" + link + retrieved[i].poster_path 
-                                                                    + "'><div class='overlay'><a href='buyNow.html'>Rent Now</a></div></div>"; 
-                                                /* added here */
-                                                
-                                                document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].name + "<br>";
-                                                document.getElementById("data" + [i]).innerHTML += "<p>First Air Date: <br>" + retrieved[i].first_air_date + "</p>";
-                                                
+                                                        //var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
+                                                        var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face" + retrieved[i].poster_path;
+
+                                                        var title = retrieved[i].name;
+                                                        var released = retrieved[i].first_air_date;
+
+                                                        document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'><br>" + link 
+                                                                + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
+                                                        
+                                                        document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].name + "<br>";
+                                                        document.getElementById("data" + [i]).innerHTML += "<p>First Air Date: <br>" + retrieved[i].first_air_date + "</p>";
+                                                        
+                                                }
+                                                        
+                                        } else if (this.readyState == 4 && this.status != 200) {
+                                                document.getElementById("topMovie").innerHTML = "Unable to retrieve data";
                                         }
-
-                                                
-                                } else if (this.readyState == 4 && this.status != 200) {
-                                        document.getElementById("toptv").innerHTML = "Unable to retrieve data";
                                 }
-                        }
                                 request.send();
                         }
 
                 now_playing();
+
                 </script>
 
                 <button type="button" onclick="getFilterInfo()">Shuffle</button>
-
         </form>
-    
-        <br><br>
         
+        <br><br>
+    
         <div id="data">
-                <h4>Currently Airing TV Shows</h4>
+                <h4>Top Rated TV Shows</h4>
                 <div id="dataContainer">
                         <div id="data0"></div>
                         <div id="data1"></div>
@@ -297,13 +552,13 @@
                 </div>
         </div>
 
+      
+
         <br>
         <br>
         
          <script language="javascript">
             var genreId, rating;
-
-            
         
             function getFilterInfo() {
                     genreId = document.getElementById("genre").value;
@@ -327,12 +582,7 @@
                 }
                 
                 var api_link = "https://api.themoviedb.org/3/discover/tv?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" 
-                                + genreId + "&vote_average.gte=" + rating;
-
-                
-                
-                console.log(api_link);
-                     
+                                + genreId + "&vote_average.gte=" + rating;      
 
                 if (!request) {
                         {alert("Unable to get HTTPRequest object"); return;}
@@ -349,16 +599,20 @@
 
                                 /* generates a random number */
                                 var random = Math.ceil((Math.random() * 19));
-                                console.log("What is the random number: " + random);
+
+                                var title = retrieved[random].name;
+                                var released = retrieved[random].first_air_date;
 
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
-                                document.getElementById("data").innerHTML = "<div class='tvPoster'><br>" + link + retrieved[random].poster_path + "'><div class='overlay'><a href='buyNow.html'>Rent Now</a></div></div>";
+                                document.getElementById("data").innerHTML = "<div class='moviePoster'><br>" + link + retrieved[random].poster_path
+                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
                                 document.getElementById("data").innerHTML += "<br>" + retrieved[random].name + "<br>";
                                 document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
                                 document.getElementById("data").innerHTML += "<p>First Air Date: " + retrieved[random].first_air_date + "</p>";
                                 document.getElementById("data").innerHTML += "<p>Rating: " + retrieved[random].vote_average + "</p>";
                                 document.getElementById("data").innerHTML += "<p id='overview'>Overview: " + retrieved[random].overview + "</p><br>";
+
 
                         } else if (this.readyState == 4 && this.status != 200) {
                                 document.getElementById("data").innerHTML = "Unable to retrieve data";
@@ -366,9 +620,8 @@
                 }
                 request.send();
         }
-        
+
         </script>
-    
 
         <div class="spacer"></div>
         
