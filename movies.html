@@ -93,12 +93,12 @@
                 padding: 3px;
             }
 
-            #data0 .moviePoster:hover {
-                    position: relative;
+            /* #data0 .moviePoster:hover {
+                    position: relative; */
                     /* background-color: rgba(0, 0, 0, 0.5); */
-            }
+            /* } */
 
-            #data1 .moviePoster:hover {
+            /* #data1 .moviePoster:hover {
                     position: relative;
 
             }
@@ -109,7 +109,7 @@
 
             #data3 .moviePoster:hover {
                     position: relative;
-            }
+            } */
 
             .overlay {
                     /* position: absolute; */
@@ -144,7 +144,7 @@
 
             .moviePoster::before {
                 content: '';
-                position: absolute;
+                /* position: absolute; */
                 top: 0;
                 left: 0;
                 right: 0;
@@ -153,6 +153,7 @@
                 opacity: 0;
                 transition: opacity 0.3s;
                 pointer-events: none;
+                border-radius: 8px;
         }
 
         .moviePoster:hover::before {
@@ -196,6 +197,7 @@
                 margin: 0 auto;
                 justify-content: center;
                 text-align: center;
+                position: relative;
             }
 
             /* .popup {
