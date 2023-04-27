@@ -111,16 +111,7 @@
                     position: relative;
             }
 
-            .moviePoster:hover::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity value as needed */
-                z-index: 1;
-        }
+            
 
 
             .overlay {
@@ -160,8 +151,18 @@
         
             #data .poster:hover {
                 position: relative;
-                opacity: 0.4;
             }
+
+            #data .poster:hover::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity value as needed */
+                z-index: 1;
+        }
 
             .moviePoster {
                 width: 133.33px;
