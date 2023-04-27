@@ -13,6 +13,19 @@
                                 width: auto;
                         }
 
+                h1 {
+                        color: white;
+                        font-size: 65px;
+                        text-align: center;
+                        width: 100%;
+                        font-family:Georgia, 'Times New Roman', Times, serif; 
+                        position: absolute;
+                        top: 45%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                       
+                }
+
                 .gallery__item {
                         cursor: pointer;
                         overflow: hidden;
@@ -115,7 +128,7 @@
         </nav>
 
         <header>
-                <img class="banner-image" src="images/banner-image.jpeg" 
+                <img class="banner-image" src="images/banner-actors1.jpg" 
                 alt="Unsplash.com" height="400">
                 <h1>Popular Actors</h1>
         <br/>
@@ -205,7 +218,6 @@
 
                         $(document).ready(function() {
                                 // $("body").append(dropdown);
-                                $("body").append("<p style='text-align: center; font-size: small;'><em>Click images to expand</em></p>");
                                 $("body").append(gallery);
                                 $("body").append("<div class='spacer'></div>");
                                 $("body").append(footer);

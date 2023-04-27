@@ -3,7 +3,9 @@ body {
         margin: auto;
 }
 
-nav {background-color: black; overflow:hidden;
+nav {
+        background-color: black; 
+/*         overflow:hidden; */
         text-align: right;
         padding: 2% 5% 2%;
         /* position: sticky; */
@@ -82,7 +84,7 @@ header {
         background-repeat: no-repeat;
         background-size: contain;
 
-        filter: brightness(35%);
+        filter: brightness(40%);
 }
 
 .flexbox {
@@ -94,7 +96,7 @@ header {
 
 .column {
         background-color: #009dbd;
-        border: 3px solid #009dbd;
+        border: 3px solid black;
         width: 450px;
         margin: 0 0.5% 0 0.5%;
         padding: 2% 30px 2% 30px;
@@ -115,7 +117,15 @@ form {
 input[type=text] {
         font-size: 14px;
         width: 100%;
-        padding: 10px 10px;
+        padding: 2% 2%;
+        margin: 8px 0;
+        box-sizing: border-box;
+}
+
+input[type=date] {
+        font-size: 14px;
+        width: 100%;
+        padding: 2% 2%;
         margin: 8px 0;
         box-sizing: border-box;
 }
