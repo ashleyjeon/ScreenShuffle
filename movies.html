@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="final.css">
     <title>Movies</title>
@@ -424,7 +422,7 @@
                         submitButton.setAttribute("type", "button");
                         submitButton.setAttribute("class", "buyButton");
                         submitButton.setAttribute("onclick", "closePopup()");
-                        submitButton.append("Buy Now!");
+                        submitButton.append("Rent Now!");
 
 
                         const noBuy = document.createElement("button");
@@ -484,7 +482,7 @@
                                                 var released = retrieved[i].release_date;
 
                                                 document.getElementById("data" + [i]).innerHTML += "<div class='moviePoster'><br>" + link 
-                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Buy Now</button></div></div>";
+                                                        + "'><div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + title + "','" + released + "')\">Rent Now</button></div></div>";
                                                 
                                                 document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].title + "<br>";
                                                 document.getElementById("data" + [i]).innerHTML += "<p>Release Date: <br>" + retrieved[i].release_date + "</p>";

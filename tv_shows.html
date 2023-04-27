@@ -262,7 +262,7 @@
 
                                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                                 document.getElementById("data" + [i]).innerHTML += "<div class='tvPoster'><br>" + link + retrieved[i].poster_path 
-                                                                    + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>"; 
+                                                                    + "'><div class='overlay'><a href='buyNow.html'>Rent Now</a></div></div>"; 
                                                 /* added here */
                                                 
                                                 document.getElementById("data" + [i]).innerHTML += "<br>" + retrieved[i].name + "<br>";
@@ -353,7 +353,7 @@
 
                                 var link = "<img loading='lazy' class='poster' src='" + "https://www.themoviedb.org/t/p/w440_and_h660_face";
                                
-                                document.getElementById("data").innerHTML = "<div class='tvPoster'><br>" + link + retrieved[random].poster_path + "'><div class='overlay'><a href='buyNow.html'>Buy Now</a></div></div>";
+                                document.getElementById("data").innerHTML = "<div class='tvPoster'><br>" + link + retrieved[random].poster_path + "'><div class='overlay'><a href='buyNow.html'>Rent Now</a></div></div>";
                                 document.getElementById("data").innerHTML += "<br>" + retrieved[random].name + "<br>";
                                 document.getElementById("data").innerHTML += "<p>Original Language: " + retrieved[random].original_language + "</p>";
                                 document.getElementById("data").innerHTML += "<p>First Air Date: " + retrieved[random].first_air_date + "</p>";

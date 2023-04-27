@@ -26,7 +26,7 @@
                        
                 }
 
-        .gallery__item {
+                .gallery__item {
                         cursor: pointer;
                         overflow: hidden;
                 }
@@ -218,8 +218,6 @@
 
                         $(document).ready(function() {
                                 // $("body").append(dropdown);
-                                $("body").append("<br/>");
-                                $("body").append("<p style='text-align: center; font-size: small;'><em>Click images to expand.</em></p><br/>");
                                 $("body").append(gallery);
                                 $("body").append("<div class='spacer'></div>");
                                 $("body").append(footer);
