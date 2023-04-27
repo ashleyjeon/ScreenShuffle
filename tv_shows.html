@@ -590,7 +590,9 @@
                         return;
                 }
                 
-                var api_link = "https://api.themoviedb.org/3/discover/tv?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=1&with_genres=" 
+                var pages = Math.ceil(Math.random() * 3);
+
+                var api_link = "https://api.themoviedb.org/3/discover/tv?api_key=d769a465cff5b60a61415cc4a7f30648&language=en-US&sort_by=popularity.desc&include_adult=false&page=" + pages + "&with_genres=" 
                                 + genreId + "&vote_average.gte=" + rating;      
 
                 if (!request) {
@@ -607,7 +609,6 @@
                                 var retrieved = info["results"];
 
                                 console.log("total pages: " + (info["total_results"] / 20)); 
-
 
                                 /* generates a random number */
                                 var random = Math.ceil((Math.random() * 19));
