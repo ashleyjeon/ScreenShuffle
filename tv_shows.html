@@ -606,6 +606,9 @@
                                 var info = JSON.parse(data);
                                 var retrieved = info["results"];
 
+                                console.log("total pages: " + (info["total_results"] / 20)); 
+
+
                                 /* generates a random number */
                                 var random = Math.ceil((Math.random() * 19));
 
