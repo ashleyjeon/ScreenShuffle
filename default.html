@@ -111,15 +111,6 @@
                 /* z-index: 1; */
         }
 
-        .overlay button {
-                color: rgb(0, 0, 0);
-                background-color: rgba(206, 206, 206, 0.799);
-                border-width: 0;
-                font-weight: bold;
-                font-size: 11px;
-                padding: 2px;
-            }
-
         .poster:hover .overlay{
                 display:block;
         }
@@ -211,7 +202,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
-                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Rent Now</button></div></div>";
+                                        strHTML += '<div class="overlay"><a href="buyNow.html">Buy Now</a></div>';
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + movieTitle + '</h4>';
@@ -261,7 +252,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + tvName + 'Poster">';
-                                        strHTML += '<div class="overlay"><a href="buyNow.html">Rent Now</a></div>';
+                                        strHTML += '<div class="overlay"><a href="buyNow.html">Buy Now</a></div>';
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + tvName + '</h4>';
@@ -279,171 +270,11 @@
 
                         requesttv.send();
                 }
-
-                function closePopup() {
-                        console.log("HERE");
-                        let popup = document.getElementById("popup");
-                        console.log(popup);
-
-                        popup.parentNode.removeChild(popup);
-                       
-                        popup.classList.remove("open-popup");
-                }
-
-                function openPopup(title, release_date) {
-                        console.log(title);
-                        console.log(release_date);
-
-                        const container1 = document.createElement("div");
-                        container1.setAttribute("class", "container1");
-
-                        const popup = document.createElement("div");
-                        popup.setAttribute("class", "popup");
-                        popup.setAttribute("id", "popup");
-                        popup.classList.add("open-popup");
-                        
-
-                        const movieTitle = document.createElement("h2");
-                        movieTitle.append(title);
-
-                        const text = document.createElement("p");
-                        text.append("Price: $9.99");
-                       
-
-                        const buyForm = document.createElement("form");
-                        buyForm.setAttribute("class", "buyForm");
-                        
-                        // const fname = document.createElement("input");
-                        // fname.setAttribute("type", "text");
-                        // fname.setAttribute("name", "fname");
-
-                        /* for name */
-                        const nameLabel = document.createElement("label");
-                        nameLabel.setAttribute("for", "nameInput");
-                        nameLabel.textContent = "Name: ";
-                        const nameInput = document.createElement("input");
-                        nameInput.setAttribute("type", "text");
-                        nameInput.setAttribute("id", "nameInput");
-                        buyForm.appendChild(nameLabel);
-                        buyForm.appendChild(nameInput);
-                        buyForm.appendChild(document.createElement("br"));
-                        
-                        /* for email */
-                        const emailLabel = document.createElement("label");
-                        emailLabel.setAttribute("for", "emailInput");
-                        emailLabel.textContent = "Email: ";
-                        const emailInput = document.createElement("input");
-                        emailInput.setAttribute("type", "text");
-                        emailInput.setAttribute("id", "emailInput");
-                        buyForm.appendChild(emailLabel);
-                        buyForm.appendChild(emailInput);
-                        buyForm.appendChild(document.createElement("br"));
-
-                        /* for credit card number */
-                        const ccNumberLabel = document.createElement("label");
-                        ccNumberLabel.setAttribute("for", "ccNumberInput");
-                        ccNumberLabel.textContent = "Credit Card Number: ";
-                        const ccNumberInput = document.createElement("input");
-                        ccNumberInput.setAttribute("type", "text");
-                        ccNumberInput.setAttribute("id", "ccNumberInput");
-                        buyForm.appendChild(ccNumberLabel);
-                        buyForm.appendChild(ccNumberInput);
-                        buyForm.appendChild(document.createElement("br"));
-                        
-                        /* for expiration date */
-                        const expirationLabel = document.createElement("label");
-                        expirationLabel.setAttribute("for", "expirationInput");
-                        expirationLabel.textContent = "Expiration Date: ";
-                        const expirationInput = document.createElement("input");
-                        expirationInput.setAttribute("type", "text");
-                        expirationInput.setAttribute("id", "expirationInput");
-                        buyForm.appendChild(expirationLabel);
-                        buyForm.appendChild(expirationInput);
-                        buyForm.appendChild(document.createElement("br"));
-
-                        /* for security code */
-                        const securityLabel = document.createElement("label");
-                        securityLabel.setAttribute("for", "securityInput");
-                        securityLabel.textContent = "Security Code: ";
-                        const securityInput = document.createElement("input");
-                        securityInput.setAttribute("type", "text");
-                        securityInput.setAttribute("id", "securityInput");
-                        buyForm.appendChild(securityLabel);
-                        buyForm.appendChild(securityInput);
-                        buyForm.appendChild(document.createElement("br"));
-                                                
-                        /* for billing address */
-                        const billLabel = document.createElement("label");
-                        billLabel.setAttribute("for", "emailInput");
-                        billLabel.textContent = "Billing Address: ";
-                        const billInput = document.createElement("input");
-                        billInput.setAttribute("type", "text");
-                        billInput.setAttribute("id", "billInput");
-                        buyForm.appendChild(billLabel);
-                        buyForm.appendChild(billInput);
-                        buyForm.appendChild(document.createElement("br"));
-
-
-                        
-                        // <input type="text" name="txtName" id="studentName"
-                        //         placeholder="Name*">
-                        //         <br/>
-                        //         <input type="text" name="email" id="studentEmail"
-                        //         placeholder="Email*">
-                        //         <br/>
-                        //         <input type="button" id="mailingBtn" value="Submit">
-
-                        const submitButton = document.createElement("button");
-                        submitButton.setAttribute("type", "button");
-                        submitButton.setAttribute("class", "buyButton");
-                        submitButton.setAttribute("onclick", "closePopup()");
-                        submitButton.append("Rent Now!");
-
-
-                        const noBuy = document.createElement("button");
-                        noBuy.setAttribute("type", "button");
-                        noBuy.setAttribute("class", "noBuyButton");
-                        noBuy.setAttribute("onclick", "closePopup()");
-                        noBuy.append("Cancel");
-
-                        popup.appendChild(movieTitle);
-                        popup.appendChild(text);
-                        popup.appendChild(buyForm);
-                        popup.appendChild(submitButton);
-                        popup.appendChild(noBuy);
-                        container1.appendChild(popup);
-                        
-                        document.body.append(container1);
-                }
-
-
-                
-
-                $('#buyButton').click(function() {
-                    console.log("OWEIJFOI");
-                    let popup = document.getElementById("popup");
-                    popup.classList.remove("open-popup");
-                });
-
         
                 window.onload = function() {
                         requestDataMovies();
                         requestDataTV();
                 };
-
-                $(document).ready(function() {
-                        // Show popup on hover
-                        $(document).on('mouseenter', '.poster', function() {
-                        $(this).find('.overlay').css('display', 'block');
-                        }).on('mouseleave', '.poster', function() {
-                        $(this).find('.overlay').css('display', 'none');
-                        });
-
-                        // Close popup
-                        $(document).on('click', '.buyButton, .noBuyButton', function() {
-                        $(this).closest('.container1').remove();
-                });
-        });
         </script>
         <br><br>
 
