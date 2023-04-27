@@ -211,7 +211,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
-                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Buy Now</button></div></div>";
+                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Rent Now</button></div></div>";
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + movieTitle + '</h4>';
@@ -261,7 +261,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + tvName + 'Poster">';
-                                        strHTML += '<div class="overlay"><a href="buyNow.html">Buy Now</a></div>';
+                                        strHTML += '<div class="overlay"><a href="buyNow.html">Rent Now</a></div>';
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + tvName + '</h4>';
@@ -397,7 +397,7 @@
                         submitButton.setAttribute("type", "button");
                         submitButton.setAttribute("class", "buyButton");
                         submitButton.setAttribute("onclick", "closePopup()");
-                        submitButton.append("Buy Now!");
+                        submitButton.append("Rent Now!");
 
 
                         const noBuy = document.createElement("button");
