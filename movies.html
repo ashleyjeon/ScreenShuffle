@@ -585,9 +585,9 @@
                         if (this.readyState === 4 && this.status === 200) {
                                 var data = this.responseText;
                                 var info = JSON.parse(data);
-                                var totalPages = info["total_results"] / 20;
+                                var totalPages = Math.floor(info["total_results"] / 20);
 
-                                console.log(totalPages);
+                                console.log("total pages: " + totalPages);
 
                                 var randomPage = Math.floor(Math.random() * totalPages) + 1;
 
