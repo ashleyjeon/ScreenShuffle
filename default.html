@@ -121,6 +121,19 @@
                 opacity: 0.4;
         }
 
+        .buyNow {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #FFC107;
+                color: #000;
+                padding: 8px 16px;
+                font-size: 18px;
+                border-radius: 4px;
+                text-decoration: none;
+        }
+
         
         </style>
 </head>
@@ -381,7 +394,7 @@
                                         strHTML += '<div class="movie-item">';
                                         strHTML += '<div class="movie-poster">';
                                         strHTML += '<img class="poster" src="' + posterURL + '" alt="' + movieTitle + 'Poster">';
-                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Rent Now</button></div></div>";
+                                        strHTML += "<div class='overlay'><button type='button' class='buyNow' onclick=\"openPopup('" + retrieved[i].title + "','" + retrieved[i].released + "')\">Rent Now</button></div>";
                                         strHTML += '</div>';
                                         strHTML += '<div class="movie-details">';
                                         strHTML += '<h4 class="movie-title">' + (i + 1) + '. ' + movieTitle + '</h4>';
