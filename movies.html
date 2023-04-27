@@ -148,17 +148,21 @@
 
             }
 
-            .overlay button {
-                width: 100px;
-                height: 30px;
-                color: rgb(0, 0, 0);
-                background-color: rgba(206, 206, 206, 0.799);
-                border-width: 0;
-                font-weight: bold;
-                font-size: 14px;
-                padding: 4% 3% 4% 3%;
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(200, 200, 200, 0.5);
+                opacity: 0;
+                z-index: 9999;
                 border-radius: 8px;
-            }
+                transition: opacity 0.3s;
+        }
 
         
             #data .poster:hover {
