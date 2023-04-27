@@ -161,20 +161,18 @@
             }
 
             .popup {
-                    width: 40%;
-                    background: #fff;
-                    border-radius: 6px;
                     position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -100%) scale(0.1);
                     text-align: center;
-                    padding: 30px;
+                    padding: 1%;
                     color: #333;
                     background-color: white;
                     visibility: hidden;
                     transition: transform 0.4s, top 0.4s;
                     align-items: center;
+                    animation: zoom 0.8s ease-in-out;
             }
 
         
@@ -182,9 +180,11 @@
                 visibility: visible;
                 top: 50%;
                 transform: translate(-50%, 20%) scale(1);
-                width: 80%;
-                background-color: rgb(246, 240, 240);
-                border-radius: 6px;
+                width: 60%;
+                background-color: #e3edfd;
+                border-radius: 15px;
+                border: 5px solid #5d83c3;
+                transition: transform 0.4s, top 0.4s;
             }
 
         
@@ -203,14 +203,14 @@
             }
 
             .noBuyButton {
-                margin-left: 30px;
-                margin-bottom: 30px;
-                margin-top: 30px;
+                margin-left: 4%;
+                margin-bottom: 3%;
+                margin-top: 3%;
             }
 
-            .buyButton {
+            /* .buyButton {
                 margin-left: 10%;
-            }
+            } */
 
             .buyForm {
                 margin-top: 30px;
@@ -220,12 +220,14 @@
             input[type=text] {
                 display: inline-block;
                 width: 60%;
+                padding: 1%;
             }
 
             label {
                 display: inline-block;
-                align-items: left;
-                width: 100px;
+                align-items:left;
+                width: 20%;
+                font-size: 18px;
             }
 
         
@@ -255,7 +257,7 @@
         <br>
 
         <form id="filters">
-                <label for="genre">Genre:</label>
+                <label style="display: inline" for="genre">Genre:</label>
                 <select id="genre" name="genre">
                         <option value ="">No Selected Value</option>
                         <option value="28">Action</option>
@@ -280,7 +282,7 @@
                 </select>
                 &nbsp &nbsp
 
-                <label for="rating">Rating of at least:</label>
+                <label style="display: inline" for="rating">Rating of at least:</label>
                 <select id="rating" name="rating">
                         <option value="">No Selected Value</option>
                         <option value="1">1</option>
@@ -338,7 +340,8 @@
                         
 
                         const movieTitle = document.createElement("h2");
-                        movieTitle.append(title);
+                        // movieTitle.append("Rent: " + title);
+                        movieTitle.innerHTML = "Rent &nbsp;<i>" + title + "</i>";
 
                         const text = document.createElement("p");
                         text.append("Price: $9.99");
@@ -441,23 +444,28 @@
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="emailInput"]').value.length == 0) {
-                                alert("Please input your email address.");
+                        if (document.querySelector('input[id="emailInput"]').value.length == 0 ||
+                        !(($('input[id="emailInput"]').val()).includes("@a") || 
+                        ($('input[id="emailInput"]').val()).includes("."))) {
+                                alert("Please input a valid email address.");
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="ccNumberInput"]').value.length != 12) {
+                        if (document.querySelector('input[id="ccNumberInput"]').value.length != 12 ||
+                        isNaN(document.querySelector('input[id="ccNumberInput"]').value)) {
                                 alert("Please input a valid credit card number.");
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="expirationInput"]').value.length != 5) {
+                        if (document.querySelector('input[id="expirationInput"]').value.length != 5 ||
+                        !($('input[id="expirationInput"]').val()).includes("/")) {
                                 alert("Please input a valid expiration date in the format MM/YY.");
                                 return false;
                         }
 
-                        if (document.querySelector('input[id="securityInput"]').value.length != 3 &&
-                                document.querySelector('input[id="securityInput"]').value.length != 4) {
+                        if ((document.querySelector('input[id="securityInput"]').value.length != 3 &&
+                                document.querySelector('input[id="securityInput"]').value.length != 4) ||
+                                isNaN(document.querySelector('input[id="securityInput"]').value)) {
                                 alert("Please input a valid security code.");
                                 return false;
                         }
