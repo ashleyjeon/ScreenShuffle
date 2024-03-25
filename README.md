@@ -1,2 +1,3 @@
 # final
-Heres a link to a random movie/tv show generator: http://anikak.sgedu.site/spring2023/final/default.html
+Heres a link to a random movie/tv show generator: https://ashleyjeon.github.io/final/default.html
+* 05/25/24 - Note: the "actors" page only works on expired hosting site and will download the code file in the link above
